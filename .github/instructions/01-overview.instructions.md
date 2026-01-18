@@ -14,9 +14,20 @@ Purpose: High-level map for AI agents working in this repo. Read this first, the
 - React 18.3.1
 - Tailwind 3.4.6
 - Shadcn/ui with class-variance-authority (CVA)
+- **Package Manager: yarn (required)** - npm is not allowed
 
 ## CRITICAL: CODE LANGUAGE
 - **ALWAYS generate code in English** - all code, comments, variable names, function names, and documentation should be in English
+
+## Package Manager
+
+**ALWAYS use yarn as the package manager for this project.**
+
+- Installing dependencies: `yarn install` or `yarn`
+- Adding packages: `yarn add <package-name>`
+- Adding dev dependencies: `yarn add -D <package-name>`
+- Running scripts: `yarn <script-name>`
+- **DO NOT use npm** - the project is configured to reject npm usage
 
 ## Project Structure
 
