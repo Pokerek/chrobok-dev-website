@@ -5,10 +5,8 @@ export const buttonStyles = cva(
   {
     variants: {
       variant: {
-        default:
-          'bg-element-bg text-text-primary border border-border-default hover:bg-hover-bg',
-        outline:
-          'border border-border-default bg-transparent hover:bg-element-bg',
+        default: 'border border-border-default bg-element-bg text-text-primary hover:bg-hover-bg',
+        outline: 'border border-border-default bg-transparent hover:bg-element-bg',
         link: 'text-text-primary underline-offset-4 hover:underline',
       },
       size: {
@@ -22,5 +20,5 @@ export const buttonStyles = cva(
       variant: 'default',
       size: 'default',
     },
-  }
+  },
 );

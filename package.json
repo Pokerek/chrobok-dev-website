@@ -13,7 +13,10 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,astro,json,css,md}\""
   },
   "dependencies": {
     "@astrojs/check": "^0.9.5",
@@ -32,11 +35,20 @@
   "devDependencies": {
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/parser": "^8.53.0",
     "eslint": "^9.1.1",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.1.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "prettier": "^3.8.0",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwind-merge": "^2.4.0",
     "tailwindcss": "^3.4.6",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.53.0"
   }
 }
