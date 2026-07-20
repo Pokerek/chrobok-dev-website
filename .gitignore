@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# 10x skills (locally installed)
+.claude/skills/10x-*/
+.claude/.10x-cli-manifest.json
