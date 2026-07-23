@@ -3,7 +3,7 @@ project: "Chrobok.dev"
 version: 1
 status: draft
 created: 2026-07-22
-updated: 2026-07-22
+updated: 2026-07-23
 prd_version: 1
 main_goal: quality
 top_blocker: time
@@ -48,7 +48,7 @@ to recruiters at any point.
 | ID   | Change ID                 | Outcome (user can …)                                                        | Prerequisites                  | PRD refs                       | Status   |
 | ---- | ------------------------- | --------------------------------------------------------------------------- | ------------------------------ | ------------------------------ | -------- |
 | F-01 | design-system-contract    | (foundation) page skeleton + token contract settled; no ambiguity left       | —                              | §NFRs, §Guardrails             | ready    |
-| F-02 | v1-release-staging        | (foundation) v1 work merges without reaching production                      | —                              | §Success Criteria (primary)    | ready    |
+| F-02 | v1-release-staging        | (foundation) v1 work merges without reaching production                      | —                              | §Success Criteria (primary)    | in progress |
 | F-03 | inspection-gate           | (foundation) build, types and lint gate every v1 merge; inspection checklist runnable | F-02                  | §NFRs, §Guardrails             | proposed |
 | S-01 | hero-first-screen         | read name, role title, core stack and a positioning line, and reach email + CV, without scrolling | F-01, F-02   | US-01, FR-001, FR-002, FR-003  | proposed |
 | S-02 | work-proof-block          | read the commercial work with its ownership scope, numeric proof points and two-tier stack tags | F-01, F-02     | US-01, FR-004, FR-005, FR-006  | proposed |
@@ -78,7 +78,8 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Backend / API:** absent — no routes and no adapter in `astro.config.mjs` (static output). Deliberate, per PRD §Non-Goals.
 - **Data:** absent — no schema, no migrations, no content collections. Deliberate, per PRD §Non-Goals.
 - **Auth:** absent — deliberate, per PRD §Access Control (fully public, no accounts).
-- **Deploy / infra:** partial — live on Vercel at https://www.chrobok.dev via the Git integration, but `.github/workflows/` is empty and there is no `vercel.json`. Merging to `main` publishes with no gate in front of it.
+- **Deploy / infra:** partial — live on Vercel at https://www.chrobok.dev via the Git integration, but `.github/workflows/` does not exist (there is no workflows directory at all) and there is no `vercel.json`. Vercel's Production Branch is `main` — verified 2026-07-23 against the GitHub Deployments API, which shows `origin/main` deploying to Production and `origin/development` to Preview. Merging to `main` therefore publishes straight to the live site with no server-side gate in front of it; merging to `development` does not.
+- **Branch topology:** present — two long-lived branches. `development` is the **GitHub default branch** and already receives PRs (#12 landed there; #8–#11 predate the shift and targeted `main`). `main` is protected: PR required, `required_linear_history: true`, force-push and deletion blocked. `development` is deliberately unprotected until F-03 attaches required status checks.
 - **Observability:** absent — deliberate, per PRD §Non-Goals (no analytics, no vendor accounts).
 - **Verification / testing:** absent — no test runner and no accessibility or performance check. `yarn build` runs `astro check`, and `eslint` is configured with a flat config. Recorded because all four NFRs are outside-observable properties an inspecting tech lead measures directly.
 
@@ -111,7 +112,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** —
 - **Unknowns:** —
 - **Risk:** Without it, the baseline's auto-deploy-on-merge behaviour publishes every partial section straight to chrobok.dev, which contradicts the chosen one-pass release; the risk of the foundation itself is that a long-lived branch drifts, which is bounded by the one-week window.
-- **Status:** ready
+- **Status:** in progress
 
 ### F-03: Inspection gate
 

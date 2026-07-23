@@ -7,6 +7,7 @@ applyTo: "**/*"
 Purpose: High-level map for AI agents working in this repo. Read this first, then jump to specialized files:
 - **[Code Quality](./02-codeQuality.instructions.md)** - TypeScript, Tailwind, Astro, React, UI components
 - **[Design System](./03-designSystem.instructions.md)** - Design system tokens and guidelines
+- **[Release Process](./04-releaseProcess.instructions.md)** - Branch model, which branch publishes, PR targets, release gates
 
 ## Stack Snapshot
 - Astro 5.15.8
