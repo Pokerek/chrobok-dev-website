@@ -43,3 +43,8 @@ Astro 6), scheduled as a Foundations slice before content work; and
 agent-judgement confidence, to be compensated with Astro conventions in
 `CLAUDE.md` / `AGENTS.md`. Neither is a quality-gate failure, so
 `quality_override` stays false.
+
+**2026-07-23 — the agent-judgement compensation is in place.** `CLAUDE.md` at
+the repo root carries the always-loaded project facts, and `.claude/rules/`
+carries the file-scoped modules, `astro.md` among them, each with a `paths:`
+frontmatter so it loads when a matching file is read.

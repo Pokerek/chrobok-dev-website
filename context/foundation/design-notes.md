@@ -93,7 +93,8 @@ identity-defining rule in the system — see the risk below.
   four sizes, `forwardRef`, types and styles split into their own files
 - `src/pages/index.astro` — the "Work in progress…" placeholder the whole project exists
   to delete
-- Component conventions: [`.github/instructions/03-designSystem.instructions.md`](../../.github/instructions/03-designSystem.instructions.md)
+- Component conventions: [`.claude/rules/design-system.md`](../../.claude/rules/design-system.md) —
+  path-scoped to `src/ui/base/**`, so it loads automatically when a primitive is edited
 
 ## Risks to settle before implementation
 

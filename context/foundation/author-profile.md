@@ -119,7 +119,8 @@ selecting and shaping, not writing from scratch.
   scope**, never from longer evenings. Any plan that assumes evening crunch is invalid.
 - **Stack is set:** Astro 5 + Tailwind + shadcn/ui + TypeScript, yarn. Not up for
   re-selection in shape.
-- Existing conventions live in `.github/instructions/` (overview, code quality, design system).
+- Existing conventions live in `CLAUDE.md` (project facts) and `.claude/rules/` (code quality,
+  design system, release process).
 
 ## What the site must achieve (author's stated intent, to be confirmed in shape)
 
