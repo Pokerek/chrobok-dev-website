@@ -313,34 +313,34 @@ If Phase 1 finds Vercel's Production Branch set to `development`, note that PR #
 
 #### Automated
 
-- [x] 2.1 Type check passes (`npx tsc --noEmit`)
-- [x] 2.2 Lint passes (`yarn lint`)
-- [x] 2.3 Build passes (`yarn build`)
-- [x] 2.4 Markdown formatting clean (`npx prettier --check "**/*.md"`)
-- [x] 2.5 `.github/instructions/04-releaseProcess.instructions.md` exists
-- [x] 2.6 All index links in `copilot-instructions.md` resolve to real files
-- [x] 2.7 Diff touches only `.github/**/*.md` and `context/**/*.md` (checked against `origin/development`, the real merge base; `main...HEAD` also shows PR #12's husky/commitlint files, which this change did not touch)
+- [x] 2.1 Type check passes (`npx tsc --noEmit`) — 3b3bb73
+- [x] 2.2 Lint passes (`yarn lint`) — 3b3bb73
+- [x] 2.3 Build passes (`yarn build`) — 3b3bb73
+- [x] 2.4 Markdown formatting clean (`npx prettier --check "**/*.md"`) — 3b3bb73
+- [x] 2.5 `.github/instructions/04-releaseProcess.instructions.md` exists — 3b3bb73
+- [x] 2.6 All index links in `copilot-instructions.md` resolve to real files — 3b3bb73
+- [x] 2.7 Diff touches only `.github/**/*.md` and `context/**/*.md` (checked against `origin/development`, the real merge base; `main...HEAD` also shows PR #12's husky/commitlint files, which this change did not touch) — 3b3bb73
 
 #### Manual
 
-- [x] 2.8 Release module unambiguously names the publishing branch
-- [x] 2.9 Roadmap baseline no longer contains the stale workflows/publish claims
-- [x] 2.10 Commit message passes commitlint; branch name passes `validate-branch-name`
+- [x] 2.8 Release module unambiguously names the publishing branch — 3b3bb73
+- [x] 2.9 Roadmap baseline no longer contains the stale workflows/publish claims — 3b3bb73
+- [x] 2.10 Commit message passes commitlint; branch name passes `validate-branch-name` — 3b3bb73
 
 ### Phase 3: Prove the insulation with a live smoke test
 
 #### Automated
 
-- [ ] 3.1 Production responds 200
-- [ ] 3.2 Production HTML hash matches pre-merge baseline
-- [ ] 3.3 Production `last-modified` / `etag` match pre-merge baseline
-- [ ] 3.4 `origin/main` unmoved
-- [ ] 3.5 `origin/development` contains the docs commit
+- [x] 3.1 Production responds 200 — 97e6de2
+- [x] 3.2 Production HTML hash matches pre-merge baseline — 97e6de2
+- [x] 3.3 Production `last-modified` / `etag` match pre-merge baseline — 97e6de2
+- [x] 3.4 `origin/main` unmoved — 97e6de2
+- [x] 3.5 `origin/development` contains the docs commit — 97e6de2
 
 #### Manual
 
-- [ ] 3.6 Vercel shows a Preview deployment for branch `development`
-- [ ] 3.7 The `development` preview URL builds and serves the placeholder
-- [ ] 3.8 No new Production deployment appeared for this merge
-- [ ] 3.9 `chrobok.dev` still shows "Work in progress…" in a browser
-- [ ] 3.10 Stable `development` preview URL recorded in `change.md` Notes
+- [x] 3.6 Vercel shows a Preview deployment for branch `development` — 97e6de2
+- [x] 3.7 The `development` preview URL builds and serves the placeholder — 97e6de2
+- [x] 3.8 No new Production deployment appeared for this merge — 97e6de2
+- [x] 3.9 `chrobok.dev` still shows "Work in progress…" in a browser — 97e6de2
+- [x] 3.10 Stable `development` preview URL recorded in `change.md` Notes — 97e6de2

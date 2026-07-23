@@ -1,5 +1,5 @@
 ---
-applyTo: "**/*"
+applyTo: '**/*'
 ---
 
 # Release Process Instructions
@@ -21,11 +21,11 @@ decides what gets published. Never reason about one from the other.
 
 ## Branch model
 
-| Branch | Role | Deploys to |
-| --- | --- | --- |
-| `main` | Production | https://www.chrobok.dev |
-| `development` | Integration — GitHub default branch | Vercel branch **Preview** (stable per-branch URL) |
-| `(feat\|fix\|chore\|docs)/…` | Feature branches | Vercel per-commit Preview |
+| Branch                       | Role                                | Deploys to                                        |
+| ---------------------------- | ----------------------------------- | ------------------------------------------------- |
+| `main`                       | Production                          | https://www.chrobok.dev                           |
+| `development`                | Integration — GitHub default branch | Vercel branch **Preview** (stable per-branch URL) |
+| `(feat\|fix\|chore\|docs)/…` | Feature branches                    | Vercel per-commit Preview                         |
 
 Flow:
 
@@ -37,11 +37,27 @@ Flow:
 4. The single `development` → `main` PR is the v1 release event (roadmap S-08,
    `v1-production-cutover`). It happens once, after every slice has landed.
 
+## Where to review work in progress
+
+The stable `development` preview — the review target for every v1 slice:
+
+```
+https://website-astro-git-development-karol-chroboks-projects.vercel.app
+```
+
+**Preview deployments are behind Vercel Deployment Protection.** The URL returns `302` to
+`vercel.com/sso-api` unless you are logged into the Vercel account. This is a feature, not a
+problem: a half-built page is not publicly reachable even by someone holding the link. To let
+someone outside the account review a slice, generate a shareable link from the Vercel dashboard
+rather than pasting the URL.
+
 ## Constraints discovered in research
 
-- **The cutover PR must be squash or rebase.** `main` has `required_linear_history: true`, so
-  GitHub rejects a merge commit. Choose "Squash and merge" or "Rebase and merge" on the
-  `development` → `main` PR.
+- **Squash is the only merge method available.** The repository has `allow_merge_commit: false`
+  and `allow_rebase_merge: false`, so "Squash and merge" is the only button GitHub offers — on
+  every PR, not just the cutover. `main` additionally enforces `required_linear_history: true`.
+  Note also `delete_branch_on_merge: true`: the head branch is deleted automatically, so any
+  follow-up work needs a fresh branch.
 - **`main` requires a PR.** Force-push and branch deletion are blocked; direct pushes are rejected.
   `required_approving_review_count` is 0, so a solo approval is not needed — but the PR is.
 - **`yarn build` runs `astro check` before `astro build`.** A type error therefore fails the Vercel
