@@ -1,7 +1,7 @@
 ---
 change_id: inspection-gate
 title: Gate v1 merges on build, type-check and lint, with a repeatable NFR inspection run
-status: planned
+status: implementing
 created: 2026-07-24
 updated: 2026-07-24
 archived_at: null

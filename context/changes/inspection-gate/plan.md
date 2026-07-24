@@ -253,9 +253,9 @@ the workflow file and removing the `development` protection rule (`gh api -X DEL
 
 #### Automated
 
-- [ ] 1.1 `yarn lint` passes locally
-- [ ] 1.2 Workflow YAML is well-formed (parses)
-- [ ] 1.3 Serve script is executable and syntactically valid (`test -x` + `bash -n`)
+- [x] 1.1 `yarn lint` passes locally
+- [x] 1.2 Workflow YAML is well-formed (parses)
+- [x] 1.3 Serve script is executable and syntactically valid (`test -x` + `bash -n`)
 - [ ] 1.4 `lint` check runs and passes on the Phase 1 PR into `development`
 
 #### Manual
