@@ -20,6 +20,7 @@ export default {
         'text-secondary': '#333333',
         'border-default': '#000000',
         'hover-bg': '#E8E8E8',
+        'focus-ring': '#000000',
       },
       fontFamily: {
         heading: ['Ramaraja', 'serif'],
@@ -34,12 +35,31 @@ export default {
       gap: {
         grid: '3rem', // 48px
       },
-      borderRadius: {
-        DEFAULT: '0px',
+      gridTemplateColumns: {
+        // Section-level "label | content" skeleton; collapses to 1 column below md.
+        section: 'minmax(0, 12rem) minmax(0, 1fr)',
       },
+      // Focus-visible ring token: the ring colour is the design-system focus-ring
+      // token and the offset matches the page background, so `ring-2 ring-offset-2`
+      // renders correctly without ever hard-coding a colour at the call site.
+      ringColor: ({ theme }) => ({ DEFAULT: theme('colors.focus-ring') }),
+      ringOffsetColor: ({ theme }) => ({ DEFAULT: theme('colors.page-bg') }),
       minHeight: {
         'without-footer': 'calc(100dvh - 33px)',
       },
+    },
+    // Square corners are the design identity: every named radius resolves to 0 so
+    // `rounded-md` / `rounded-lg` / `rounded-full` can never leak a rounded corner.
+    borderRadius: {
+      none: '0px',
+      sm: '0px',
+      DEFAULT: '0px',
+      md: '0px',
+      lg: '0px',
+      xl: '0px',
+      '2xl': '0px',
+      '3xl': '0px',
+      full: '0px',
     },
   },
   plugins: [require('tailwindcss-animate')],

@@ -1,0 +1,39 @@
+---
+/*
+ * Section — the page skeleton primitive (F-01 design-system contract).
+ *
+ * Wraps content in a semantic <section> with a scroll anchor and the centered
+ * container. When a `label` slot is provided it lays the section out as the
+ * "label | content" two-column grid on md+ and collapses to a single column
+ * below md; without a `label` slot the content spans the full column.
+ *
+ * Semantics are left to the caller: pass the section heading (and its label)
+ * as slot content so each section owns its own heading level and ARIA wiring.
+ */
+interface Props {
+  /** Anchor id — also the scroll target for the sticky section nav (S-06). */
+  id: string;
+  /** Extra classes for the outer <section>. */
+  class?: string;
+}
+
+const { id, class: className } = Astro.props;
+const hasLabel = Astro.slots.has('label');
+---
+
+<section id={id} class:list={['scroll-mt-section py-section', className]}>
+  <div class="container">
+    <div class:list={['grid gap-grid', hasLabel ? 'grid-cols-1 md:grid-cols-section' : 'grid-cols-1']}>
+      {
+        hasLabel && (
+          <div>
+            <slot name="label" />
+          </div>
+        )
+      }
+      <div>
+        <slot />
+      </div>
+    </div>
+  </div>
+</section>
