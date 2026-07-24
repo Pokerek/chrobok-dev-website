@@ -268,12 +268,12 @@ the workflow file and removing the `development` protection rule (`gh api -X DEL
 
 #### Automated
 
-- [ ] 2.1 Protection contexts return `["lint","Vercel"]`
-- [ ] 2.2 `required_status_checks.strict` is `false`
-- [ ] 2.3 `enforce_admins.enabled` is `false`
-- [ ] 2.4 `required_pull_request_reviews` is null/absent
+- [x] 2.1 Protection contexts return `["lint","Vercel"]`
+- [x] 2.2 `required_status_checks.strict` is `false`
+- [x] 2.3 `enforce_admins.enabled` is `false`
+- [x] 2.4 `required_pull_request_reviews` is null/absent
 
 #### Manual
 
-- [ ] 2.5 A subsequent PR into `development` shows both checks required and is merge-blocked until green
-- [ ] 2.6 Squash-and-merge remains the only merge button
+- [x] 2.5 A subsequent PR into `development` shows both checks required and is merge-blocked until green
+- [x] 2.6 Squash-and-merge remains the only merge button
