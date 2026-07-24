@@ -1,10 +1,10 @@
 ---
 change_id: design-system-contract
 title: Design-system and layout contract
-status: new
+status: archived
 created: 2026-07-24
 updated: 2026-07-24
-archived_at: null
+archived_at: 2026-07-24T08:47:44Z
 ---
 
 ## Notes
