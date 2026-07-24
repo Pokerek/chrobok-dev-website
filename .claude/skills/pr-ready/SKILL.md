@@ -1,24 +1,25 @@
 ---
 name: pr-ready
-description: Open the PR for a finished change and sync its Linear and GitHub-mirror tracker issues to "in review" — push the branch, create the PR with a generated summary/test plan, move the Linear issue to In Review with a link to the PR, and comment the PR link on the GitHub mirror issue. Trigger on "/pr-ready <change-id>" or natural-language completion announcements like "I finished implementing places-schema-foundation, prepare the PR" / "open a PR for this and sync the trackers".
+description: Open the PR for a finished change and sync its Linear tracker issue to "in review" — push the branch, create the PR against `development` with a generated summary/test plan, and move the Linear issue to In Review with a link to the PR. Trigger on "/pr-ready <change-id>" or natural-language completion announcements like "I finished implementing places-schema-foundation, prepare the PR" / "open a PR for this and sync the trackers".
 argument-hint: "<change-id>"
 allowed-tools:
   - Read
   - Bash
   - AskUserQuestion
-  - mcp__linear-server__get_issue
-  - mcp__linear-server__save_issue
-  - mcp__linear-server__list_issue_statuses
+  - mcp__plugin_linear_linear__get_issue
+  - mcp__plugin_linear_linear__save_issue
+  - mcp__plugin_linear_linear__list_issue_statuses
 ---
 
 # /pr-ready — Ship a finished change
 
 Take a change that's done being implemented and put it in front of reviewers: push the
-branch, open the GitHub PR, and move its two tracker mirrors (Linear + the GitHub-issues
-mirror) into "in review" so the backlog reflects reality. This is the
-"I'm done coding, get it ready for review" button — it does not merge anything or touch
-`roadmap.md` (that only changes at planning time or archive time, see "What this skill
-deliberately does NOT do").
+branch, open the GitHub PR **against `development`** (never `main` — `main` is the Vercel
+production branch), and move its Linear tracker issue into "in review" so the backlog
+reflects reality. This project tracks only in Linear — there is no GitHub-issues mirror
+(see `context/foundation/tasks-linear.md`). This is the "I'm done coding, get it ready for
+review" button — it does not merge anything or touch `roadmap.md` (that only changes at
+planning time or archive time, see "What this skill deliberately does NOT do").
 
 ## Initial Response
 
@@ -57,7 +58,7 @@ PR"), extract the change-id from that description — match it against `ls conte
    ship:
    ```bash
    git status -sb
-   git log main..HEAD --oneline   # commits this PR will carry
+   git log development..HEAD --oneline   # commits this PR will carry (base is development)
    ```
    If there are uncommitted changes, look at whether they plausibly belong to this change
    (touch the same files / folders) or look unrelated (e.g. editing CLAUDE.md, unrelated
@@ -90,7 +91,7 @@ list`/`gh repo view` can't resolve the repo, `gh auth switch --user <owner-of-th
 
 1. Push with upstream tracking: `git push -u origin <branch>`.
 2. Build the PR body from what's actually in the branch, not boilerplate:
-   - **Summary**: 2-4 bullets derived from `git log main..HEAD --reverse --format="- %s"`,
+   - **Summary**: 2-4 bullets derived from `git log development..HEAD --reverse --format="- %s"`,
      grouped/rephrased into user-meaningful bullets (not a raw commit dump).
    - **Test plan**: pull verification steps from the change folder if it has them
      (`context/changes/<change-id>/plan.md` or similar — look for an existing test/manual
@@ -99,7 +100,7 @@ list`/`gh repo view` can't resolve the repo, `gh auth switch --user <owner-of-th
      anything the change's "Risk" notes flagged.
 3. Create it:
    ```bash
-   gh pr create --base main --head <branch> --title "<type>: <concise title>" --body "$(cat <<'EOF'
+   gh pr create --base development --head <branch> --title "<type>: <concise title>" --body "$(cat <<'EOF'
    ## Summary
    - ...
 
@@ -113,16 +114,15 @@ list`/`gh repo view` can't resolve the repo, `gh auth switch --user <owner-of-th
 ## Step 5 — Show the plan before touching the trackers
 
 You've now done the (effectively one-shot, hard-to-undo-cleanly) GitHub actions. Before
-making the Linear/GitHub-mirror edits — which are easy to get wrong if the issue mapping
-is stale — show the user one short summary of what you're about to do and proceed without
+making the Linear edit — which is easy to get wrong if the issue mapping is stale — show
+the user one short summary of what you're about to do and proceed without
 waiting for a reply, e.g.:
 
 ```
 PR #19 is open: https://github.com/<owner>/<repo>/pull/19
 
-Now syncing trackers:
+Now syncing the tracker:
   - Linear CHR-5 → move Todo → In Review, attach PR #19 link
-  - GitHub mirror issue #1 → comment with the PR #19 link
 ```
 
 This is a heads-up, not a gate — if the resolved issue numbers look wrong to the user
@@ -133,11 +133,11 @@ this change, that's when to actually stop and ask — see Step 6.1.)
 
 ### 6.1 Resolve the issue mapping
 
-Read `context/foundation/tasks-linear.md` and `context/foundation/tasks-github.md`. Both
-carry an "Issue mapping (roadmap → …)" table keyed by **Change ID** (via the roadmap ID —
-cross-reference `context/foundation/roadmap.md`'s `Change ID` column to get from
-`<change-id>` to a roadmap ID like `F-01`/`S-02`, then to the table row). That row gives
-you the Linear identifier (`CHR-N`) and the GitHub issue number (`#N`).
+Read `context/foundation/tasks-linear.md`. Its "Issue mapping (roadmap → Linear)" table is
+keyed by the roadmap ID — cross-reference `context/foundation/roadmap.md`'s `Change ID`
+column to get from `<change-id>` to a roadmap ID like `F-01`/`S-02`, then to the table row,
+which gives you the Linear identifier (`CHR-N`). This project has no GitHub-issues mirror
+(see the file's "GitHub is not used" note) — the PR itself is the only GitHub-side record.
 
 If you can't find an unambiguous row — the change-id isn't in the roadmap, or the tables
 disagree — **stop and ask** which issues to update rather than guessing from branch names
@@ -147,29 +147,18 @@ more confusing to untangle later than a short pause now.
 ### 6.2 Linear: move to "In Review" + attach the PR link
 
 ```
-mcp__linear-server__get_issue        — fetch current state (sanity-check title/status)
-mcp__linear-server__list_issue_statuses  — confirm "In Review" exists for this team
-mcp__linear-server__save_issue       — id: <CHR-N>, state: "In Review",
-                                        links: [{url: <PR URL>, title: "PR #<N>: <PR title>"}]
+mcp__plugin_linear_linear__get_issue           — fetch current state (sanity-check title/status)
+mcp__plugin_linear_linear__list_issue_statuses — confirm "In Review" exists for this team
+mcp__plugin_linear_linear__save_issue          — id: <CHR-N>, state: "In Review",
+                                                 links: [{url: <PR URL>, title: "PR #<N>: <PR title>"}]
 ```
 
 Only move it forward (Todo/Backlog → In Review). If the issue is already further along
 (In Review, Done) leave its state alone — just add the link if missing — rather than
 moving it backward.
 
-### 6.3 GitHub mirror: comment with the PR link
-
-```bash
-gh issue comment <issue-number> --repo <owner>/<repo> --body "Implementation complete and in review: #<PR-number>"
-```
-
-Don't touch the issue's `status:*` label. Read `tasks-github.md`'s "Mapping decisions" /
-label table first if you're unsure why — but the short version is that those labels mirror
-`roadmap.md`'s **planning-readiness** status (`ready`/`proposed`/`blocked`), a different axis
-than implementation/PR progress. There is no `status:in-review` in the taxonomy, and adding
-one would be inventing a convention the user hasn't asked for. The GitHub-native way to
-track "this issue has a PR in flight" is the cross-reference comment/link, which is what
-you just added — same as Linear's `links` attachment, just GitHub's native mechanism for it.
+That's the whole tracker sync — there is no GitHub-issues mirror in this project, so nothing
+else to touch. The PR opened in Step 4 is the GitHub-side record.
 
 ## What this skill deliberately does NOT do
 
@@ -179,8 +168,8 @@ you just added — same as Linear's `links` attachment, just GitHub's native mec
   is implementation-progress granularity that the roadmap deliberately doesn't track —
   that lives in the change folder's `change.md` (`status: impl_reviewed` etc.) and in
   Linear's workflow state. Resist the urge to "complete the picture" by editing it anyway.
-- **Doesn't merge the PR or close the issues.** "Ready for review" is the end state this
+- **Doesn't merge the PR or close the issue.** "Ready for review" is the end state this
   skill produces — closing/merging is a human (or separate, explicit) action.
-- **Doesn't invent a `status:in-review` GitHub label.** See 6.3 — adding new conventions
-  to a documented taxonomy is a decision for the user to make deliberately, not a side
-  effect of getting a PR ready.
+- **Doesn't target `main`.** `main` is the Vercel production branch; every v1 PR opens
+  against `development`. The single `development` → `main` release PR is a deliberate,
+  separate event (roadmap S-08), never something this skill opens.

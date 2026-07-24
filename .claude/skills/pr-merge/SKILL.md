@@ -1,6 +1,6 @@
 ---
 name: pr-merge
-description: Close out a reviewed change end-to-end — archive it, squash-merge its PR to main, and bring the trackers to their terminal state. Runs /10x-archive (which closes the matching roadmap item and commits the folder move), pushes that commit into the PR, waits for all GitHub checks to pass, squash-merges with --delete-branch, then moves the Linear issue to Done and closes the GitHub-mirror issue. This is the counterpart to /pr-ready (which only opens the PR + moves trackers to "in review"). Trigger on "/pr-merge <change-id>" or natural-language close-out requests like "the PR for places-schema-foundation is approved, merge it and close everything out" / "squash and merge this and archive the change" / "land this PR".
+description: Close out a reviewed change end-to-end — archive it, squash-merge its PR into `development`, and bring the tracker to its terminal state. Runs /10x-archive (which closes the matching roadmap item and commits the folder move), pushes that commit into the PR, waits for all GitHub checks to pass, squash-merges with --delete-branch, then moves the Linear issue to Done. Linear-only — this project has no GitHub-issues mirror. This is the counterpart to /pr-ready (which only opens the PR + moves the tracker to "in review"). Trigger on "/pr-merge <change-id>" or natural-language close-out requests like "the PR for places-schema-foundation is approved, merge it and close everything out" / "squash and merge this and archive the change" / "land this PR".
 argument-hint: "<change-id>"
 allowed-tools:
   - Read
@@ -8,24 +8,24 @@ allowed-tools:
   - Bash
   - AskUserQuestion
   - Skill
-  - mcp__linear-server__get_issue
-  - mcp__linear-server__save_issue
-  - mcp__linear-server__list_issue_statuses
+  - mcp__plugin_linear_linear__get_issue
+  - mcp__plugin_linear_linear__save_issue
+  - mcp__plugin_linear_linear__list_issue_statuses
 ---
 
 # /pr-merge — Land and close out a reviewed change
 
 Take a change whose PR has been reviewed and approved and finish it: archive the change
-folder (which also closes its roadmap item), squash-merge the PR onto `main`, delete the
-branch, and move both tracker mirrors to their done/closed state. This is the
-"it's approved, ship it and close everything out" button — the back half of the lifecycle
-whose front half is `/pr-ready`.
+folder (which also closes its roadmap item), squash-merge the PR into its base
+(`development` for every v1 slice — never `main`, which is production), delete the branch,
+and move the Linear issue to Done. This is the "it's approved, ship it and close everything
+out" button — the back half of the lifecycle whose front half is `/pr-ready`.
 
 The hard part of this skill is **ordering and gates**, not the individual commands. Each
 step has a reason it comes where it does — read the "why" notes, because doing these out
 of order (e.g. merging before the archive commit is pushed, or merging on red CI) produces
-messes that are annoying to untangle: orphaned archive commits, a `main` that's missing the
-folder move, or a closed issue for a change that didn't actually merge.
+messes that are annoying to untangle: orphaned archive commits, a `development` that's missing
+the folder move, or a closed issue for a change that didn't actually merge.
 
 ## Initial Response
 
@@ -94,7 +94,7 @@ Closing out <change-id> (PR #<n>, "<pr title>"):
   1. /10x-archive <change-id>      → closes roadmap item, commits the folder move
   2. push the archive commit into PR #<n>, wait for CI to go green
   3. squash-merge PR #<n> --delete-branch
-  4. Linear <CHR-n> → Done · GitHub mirror issue #<n> → closed
+  4. Linear <CHR-n> → Done
 ```
 
 **If Step 1 set the `already_archived` flag, skip the archive entirely** — note "archive
@@ -106,7 +106,7 @@ Otherwise, **invoke the `/10x-archive` skill** with the change-id (via the Skill
 it **while checked out on the feature branch** so its `chore(archive): close <change-id>`
 commit lands on the branch — and therefore inside this PR. That's the whole reason archive
 comes before the merge: we want the folder move + roadmap close to be part of the squashed
-history on `main`, not stranded on a branch that's about to be deleted.
+history on `development`, not stranded on a branch that's about to be deleted.
 
 `/10x-archive` has its own warn-and-confirm gate (incomplete progress, missing impl-review,
 etc.) and a hard block on uncommitted changes. **Respect its outcome:**
@@ -139,8 +139,8 @@ one fails. Read the exit code:
 
 - **Exit 0** → all checks green, continue to Step 5.
 - **Non-zero** → checks failed or were cancelled. STOP and report which ones (`gh pr checks
-  <number>` for the table). Do not merge red CI — fixing on `main` after the fact is exactly
-  the round-trip this gate exists to prevent.
+  <number>` for the table). Do not merge red CI — fixing on `development` after the fact is
+  exactly the round-trip this gate exists to prevent.
 
 If the repo has **no checks configured** (`gh pr checks` says "no checks"), there's nothing
 to gate on — note that and continue.
@@ -151,8 +151,9 @@ to gate on — note that and continue.
 gh pr merge <number> --squash --delete-branch
 ```
 
-Squash keeps `main` to one commit per change. `--delete-branch` removes the merged branch
-(remote + local) — `gh` switches you to `main` as part of this. Confirm the merge landed:
+Squash keeps `development` to one commit per change. `--delete-branch` removes the merged
+branch (remote + local) — `gh` switches you to `development` (the default branch) as part of
+this. Confirm the merge landed:
 
 ```bash
 gh pr view <number> --json state,mergedAt   # state should be MERGED
@@ -161,47 +162,35 @@ gh pr view <number> --json state,mergedAt   # state should be MERGED
 If the merge fails (e.g. branch protection needs an approval `gh` can't satisfy, or a
 late-arriving conflict), STOP and report — don't retry with bypass flags.
 
-## Step 6 — Bring the trackers to their terminal state
+## Step 6 — Bring the tracker to its terminal state
 
 The roadmap item is already closed (that happened inside `/10x-archive`). What's left is the
-two issue mirrors. Use the same mapping logic `/pr-ready` uses.
+single Linear issue. Use the same mapping logic `/pr-ready` uses.
 
 ### 6.1 Resolve the issue mapping
 
-Read `context/foundation/tasks-linear.md` and `context/foundation/tasks-github.md`. Both
-carry an "Issue mapping" table keyed via the roadmap ID. Cross-reference
-`context/foundation/roadmap.md`'s **Change ID** column to get from `<change-id>` to a
-roadmap ID (`F-01` / `S-02`), then to the Linear identifier (`CHR-n`) and the GitHub issue
-number (`#n`).
+Read `context/foundation/tasks-linear.md`. Its "Issue mapping (roadmap → Linear)" table is
+keyed via the roadmap ID — cross-reference `context/foundation/roadmap.md`'s **Change ID**
+column to get from `<change-id>` to a roadmap ID (`F-01` / `S-02`), then to the Linear
+identifier (`CHR-n`). This project has no GitHub-issues mirror (see the file's "GitHub is not
+used" note), so there is nothing to close on GitHub — the merged PR is the GitHub-side record.
 
-If you can't find an unambiguous row — the change-id isn't in the roadmap, or the tables
-disagree — **stop and ask** which issues to update. Moving/closing the wrong issue is more
-confusing to untangle than a short pause now.
+If you can't find an unambiguous row — the change-id isn't in the roadmap — **stop and ask**
+which issue to update. Moving the wrong issue is more confusing to untangle than a short pause now.
 
 ### 6.2 Linear: move to "Done"
 
 ```
-mcp__linear-server__get_issue           — fetch current state (sanity-check title)
-mcp__linear-server__list_issue_statuses — confirm the team's "Done" (completed) state name
-mcp__linear-server__save_issue          — id: <CHR-n>, state: "Done"
+mcp__plugin_linear_linear__get_issue           — fetch current state (sanity-check title)
+mcp__plugin_linear_linear__list_issue_statuses — confirm the team's "Done" (completed) state name
+mcp__plugin_linear_linear__save_issue          — id: <CHR-n>, state: "Done"
 ```
 
 Only move forward. If it's already Done, leave it. If it's still in an early state
 (Backlog/Todo) rather than In Review, that's odd for something you just merged — flag it but
 still move it to Done, since the merge is ground truth.
 
-### 6.3 GitHub mirror: close the issue
-
-The GitHub mirror's `status:*` labels track *planning readiness* (`ready`/`proposed`/
-`blocked`), not implementation progress — there's no `status:done`, so closing the issue is
-the canonical "this is done" signal (see `tasks-github.md` → "Keeping doc and issues in
-sync", which says to close the issue when a change is archived). Close it with a comment that
-points at the merge:
-
-```bash
-gh issue close <issue-number> --repo <owner>/<repo> --reason completed \
-  --comment "Merged to main via #<PR-number> and archived."
-```
+That's the whole tracker close-out — no GitHub-issues mirror to touch in this project.
 
 ## Step 7 — Confirm
 
@@ -210,9 +199,8 @@ Print a short close-out summary so the user sees the whole lifecycle ended clean
 ```
 ✓ Closed out <change-id>
   archived:  context/archive/<date>-<change-id>/   (roadmap item closed by /10x-archive)
-  merged:    PR #<n> squashed onto main, branch deleted
+  merged:    PR #<n> squashed onto development, branch deleted
   Linear:    <CHR-n> → Done
-  GitHub:    issue #<n> → closed
 ```
 
 ## What this skill deliberately does NOT do
@@ -223,10 +211,12 @@ Print a short close-out summary so the user sees the whole lifecycle ended clean
   Steps 1 and 4 exist because un-gated merges are the expensive mistake here.
 - **Doesn't re-close the roadmap item.** `/10x-archive` owns the roadmap (`Status: done` +
   `## Done` entry); duplicating that here would just risk drift.
-- **Doesn't rewrite the `tasks-github.md` / `tasks-linear.md` markdown tables.** It treats
-  them as the issue-mapping source of record (same as `/pr-ready`) and brings the *live*
-  trackers they describe to their terminal state. If you want the markdown tables themselves
-  edited on merge, that's a deliberate convention change to ask for, not a side effect.
+- **Doesn't rewrite the `tasks-linear.md` markdown table.** It treats it as the issue-mapping
+  source of record (same as `/pr-ready`) and brings the *live* Linear issue it describes to its
+  terminal state. If you want the markdown table itself edited on merge, that's a deliberate
+  convention change to ask for, not a side effect.
+- **Doesn't target `main`.** v1 slice PRs merge into `development`; `main` is production and the
+  single `development` → `main` release PR (roadmap S-08) is a separate, deliberate event.
 - **Doesn't use merge-bypass flags** (`--admin`, `--no-verify`, signing bypass). If branch
   protection blocks the merge, that's a signal to surface, not to override.
 ```
