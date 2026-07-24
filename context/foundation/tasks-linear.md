@@ -34,9 +34,9 @@ is a point-in-time snapshot — Linear is the live source of truth for workflow 
 
 | Linear | Roadmap ID | Change ID                 | Title (short)                    | State snapshot |
 | ------ | ---------- | ------------------------- | -------------------------------- | -------------- |
-| CHR-28 | F-01       | design-system-contract    | Design-system & layout contract  | In Review      |
+| CHR-28 | F-01       | design-system-contract    | Design-system & layout contract  | Done           |
 | CHR-29 | F-02       | v1-release-staging        | v1 release staging               | Done           |
-| CHR-30 | F-03       | inspection-gate           | Inspection gate                  | Backlog        |
+| CHR-30 | F-03       | inspection-gate           | Inspection gate                  | Done           |
 | CHR-31 | S-01       | hero-first-screen         | Hero — first screen              | Backlog        |
 | CHR-32 | S-02       | work-proof-block          | Work — proof block               | Backlog        |
 | CHR-33 | S-03       | skills-two-tier           | Skills — two tiers               | Backlog        |
