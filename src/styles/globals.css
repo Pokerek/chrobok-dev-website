@@ -14,6 +14,15 @@
     line-height: 1.7;
   }
 
+  /*
+   * Focus-visible ring contract: every keyboard-focusable element gets the same
+   * ring (focus-ring token) with a page-bg offset. Colours come from the ring
+   * token defaults in tailwind.config.mjs — never hard-coded here or at call sites.
+   */
+  :focus-visible {
+    @apply outline-none ring-2 ring-offset-2;
+  }
+
   h1,
   h2,
   h3,

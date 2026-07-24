@@ -3,7 +3,7 @@ project: "Chrobok.dev"
 version: 1
 status: draft
 created: 2026-07-22
-updated: 2026-07-23
+updated: 2026-07-24
 prd_version: 1
 main_goal: quality
 top_blocker: time
@@ -47,7 +47,7 @@ to recruiters at any point.
 
 | ID   | Change ID                 | Outcome (user can …)                                                        | Prerequisites                  | PRD refs                       | Status   |
 | ---- | ------------------------- | --------------------------------------------------------------------------- | ------------------------------ | ------------------------------ | -------- |
-| F-01 | design-system-contract    | (foundation) page skeleton + token contract settled; no ambiguity left       | —                              | §NFRs, §Guardrails             | ready    |
+| F-01 | design-system-contract    | (foundation) page skeleton + token contract settled; no ambiguity left       | —                              | §NFRs, §Guardrails             | done     |
 | F-02 | v1-release-staging        | (foundation) v1 work merges without reaching production                      | —                              | §Success Criteria (primary)    | done     |
 | F-03 | inspection-gate           | (foundation) build, types and lint gate every v1 merge; inspection checklist runnable | F-02                  | §NFRs, §Guardrails             | proposed |
 | S-01 | hero-first-screen         | read name, role title, core stack and a positioning line, and reach email + CV, without scrolling | F-01, F-02   | US-01, FR-001, FR-002, FR-003  | proposed |
@@ -100,7 +100,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
   - Does Ramaraja 700 against IBM Plex Mono read as craftsmanship or as decoration? Reverting is cheap now and expensive after five sections are built. — Owner: author. Block: no.
   - Is any motion allowed beyond `transition-colors` on hover? — Owner: author. Block: no.
 - **Risk:** Sequenced first because `main_goal: quality` and because every content slice inherits these decisions; the failure mode is settling them implicitly inside S-01 and then retro-fitting four other sections.
-- **Status:** ready
+- **Status:** done
 
 ### F-02: v1 release staging
 
@@ -269,3 +269,4 @@ Foundations below assume these are present and do NOT re-scaffold them.
 ## Done
 
 - **F-02: (foundation) v1 work merges and deploys to a preview without touching production — `main` keeps serving the placeholder until the cutover.** — Archived 2026-07-23 → `context/archive/2026-07-23-v1-release-staging/`. Lesson: —.
+- **F-01: (foundation) the page skeleton and token contract are settled — grid and its mobile collapse, the border-radius scale, the focus-visible ring, and the rule for keeping hard-coded values out — so no content slice has to re-open a visual decision.** — Archived 2026-07-24 → `context/archive/2026-07-24-design-system-contract/`. Lesson: —.

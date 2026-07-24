@@ -12,11 +12,37 @@ Tokens are configured in `tailwind.config.mjs` (colors, fonts, spacing) and `src
 
 ## Principles
 
-- **Fonts**: Ramaraja for headings (`font-heading`), IBM Plex Mono for body/accents (`font-body`).
+- **Fonts**: Ramaraja 700 for headings (`font-heading`), IBM Plex Mono for body/accents (`font-body`).
+  This pair is the frozen v1 typography contract — do not swap it while building sections.
 - **Colors**: token names only — `page-bg`, `element-bg`, `hover-bg`, `text-primary`, `text-secondary`,
-  `border-default` (used as `bg-page-bg`, `text-text-primary`, `border-border-default`, …).
-- **Border radius**: 0 by default — square corners, no need to specify.
+  `border-default`, `focus-ring` (used as `bg-page-bg`, `text-text-primary`, `border-border-default`, …).
+- **Border radius**: **every** named radius resolves to `0` — `rounded`, `rounded-md`, `rounded-lg`,
+  `rounded-full` are all square. Corners are never rounded in v1; don't reintroduce a rounded value.
 - **Spacing**: token scale — `p-card`, `gap-grid`, `space-y-element`, `section`, `container`.
+
+## Layout skeleton (F-01 contract)
+
+- **Container**: centered, `2rem` horizontal padding, max width `1400px` at `2xl` (Tailwind `container`).
+- **Grid**: the page skeleton is section-level, not a global two-column frame. Use the `Section` primitive
+  at `src/components/layout/Section.astro`: a semantic `<section>` with a scroll anchor plus the container.
+  Fill the `label` slot to get the `label | content` two-column layout (`md:grid-cols-section`), which
+  **collapses to a single column below `md`**; omit the `label` slot for a full-width section.
+- Sections own their own heading level and ARIA — pass headings as slot content, don't let the primitive
+  impose them.
+
+## Focus & motion
+
+- **Focus ring**: keyboard focus is handled globally by the `:focus-visible` rule in `globals.css`
+  (`ring-2 ring-offset-2`). The ring colour is the `focus-ring` token and the offset is `page-bg`, both set
+  as ring defaults in `tailwind.config.mjs`. Don't add `ring-<color>` at call sites; don't remove the ring.
+- **Motion**: `transition-colors` on hover/focus only. No fade-in, slide, scale, scroll-reveal or parallax
+  in v1 — this protects the "no layout shift after first paint" NFR.
+
+## No hard-coded values
+
+Colours, spacing, radius and ring all come from tokens — never a raw hex, px, or `border-black`. shadcn is
+configured with `cssVariables: false` (`components.json`), so generated components must be re-pointed at the
+named tokens above before they compile against anything real.
 
 ## Checklist for a new or modified `src/ui/base` component
 
