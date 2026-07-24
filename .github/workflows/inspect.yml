@@ -1,0 +1,20 @@
+name: inspect
+
+on:
+  pull_request:
+    branches: [development]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn lint
