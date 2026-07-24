@@ -1,4 +1,4 @@
-# website-astro
+# chrobok-dev-website
 
 Personal site at https://www.chrobok.dev. Astro 5 + React 18 islands, Tailwind 3, shadcn/ui, TypeScript 5.
 
