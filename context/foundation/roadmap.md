@@ -49,7 +49,7 @@ to recruiters at any point.
 | ---- | ------------------------- | --------------------------------------------------------------------------- | ------------------------------ | ------------------------------ | -------- |
 | F-01 | design-system-contract    | (foundation) page skeleton + token contract settled; no ambiguity left       | —                              | §NFRs, §Guardrails             | done     |
 | F-02 | v1-release-staging        | (foundation) v1 work merges without reaching production                      | —                              | §Success Criteria (primary)    | done     |
-| F-03 | inspection-gate           | (foundation) build, types and lint gate every v1 merge; inspection checklist runnable | F-02                  | §NFRs, §Guardrails             | proposed |
+| F-03 | inspection-gate           | (foundation) build, types and lint gate every v1 merge; inspection checklist runnable | F-02                  | §NFRs, §Guardrails             | done |
 | S-01 | hero-first-screen         | read name, role title, core stack and a positioning line, and reach email + CV, without scrolling | F-01, F-02   | US-01, FR-001, FR-002, FR-003  | proposed |
 | S-02 | work-proof-block          | read the commercial work with its ownership scope, numeric proof points and two-tier stack tags | F-01, F-02     | US-01, FR-004, FR-005, FR-006  | proposed |
 | S-03 | skills-two-tier           | scan a grouped core/supporting technology list with no ratings or bars      | F-01, F-02                     | FR-007                         | proposed |
@@ -127,7 +127,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Unknowns:**
   - Which checks are automated versus checked by hand — the four-engine matrix in particular may not be worth automating for a static page. — Owner: author. Block: no.
 - **Risk:** Sequenced before the hardening pass because `main_goal: quality` says inspection gates are not deferred behind content; the scope risk is that a CI setup grows past the minimum this page needs, which `top_blocker: time` makes expensive.
-- **Status:** proposed
+- **Status:** done
 
 ## Slices
 
@@ -270,3 +270,4 @@ Foundations below assume these are present and do NOT re-scaffold them.
 
 - **F-02: (foundation) v1 work merges and deploys to a preview without touching production — `main` keeps serving the placeholder until the cutover.** — Archived 2026-07-23 → `context/archive/2026-07-23-v1-release-staging/`. Lesson: —.
 - **F-01: (foundation) the page skeleton and token contract are settled — grid and its mobile collapse, the border-radius scale, the focus-visible ring, and the rule for keeping hard-coded values out — so no content slice has to re-open a visual decision.** — Archived 2026-07-24 → `context/archive/2026-07-24-design-system-contract/`. Lesson: —.
+- **F-03: (foundation) every v1 merge is gated on build, type-check and lint, and the inspection checklist behind the NFRs is a repeatable run rather than a memory exercise.** — Archived 2026-07-24 → `context/archive/2026-07-24-inspection-gate/`. Lesson: —.
