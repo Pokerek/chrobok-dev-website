@@ -256,13 +256,13 @@ the workflow file and removing the `development` protection rule (`gh api -X DEL
 - [x] 1.1 `yarn lint` passes locally — 4fb7f4c
 - [x] 1.2 Workflow YAML is well-formed (parses) — 4fb7f4c
 - [x] 1.3 Serve script is executable and syntactically valid (`test -x` + `bash -n`) — 4fb7f4c
-- [ ] 1.4 `lint` check runs and passes on the Phase 1 PR into `development`
+- [x] 1.4 `lint` check runs and passes on the Phase 1 PR into `development` — 4fb7f4c
 
 #### Manual
 
-- [ ] 1.5 Runbook reads as genuinely runnable — each NFR maps to a concrete check
-- [ ] 1.6 PR into `development` opened and reviewed as the final implementation
-- [ ] 1.7 `Vercel` check green on the same PR
+- [x] 1.5 Runbook reads as genuinely runnable — each NFR maps to a concrete check — 4fb7f4c
+- [x] 1.6 PR into `development` opened and reviewed as the final implementation
+- [x] 1.7 `Vercel` check green on the same PR — 4fb7f4c
 
 ### Phase 2: Apply `development` branch protection
 
