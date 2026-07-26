@@ -3,7 +3,7 @@ project: "Chrobok.dev"
 version: 1
 status: draft
 created: 2026-07-22
-updated: 2026-07-24
+updated: 2026-07-26
 prd_version: 1
 main_goal: quality
 top_blocker: time
@@ -50,7 +50,7 @@ to recruiters at any point.
 | F-01 | design-system-contract    | (foundation) page skeleton + token contract settled; no ambiguity left       | —                              | §NFRs, §Guardrails             | done     |
 | F-02 | v1-release-staging        | (foundation) v1 work merges without reaching production                      | —                              | §Success Criteria (primary)    | done     |
 | F-03 | inspection-gate           | (foundation) build, types and lint gate every v1 merge; inspection checklist runnable | F-02                  | §NFRs, §Guardrails             | done |
-| S-01 | hero-first-screen         | read name, role title, core stack and a positioning line, and reach email + CV, without scrolling | F-01, F-02   | US-01, FR-001, FR-002, FR-003  | proposed |
+| S-01 | hero-first-screen         | read name, role title, core stack and a positioning line, and reach email + CV, without scrolling | F-01, F-02   | US-01, FR-001, FR-002, FR-003  | done     |
 | S-02 | work-proof-block          | read the commercial work with its ownership scope, numeric proof points and two-tier stack tags | F-01, F-02     | US-01, FR-004, FR-005, FR-006  | proposed |
 | S-03 | skills-two-tier           | scan a grouped core/supporting technology list with no ratings or bars      | F-01, F-02                     | FR-007                         | proposed |
 | S-04 | about-and-journal         | read the one-paragraph bio incl. teaching, and open the Instagram journal    | F-01, F-02                     | FR-008, FR-009                 | proposed |
@@ -142,7 +142,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Unknowns:**
   - Does the positioning line use the author's own AI formulation verbatim, or a shortened variant that still avoids reading as "I don't use AI"? — Owner: author. Block: no.
 - **Risk:** This screen carries the acceptance criteria of the only user story, so its failure mode is silent — it can look finished while missing one of the four things a recruiter needs; note that FR-001's resolution deliberately leaves seniority *out* of the hero, which makes S-02 load-bearing for it.
-- **Status:** proposed
+- **Status:** done
 
 ### S-02: Work — the proof block
 
@@ -271,3 +271,4 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **F-02: (foundation) v1 work merges and deploys to a preview without touching production — `main` keeps serving the placeholder until the cutover.** — Archived 2026-07-23 → `context/archive/2026-07-23-v1-release-staging/`. Lesson: —.
 - **F-01: (foundation) the page skeleton and token contract are settled — grid and its mobile collapse, the border-radius scale, the focus-visible ring, and the rule for keeping hard-coded values out — so no content slice has to re-open a visual decision.** — Archived 2026-07-24 → `context/archive/2026-07-24-design-system-contract/`. Lesson: —.
 - **F-03: (foundation) every v1 merge is gated on build, type-check and lint, and the inspection checklist behind the NFRs is a repeatable run rather than a memory exercise.** — Archived 2026-07-24 → `context/archive/2026-07-24-inspection-gate/`. Lesson: —.
+- **S-01: Visitor can read the author's name, role title and core stack, read the one-line positioning statement, and reach the email address and the CV — all without scrolling, on a phone as well as on desktop.** — Archived 2026-07-26 → `context/archive/2026-07-26-hero-first-screen/`. Lesson: —.
