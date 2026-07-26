@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+
+import { cn } from 'styles/utils';
+import { buttonStyles } from 'ui/base/button/button.styles';
+
+import monk from '../../assets/monk.webp';
+import Section from '../layout/Section.astro';
+
+const EMAIL = 'karolchrobok@gmail.com';
+const CV_PATH = '/karol_chrobok_cv.pdf';
+const CV_FILENAME = 'karol-chrobok-en-cv.pdf';
+---
+
+<Section id="hero" class="flex min-h-svh flex-col justify-center">
+  <div class="grid items-center gap-grid md:grid-cols-2">
+    <div class="space-y-element">
+      <div class="space-y-2">
+        <h1>Karol Chrobok</h1>
+        <p>Frontend Developer</p>
+        <p class="text-text-secondary">React &middot; Next.js &middot; TypeScript</p>
+      </div>
+
+      <p class="max-w-lg">
+        I don&rsquo;t generate code, I craft it. AI is a tool I use every day &mdash; the result is owned by a human.
+      </p>
+
+      <div class="flex flex-wrap gap-element">
+        <a class={cn(buttonStyles({ variant: 'outline' }))} href={`mailto:${EMAIL}`}>Email me</a>
+        <a class={cn(buttonStyles({ variant: 'outline' }))} href={CV_PATH} download={CV_FILENAME}>Download CV</a>
+      </div>
+    </div>
+
+    <Image src={monk} alt="" class="hidden h-auto w-full max-w-sm justify-self-end md:block" loading="eager" />
+  </div>
+</Section>
