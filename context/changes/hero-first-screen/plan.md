@@ -311,21 +311,21 @@ from git history if needed.
 
 #### Automated
 
-- [x] 1.1 Type-check and build pass: `yarn build`
-- [x] 1.2 Lint passes: `yarn lint`
-- [x] 1.3 No placeholder text survives in the build
+- [x] 1.1 Type-check and build pass: `yarn build` — bdb0551
+- [x] 1.2 Lint passes: `yarn lint` — bdb0551
+- [x] 1.3 No placeholder text survives in the build — bdb0551
 - [x] 1.4 No `public/images/monk.webp` reference survives — the illustration returns via `astro:assets`
-      (`src/assets/monk.webp` → hashed `/_astro/monk.*.webp`) per the Phase 1 deviation
-- [x] 1.5 Hero renders server-side with no island
+      (`src/assets/monk.webp` → hashed `/_astro/monk.*.webp`) per the Phase 1 deviation — bdb0551
+- [x] 1.5 Hero renders server-side with no island — bdb0551
 
 #### Manual
 
 - [x] 1.6 Both CTAs visible and correctly styled on desktop — both ship the `outline` variant, a
       deliberate visual decision taken on the rendered page (supersedes the `default`/`outline` split in
-      the Phase 1 contract)
-- [x] 1.7 Email link opens a mail client with the correct address
-- [x] 1.8 CV link resolves to its final path — PDF landed in Phase 1; serves 200 application/pdf
-- [x] 1.9 Desktop container width and centring unchanged — re-checked with the illustration in place
+      the Phase 1 contract) — bdb0551
+- [x] 1.7 Email link opens a mail client with the correct address — bdb0551
+- [x] 1.8 CV link resolves to its final path — PDF landed in Phase 1; serves 200 application/pdf — bdb0551
+- [x] 1.9 Desktop container width and centring unchanged — re-checked with the illustration in place — bdb0551
 
 ### Phase 2: First-screen verification
 
