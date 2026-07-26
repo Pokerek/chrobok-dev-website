@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 
-import { cn } from 'styles/utils';
 import { buttonStyles } from 'ui/base/button/button.styles';
 
 import monk from '../../assets/monk.webp';
@@ -26,8 +25,8 @@ const CV_FILENAME = 'karol-chrobok-en-cv.pdf';
       </p>
 
       <div class="flex flex-wrap gap-element">
-        <a class={cn(buttonStyles({ variant: 'outline' }))} href={`mailto:${EMAIL}`}>Email me</a>
-        <a class={cn(buttonStyles({ variant: 'outline' }))} href={CV_PATH} download={CV_FILENAME}>Download CV</a>
+        <a class={buttonStyles({ variant: 'outline' })} href={`mailto:${EMAIL}`}>Email me</a>
+        <a class={buttonStyles({ variant: 'outline' })} href={CV_PATH} download={CV_FILENAME}>Download CV</a>
       </div>
     </div>
 

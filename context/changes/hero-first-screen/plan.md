@@ -92,12 +92,12 @@ to fill the empty column. Implemented as:
 - `astro.config.mjs` gained `image: { service: passthroughImageService() }`. `astro:assets` otherwise
   requires `sharp`, which is not installed; the asset is already an optimised 21 KB webp, so passthrough
   keeps the width/height benefit without adding a native dependency.
-- Hero content became a `lg:grid-cols-2` grid. The image is `hidden lg:block`, so it never competes for
+- Hero content became a `md:grid-cols-2` grid. The image is `hidden md:block`, so it never competes for
   the mobile fold budget, and carries `alt=""` as decorative.
 
 The CV also landed during this phase at `public/karol_chrobok_cv.pdf`, so the link is live rather than
 the anticipated 404. The href points at the real (underscored) filename and uses
-`download="karol-chrobok-cv.pdf"` to give the saved file a clean name.
+`download="karol-chrobok-en-cv.pdf"` to give the saved file a clean name.
 
 ## Implementation Approach
 
@@ -167,8 +167,11 @@ Copy is fixed by the decisions taken during planning:
 **Contract (CTAs)**: two anchors, styled by `buttonStyles` from `src/ui/base/button/button.styles.ts`
 combined through `cn()` from `styles/utils`:
 
-- Email — `variant: 'default'` (filled), `href="mailto:karolchrobok@gmail.com"`
-- CV — `variant: 'outline'`, `href="/cv/karol-chrobok-cv.pdf"`, carrying the `download` attribute
+- Email — `variant: 'outline'`, `href="mailto:karolchrobok@gmail.com"`
+- CV — `variant: 'outline'`, `href="/karol_chrobok_cv.pdf"`, carrying the `download` attribute
+
+Both CTAs ship the `outline` variant: the `default`/`outline` split was tried on the rendered page and
+the matched pair read better, so the visual hierarchy is carried by order and copy, not by fill.
 
 Both are internal-or-mailto targets, so neither needs `rel="noopener"` or `target="_blank"`. Do not add
 focus-ring classes — the global `:focus-visible` rule in `globals.css` already applies.
@@ -200,7 +203,7 @@ see the deviation note under "What We're NOT Doing".
 
 - Both CTAs are visible and correctly styled — email filled, CV outline — on desktop
 - The email link opens a mail client addressed to `karolchrobok@gmail.com`
-- The CV link resolves to `/cv/karol-chrobok-cv.pdf` (expected to 404 until the artifact lands)
+- The CV link resolves to `/karol_chrobok_cv.pdf` (the artifact landed during Phase 1)
 - Desktop container width and centring are unchanged from the rest of the design system
 
 **Implementation Note**: After completing this phase and all automated verification passes, pause here
@@ -311,12 +314,15 @@ from git history if needed.
 - [x] 1.1 Type-check and build pass: `yarn build`
 - [x] 1.2 Lint passes: `yarn lint`
 - [x] 1.3 No placeholder text survives in the build
-- [x] 1.4 No monk image reference survives
+- [x] 1.4 No `public/images/monk.webp` reference survives — the illustration returns via `astro:assets`
+      (`src/assets/monk.webp` → hashed `/_astro/monk.*.webp`) per the Phase 1 deviation
 - [x] 1.5 Hero renders server-side with no island
 
 #### Manual
 
-- [x] 1.6 Both CTAs visible and correctly styled on desktop
+- [x] 1.6 Both CTAs visible and correctly styled on desktop — both ship the `outline` variant, a
+      deliberate visual decision taken on the rendered page (supersedes the `default`/`outline` split in
+      the Phase 1 contract)
 - [x] 1.7 Email link opens a mail client with the correct address
 - [x] 1.8 CV link resolves to its final path — PDF landed in Phase 1; serves 200 application/pdf
 - [x] 1.9 Desktop container width and centring unchanged — re-checked with the illustration in place
