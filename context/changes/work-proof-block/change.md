@@ -1,7 +1,7 @@
 ---
 change_id: work-proof-block
 title: Work proof block (S-02) — commercial work with proof points and stack tags
-status: implemented
+status: impl_reviewed
 created: 2026-07-27
 updated: 2026-07-27
 archived_at: null
