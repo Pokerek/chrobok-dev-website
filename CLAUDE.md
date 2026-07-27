@@ -61,6 +61,15 @@ When the structure changes, update this section.
     componentName.test.tsx   # tests (optional)
   ```
 - Compound components are namespaced: `ComponentName.SubComponentName`.
+- **Feature components keep data and types out of the `.astro` file.** Module-scope constants go in a
+  sibling `componentName.constants.ts`, types in `componentName.types.ts`. The `.astro` frontmatter
+  should import and render — not declare the content it renders.
+  ```
+  skills/
+    Skills.astro             # markup, imports its data
+    skills.constants.ts      # SKILL_CATEGORIES, TIER_LEGEND, …
+    skills.types.ts          # Tier, SkillCategory, …
+  ```
 
 ## Naming
 
