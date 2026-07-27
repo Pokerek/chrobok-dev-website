@@ -118,7 +118,7 @@ const SKILL_CATEGORIES: { id: string; caption: string; items: { name: string; ti
               {category.items.map((item) => (
                 <li class={tagStyles({ tier: item.tier })}>
                   {item.name}
-                  {item.tier === 'supporting' && <span class="sr-only">&nbsp;(supporting)</span>}
+                  <span class="sr-only">&nbsp;({item.tier})</span>
                 </li>
               ))}
             </ul>
