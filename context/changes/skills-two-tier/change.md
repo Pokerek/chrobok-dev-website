@@ -1,7 +1,7 @@
 ---
 change_id: skills-two-tier
 title: Skills two tier
-status: implementing
+status: implemented
 created: 2026-07-27
 updated: 2026-07-27
 archived_at: null

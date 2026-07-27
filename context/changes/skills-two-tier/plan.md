@@ -353,14 +353,14 @@ None. New section, additive; the `#skills` anchor is the interface S-06 will con
 
 #### Automated
 
-- [x] 3.1 Build, type-check and lint clean on the final state
+- [x] 3.1 Build, type-check and lint clean on the final state — ac5b614
 
 #### Manual
 
-- [x] 3.2 Vault cross-check: every chip traceable to a core or uzupełniające row
-- [x] 3.3 Internal consistency: no tier contradiction with `SologyRole.astro`
-- [x] 3.4 Confidentiality: no client, product or internal repo name in the section
-- [x] 3.5 Keyboard and screen reader: no trap; chip lists announced with their caption
-- [x] 3.6 No-JS: full section renders with scripts disabled
-- [x] 3.7 Contrast: caption and gloss text meets WCAG AA
-- [x] 3.8 No CLS: no layout shift after first paint, no added motion
+- [x] 3.2 Vault cross-check: every chip traceable to a core or uzupełniające row — ac5b614
+- [x] 3.3 Internal consistency: no tier contradiction with `SologyRole.astro` — ac5b614
+- [x] 3.4 Confidentiality: no client, product or internal repo name in the section — ac5b614
+- [x] 3.5 Keyboard and screen reader: no trap; chip lists announced with their caption — ac5b614
+- [x] 3.6 No-JS: full section renders with scripts disabled — ac5b614
+- [x] 3.7 Contrast: caption and gloss text meets WCAG AA — ac5b614
+- [x] 3.8 No CLS: no layout shift after first paint, no added motion — ac5b614
