@@ -52,7 +52,7 @@ to recruiters at any point.
 | F-03 | inspection-gate           | (foundation) build, types and lint gate every v1 merge; inspection checklist runnable | F-02                  | §NFRs, §Guardrails             | done |
 | S-01 | hero-first-screen         | read name, role title, core stack and a positioning line, and reach email + CV, without scrolling | F-01, F-02   | US-01, FR-001, FR-002, FR-003  | done     |
 | S-02 | work-proof-block          | read the commercial work with its ownership scope, numeric proof points and two-tier stack tags | F-01, F-02     | US-01, FR-004, FR-005, FR-006  | done |
-| S-03 | skills-two-tier           | scan a grouped core/supporting technology list with no ratings or bars      | F-01, F-02                     | FR-007                         | proposed |
+| S-03 | skills-two-tier           | scan a grouped core/supporting technology list with no ratings or bars      | F-01, F-02                     | FR-007                         | done     |
 | S-04 | about-and-journal         | read the one-paragraph bio incl. teaching, and open the Instagram journal    | F-01, F-02                     | FR-008, FR-009                 | done |
 | S-05 | footer-contact            | select the email as text and open LinkedIn, GitHub and the ungated CV PDF   | F-01, F-02                     | FR-010, FR-011                 | proposed |
 | S-06 | sticky-section-nav        | jump to any section from a sticky header on every breakpoint                | S-01, S-02, S-03, S-04, S-05   | FR-012                         | proposed |
@@ -167,7 +167,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** —
 - **Unknowns:** —
 - **Risk:** The tier split is the mechanism that keeps SQL, Node.js and Rails from reading as strongly as React; collapsing it back to one flat list would quietly break the no-overstatement guardrail that the site, the CV and GitHub must jointly satisfy.
-- **Status:** proposed
+- **Status:** done
 
 ### S-04: About and journal
 
@@ -283,3 +283,4 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **S-01: Visitor can read the author's name, role title and core stack, read the one-line positioning statement, and reach the email address and the CV — all without scrolling, on a phone as well as on desktop.** — Archived 2026-07-26 → `context/archive/2026-07-26-hero-first-screen/`. Lesson: —.
 - **S-02: Visitor can read the commercial work as a single block dominated by the Rentola role, including the ownership scope that signals seniority, the outcome-based numbers, and stack tags split into core and supporting tiers.** — Archived 2026-07-27 → `context/archive/2026-07-27-work-proof-block/`. Lesson: —.
 - **S-04: Visitor can read a short bio paragraph that includes the decade of teaching in one sentence, and can open the developer's journal on Instagram from a labelled link.** — Archived 2026-07-27 → `context/archive/2026-07-27-about-and-journal/`. Lesson: —.
+- **S-03: Visitor can scan a grouped technology list split into a core tier and a supporting tier, with no ratings, levels, bars or percentages.** — Archived 2026-07-27 → `context/archive/2026-07-27-skills-two-tier/`. Lesson: —.

@@ -1,10 +1,10 @@
 ---
 change_id: skills-two-tier
 title: Skills two tier
-status: impl_reviewed
+status: archived
 created: 2026-07-27
 updated: 2026-07-27
-archived_at: null
+archived_at: 2026-07-27T13:44:59Z
 ---
 
 ## Notes
