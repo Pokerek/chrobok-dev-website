@@ -267,19 +267,19 @@ defect found but deliberately not fixed is listed with the slice that owns it.
 
 - Full build clean from a cold start: `yarn build`
 - Lint clean: `yarn lint`
-- Zero JavaScript shipped for the footer: no `<script>` tag attributable to the footer in `dist/index.html`
-- All four footer destinations resolve — `mailto:` address correct, both profile URLs return 200,
+- Zero JavaScript shipped for the contact section: no `<script>` tag attributable to it in `dist/index.html`
+- All four contact destinations resolve — `mailto:` address correct, both profile URLs return 200,
   `/karol_chrobok_cv.pdf` is present in `dist/`
 
 #### Manual Verification:
 
-- Page reads correctly with JavaScript disabled — every footer link present and clickable
-- Footer text meets WCAG AA contrast (`text-secondary` on `page-bg`, and the outline links' label on their
-  hover background)
-- No layout shift after first paint when the footer enters the viewport
+- Page reads correctly with JavaScript disabled — every contact link present and clickable
+- Contact-section text meets WCAG AA contrast (`text-secondary` on `page-bg`, and the outline links' label
+  on their hover background)
+- No layout shift after first paint when the contact section enters the viewport
 - The page renders correctly at 375px width and on desktop, in a Chromium and a WebKit browser
-- Guardrail read-through: the footer states no availability, no contract form, no notice period, names no
-  client, and makes no competency claim
+- Guardrail read-through: the contact section states no availability, no contract form, no notice period,
+  names no client, and makes no competency claim
 
 ---
 
@@ -343,42 +343,42 @@ None — no stored data, no URLs change, and the footer is not linked from anywh
 
 #### Manual
 
-- [ ] 1.5 Hero CV link opens the PDF in the browser and reads "View CV (PDF)"
+- [x] 1.5 Hero CV link opens the PDF in the browser and reads "View CV (PDF)"
 - [ ] 1.6 Hero "Email me" button still opens a mail composer
-- [ ] 1.7 Hero otherwise renders unchanged at mobile and desktop width
+- [x] 1.7 Hero otherwise renders unchanged at mobile and desktop width
 
 ### Phase 2: Contact section
 
 #### Automated
 
-- [x] 2.1 Build and type-check pass: `yarn build`
-- [x] 2.2 Lint passes: `yarn lint`
-- [x] 2.3 No hard-coded colour utilities remain in `src/components` or `src/layouts`
-- [x] 2.4 One `id="contact"` anchor in `dist/index.html`, rendered as `<section id="contact">` inside `<main>`
-- [x] 2.5 Hero, Work, About and the `<footer>` render unchanged
+- [x] 2.1 Build and type-check pass: `yarn build` — 8bddea5
+- [x] 2.2 Lint passes: `yarn lint` — 8bddea5
+- [x] 2.3 No hard-coded colour utilities remain in `src/components` or `src/layouts` — 8bddea5
+- [x] 2.4 One `id="contact"` anchor in `dist/index.html`, rendered as `<section id="contact">` inside `<main>` — 8bddea5
+- [x] 2.5 Hero, Work, About and the `<footer>` render unchanged — 8bddea5
 
 #### Manual
 
-- [ ] 2.6 Contact label aligns with Work and About on desktop, stacks below `md`
-- [ ] 2.7 Every footer link reachable and operable by keyboard, focus ring visible, tab order correct
+- [x] 2.6 Contact label aligns with Work and About on desktop, stacks below `md`
+- [x] 2.7 Every footer link reachable and operable by keyboard, focus ring visible, tab order correct
 - [ ] 2.8 Screen reader announces the new-tab suffix on LinkedIn and GitHub, and the address on the email link
-- [ ] 2.9 Contact CV link opens the same PDF as the hero, in the browser, same tab
-- [ ] 2.10 No label clipped at 200% text zoom
-- [ ] 2.11 Contact section states no availability, start date, notice period or client name
+- [x] 2.9 Contact CV link opens the same PDF as the hero, in the browser, same tab
+- [x] 2.10 No label clipped at 200% text zoom
+- [x] 2.11 Contact section states no availability, start date, notice period or client name
 
 ### Phase 3: Inspection verification
 
 #### Automated
 
-- [ ] 3.1 Full build clean from a cold start: `yarn build`
-- [ ] 3.2 Lint clean: `yarn lint`
-- [ ] 3.3 Zero JavaScript shipped for the footer
-- [ ] 3.4 All four footer destinations resolve
+- [x] 3.1 Full build clean from a cold start: `yarn build`
+- [x] 3.2 Lint clean: `yarn lint`
+- [x] 3.3 Zero JavaScript shipped for the contact section
+- [x] 3.4 All four contact destinations resolve
 
 #### Manual
 
-- [ ] 3.5 Page reads correctly with JavaScript disabled
-- [ ] 3.6 Footer text meets WCAG AA contrast
-- [ ] 3.7 No layout shift after first paint when the footer enters the viewport
+- [x] 3.5 Page reads correctly with JavaScript disabled
+- [x] 3.6 Contact-section text meets WCAG AA contrast
+- [x] 3.7 No layout shift after first paint when the contact section enters the viewport
 - [ ] 3.8 Renders correctly at 375px and desktop, in a Chromium and a WebKit browser
-- [ ] 3.9 Guardrail read-through passes
+- [x] 3.9 Guardrail read-through passes
