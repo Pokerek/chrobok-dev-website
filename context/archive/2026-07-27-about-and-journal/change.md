@@ -1,10 +1,10 @@
 ---
 change_id: about-and-journal
 title: About and journal
-status: impl_reviewed
+status: archived
 created: 2026-07-27
 updated: 2026-07-27
-archived_at: null
+archived_at: 2026-07-27T13:21:14Z
 ---
 
 ## Notes
