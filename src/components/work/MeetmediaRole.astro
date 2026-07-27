@@ -1,0 +1,36 @@
+---
+import { tagStyles } from 'ui/base/tag/tag.styles';
+
+const STACK_CAPTION_ID = 'meetmedia-stack';
+const STACK = ['HTML', 'CSS', 'Sass', 'JavaScript', 'jQuery', 'PHP'];
+---
+
+<article class="space-y-element">
+  <div class="space-y-tight">
+    <h3 class="text-2xl">Meetmedia</h3>
+    <p class="text-text-secondary">Junior Frontend Developer &middot; Dec 2019 &ndash; Aug 2020 &middot; Remote</p>
+  </div>
+
+  <p>
+    The role before the framework &mdash; layout, CSS and browser debugging built by hand, from Photoshop designs, with
+    nothing generating the markup.
+  </p>
+
+  <ul role="list" class="space-y-tight">
+    <li>
+      The complete visual layer of bezuzyteczna.pl, a well-known Polish content portal &mdash; cut from PSD and wired to
+      the site&rsquo;s logic and API. Still running unchanged in production six years later.
+    </li>
+    <li>
+      Client sites built and maintained end to end in semantic HTML, Sass and JavaScript &mdash; reported symptom
+      reproduced in the browser, traced to root cause, fixed.
+    </li>
+  </ul>
+
+  <div class="space-y-tight">
+    <p id={STACK_CAPTION_ID} class="text-text-secondary">Stack at the time</p>
+    <ul role="list" aria-labelledby={STACK_CAPTION_ID} class="flex flex-wrap gap-tight">
+      {STACK.map((item) => <li class={tagStyles}>{item}</li>)}
+    </ul>
+  </div>
+</article>

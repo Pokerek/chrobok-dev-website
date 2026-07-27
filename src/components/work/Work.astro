@@ -1,0 +1,15 @@
+---
+import Section from '../layout/Section.astro';
+
+import MeetmediaRole from './MeetmediaRole.astro';
+import SologyRole from './SologyRole.astro';
+---
+
+<Section id="work">
+  <h2 slot="label">Work</h2>
+
+  <div class="max-w-3xl space-y-section">
+    <SologyRole />
+    <MeetmediaRole />
+  </div>
+</Section>

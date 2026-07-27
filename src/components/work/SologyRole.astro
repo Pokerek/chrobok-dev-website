@@ -1,0 +1,65 @@
+---
+import { tagStyles } from 'ui/base/tag/tag.styles';
+
+const STACK_TIERS = [
+  {
+    id: 'sology-stack-core',
+    caption: 'Core',
+    items: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'CSS', 'Jest'],
+  },
+  {
+    id: 'sology-stack-supporting',
+    caption: 'Supporting',
+    items: ['Node.js', 'Playwright', 'Radix UI', 'Storybook', 'AWS', 'Sentry'],
+  },
+];
+---
+
+<article class="space-y-element">
+  <div class="space-y-tight">
+    <h3 class="text-2xl">Sology Software House</h3>
+    <p class="text-text-secondary">Frontend Developer &middot; Aug 2023 &ndash; Jul 2026 &middot; Remote, B2B</p>
+  </div>
+
+  <p>
+    One of 3&ndash;4 frontend developers on a client&rsquo;s greenfield, multi-tenant international rental marketplace
+    running on subscriptions &mdash; and the owner of its registration and subscription funnel, payments and CRO. Joined
+    as a junior with no React or Next.js experience and grew into that ownership over three years.
+  </p>
+
+  <ul role="list" class="space-y-tight">
+    <li>
+      ~52 A/B experiments in GrowthBook across the registration and subscription funnel &mdash; building the variants
+      defined with product and business, shipping winners as defaults, removing losing-experiment code.
+    </li>
+    <li>
+      ~60 language-market locales with Lingui and Crowdin, including full RTL for Arabic and Hebrew, plus new market
+      rollouts in DE, AU and CA.
+    </li>
+    <li>
+      7 legacy country platforms (DK, NL, GR, BE, IT, CZ, FI) migrated to the new product via 301s and canonicalisation,
+      preserving organic traffic.
+    </li>
+    <li>
+      3 payment providers &mdash; Rebilly framepay, Apple Pay and PayPal &mdash; behind an end-to-end subscription flow:
+      checkout, cancellation, reactivation, invoices and dashboard.
+    </li>
+  </ul>
+
+  <div class="space-y-element">
+    {
+      STACK_TIERS.map((tier) => (
+        <div class="space-y-tight">
+          <p id={tier.id} class="text-text-secondary">
+            {tier.caption}
+          </p>
+          <ul role="list" aria-labelledby={tier.id} class="flex flex-wrap gap-tight">
+            {tier.items.map((item) => (
+              <li class={tagStyles}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</article>
