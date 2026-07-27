@@ -354,8 +354,7 @@ Not applicable — no stored content, no data, no existing About section to migr
 
 #### Manual
 
-- [x] 1.7 Reads cleanly at 375px with no horizontal overflow and no clipped label — verified against the
-      shipped two-block copy, not the one-paragraph version written above — 5e7eb40
+- [x] 1.7 Reads cleanly at 375px — no overflow, no clipped label (shipped two-block copy) — 5e7eb40
 - [x] 1.8 Label sits beside the paragraph at `md+` and stacks below `md` — 5e7eb40
 - [x] 1.9 Journal link is keyboard-reachable and shows the standard focus ring — 5e7eb40
 - [x] 1.10 Screen reader announces the link including "(opens in a new tab)" — 5e7eb40
