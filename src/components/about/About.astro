@@ -1,0 +1,50 @@
+---
+import { cn } from 'styles/utils';
+import { buttonStyles } from 'ui/base/button/button.styles';
+
+import Section from '../layout/Section.astro';
+
+const JOURNAL_URL = 'https://www.instagram.com/chrobok.dev/';
+---
+
+<Section id="about">
+  <h2 slot="label">About</h2>
+
+  <div class="max-w-3xl space-y-section">
+    <div class="space-y-tight">
+      <h3 class="text-2xl">Teaching</h3>
+
+      <p>
+        I&rsquo;ve been teaching for a decade &mdash; maths and programming &mdash; which taught me to explain hard
+        things simply and to work with people. Maths tutoring came first and still runs alongside the day job; later I
+        spent two and a half years running robotics classes, where children built a machine out of LEGO and then wrote
+        the program that made it move. Both are the same craft: take something that looks impenetrable, find the
+        sentence that makes it obvious, and watch for the moment it lands. It is also where debugging became a habit
+        &mdash; run it, compare what happened against what was meant to happen, change one thing at a time.
+      </p>
+    </div>
+
+    <div class="space-y-element">
+      <div class="space-y-tight">
+        <h3 class="text-2xl">Developer&rsquo;s journal</h3>
+
+        <p>
+          Since January 2023 I&rsquo;ve kept a daily developer&rsquo;s journal &mdash; what I worked on, what broke,
+          what I would do differently &mdash; documenting the road from Zero to Senior Developer. Consistency is the
+          part that counts: three and a half years of entries, including the days with nothing impressive to report.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap gap-element">
+        <a
+          class={cn(buttonStyles({ variant: 'outline' }), 'h-auto min-h-10 text-center')}
+          href={JOURNAL_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Journal on Instagram<span class="sr-only"> (opens in a new tab)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</Section>

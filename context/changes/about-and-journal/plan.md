@@ -326,20 +326,20 @@ Not applicable — no stored content, no data, no existing About section to migr
 
 #### Automated
 
-- [ ] 1.1 Build and type-check pass: `yarn build`
-- [ ] 1.2 Lint passes: `yarn lint`
-- [ ] 1.3 The section renders into the static output (`id="about"` present once in `dist/index.html`)
-- [ ] 1.4 The journal anchor ships `target="_blank"` and `rel="noopener noreferrer"`
-- [ ] 1.5 The announced-new-tab `sr-only` span is inside the anchor
-- [ ] 1.6 No client-side JavaScript was added (JS bundle count unchanged)
+- [x] 1.1 Build and type-check pass: `yarn build`
+- [x] 1.2 Lint passes: `yarn lint`
+- [x] 1.3 The section renders into the static output (`id="about"` present once in `dist/index.html`)
+- [x] 1.4 The journal anchor ships `target="_blank"` and `rel="noopener noreferrer"`
+- [x] 1.5 The announced-new-tab `sr-only` span is inside the anchor
+- [x] 1.6 No client-side JavaScript was added (JS bundle count unchanged)
 
 #### Manual
 
-- [ ] 1.7 Reads as one paragraph plus one link at 375px, no horizontal overflow
-- [ ] 1.8 Label sits beside the paragraph at `md+` and stacks below `md`
-- [ ] 1.9 Journal link is keyboard-reachable and shows the standard focus ring
-- [ ] 1.10 Screen reader announces the link including "(opens in a new tab)"
-- [ ] 1.11 The link opens Instagram in a new tab, leaving the page in place
+- [x] 1.7 Reads as one paragraph plus one link at 375px, no horizontal overflow
+- [x] 1.8 Label sits beside the paragraph at `md+` and stacks below `md`
+- [x] 1.9 Journal link is keyboard-reachable and shows the standard focus ring
+- [x] 1.10 Screen reader announces the link including "(opens in a new tab)"
+- [x] 1.11 The link opens Instagram in a new tab, leaving the page in place
 
 ### Phase 2: Inspection verification
 
