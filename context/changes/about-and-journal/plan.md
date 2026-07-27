@@ -194,9 +194,15 @@ Import ordering follows the ESLint config already enforced on the file.
 - The journal anchor ships with its hardening attributes:
   `grep -o 'href="https://www.instagram.com/chrobok.dev/"[^>]*' dist/index.html` shows both
   `target="_blank"` and `rel="noopener noreferrer"`
-- The announced-new-tab text is inside the anchor: `grep -o '<a[^>]*instagram[^<]*<span class="sr-only">[^<]*</span>' dist/index.html` matches
-- No client-side JavaScript was added: `ls dist/_astro/*.js 2>/dev/null | wc -l` returns the same count as
-  on `development` (expected `0`)
+- The announced-new-tab text is inside the anchor:
+  `tr '\n' ' ' < dist/index.html | grep -o '<a[^>]*instagram[^<]*<span class="sr-only">[^<]*</span>'` matches.
+  The `tr` is load-bearing — Astro emits a newline after the anchor's opening tag, so a single-line
+  regex over `dist/index.html` never matches even when the span is correctly placed.
+- No client-side JavaScript reaches the browser: `grep -c '<script' dist/index.html` returns `0`.
+  Do **not** assert on `ls dist/_astro/*.js | wc -l` — the `react()` integration in `astro.config.mjs`
+  emits an orphan ~143 kB `client.*.js` chunk on every build that no `<script>` tag references. That
+  chunk predates this slice and is not a regression; the `<script>` count is the check that means
+  something.
 
 #### Manual Verification:
 
@@ -207,6 +213,19 @@ Import ordering follows the ESLint config already enforced on the file.
   with a page-background offset — no blue browser default
 - A screen reader announces the link as "Read the journal on Instagram (opens in a new tab), link"
 - Activating the link opens `instagram.com/chrobok.dev` in a new tab, leaving the page in place
+
+### Deviations from this phase as written (recorded 2026-07-27, post-implementation review)
+
+The Phase 1 contract above is left as originally written; what actually shipped differs in four places.
+Full rationale for the first three lives in `change.md`; this is the index so a reader diffing plan
+against code can tell deliberate correction from drift.
+
+| Written above                                                             | Shipped                                                              | Why                                                                                                                                                                                             |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| One `<p>`, two sentences, no subheadings                                   | Two `<h3>`-titled blocks (Teaching / Developer's journal)            | Author-directed — the section read as underweight next to Work. Trades FR-008's length-discipline constraint; see `change.md`.                                                                    |
+| `class={buttonStyles({ variant: 'outline' })}`                             | `cn(buttonStyles(...), 'h-auto min-h-10 text-center')`               | The CVA's fixed `h-10` clipped a wrapped label at 375px and clips any label at 200% zoom. Source fix deferred to S-07; see `change.md` and the S-07 roadmap item.                                 |
+| Label "Read the journal on Instagram"                                      | "Journal on Instagram"                                               | ~326px at the body size vs ~311px available at 375px. Still names both the thing and its destination, as FR-009 requires.                                                                          |
+| Content column `space-y-element`, justified as "matching `Work.astro:11`"  | `space-y-section`                                                    | **The plan was wrong twice here.** `Work.astro:11` is in fact `max-w-3xl space-y-section`, so `element` never matched it; and the "one block, not two" rationale was voided by the restructure. `space-y-section` is the correct value on both counts. |
 
 **Implementation Note**: After completing this phase and all automated verification passes, pause here for
 manual confirmation from the human that the manual testing was successful before proceeding to the next
@@ -331,11 +350,12 @@ Not applicable — no stored content, no data, no existing About section to migr
 - [x] 1.3 The section renders into the static output (`id="about"` present once in `dist/index.html`) — 5e7eb40
 - [x] 1.4 The journal anchor ships `target="_blank"` and `rel="noopener noreferrer"` — 5e7eb40
 - [x] 1.5 The announced-new-tab `sr-only` span is inside the anchor — 5e7eb40
-- [x] 1.6 No client-side JavaScript was added (JS bundle count unchanged) — 5e7eb40
+- [x] 1.6 No client-side JavaScript reaches the browser (no `<script>` tag in `dist/index.html`) — 5e7eb40
 
 #### Manual
 
-- [x] 1.7 Reads as one paragraph plus one link at 375px, no horizontal overflow — 5e7eb40
+- [x] 1.7 Reads cleanly at 375px with no horizontal overflow and no clipped label — verified against the
+      shipped two-block copy, not the one-paragraph version written above — 5e7eb40
 - [x] 1.8 Label sits beside the paragraph at `md+` and stacks below `md` — 5e7eb40
 - [x] 1.9 Journal link is keyboard-reachable and shows the standard focus ring — 5e7eb40
 - [x] 1.10 Screen reader announces the link including "(opens in a new tab)" — 5e7eb40
@@ -351,7 +371,7 @@ Not applicable — no stored content, no data, no existing About section to migr
 
 #### Manual
 
-- [x] 2.4 With JavaScript disabled, paragraph and link are present and the link works — 4d59ec7
+- [x] 2.4 With JavaScript disabled, both paragraphs and the link are present and the link works — 4d59ec7
 - [x] 2.5 Text contrast meets WCAG AA on the paragraph and the link label — 4d59ec7
 - [x] 2.6 No layout shift after first paint — 4d59ec7
 - [x] 2.7 Renders correctly in Chromium, Firefox and WebKit at mobile and desktop widths — 4d59ec7

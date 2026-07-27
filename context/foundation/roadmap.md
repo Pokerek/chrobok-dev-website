@@ -202,7 +202,8 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Prerequisites:** S-01, S-02, S-03, S-04, S-05
 - **Parallel with:** —
 - **Blockers:** —
-- **Unknowns:** —
+- **Unknowns:**
+  - **There is no `#journal` anchor, and the journal is now a visible heading (settled in S-04, 2026-07-27 — do not rediscover this as a gap).** The PRD's locked flow lists About (5) and Journal (6) as separate steps, but S-04 shipped them as one `#about` section to avoid a genuinely one-line `#journal` section. The implementation then gave the journal its own `<h3>Developer&rsquo;s journal</h3>` block, so a reader can see a titled journal section that the nav will not list. Decide deliberately: nav lists "About" only (status quo), or S-06 adds the `#journal` anchor S-04 declined to add. — Owner: author. Block: no.
 - **Risk:** Sequenced last among content slices because it needs every section anchor to exist; the accepted trade-off recorded in FR-012 is that a sticky header eats first-screen area on mobile, which is exactly where the recruiter opens the pasted link — worth re-checking against S-01 once both are on the preview.
 - **Status:** proposed
 
@@ -216,6 +217,14 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** —
 - **Unknowns:**
   - Which browser/engine combinations get a real manual check versus a reasoned assumption? — Owner: author. Block: no.
+- **Carried-in work (found during S-04, 2026-07-27):** `src/ui/base/button/button.styles.ts` pins `h-10`
+  (a fixed 2.5rem) on the `default` size, so any label that wraps overflows the button box. WCAG AA
+  requires 200% text resize without loss of content, and at that zoom *every* button label wraps — so
+  `Hero.astro`'s two buttons (`Email me`, `Download CV`) clip today. S-04 could not fix it at the source
+  because `src/ui/base/**` is F-01-frozen; it worked around it at the call site with
+  `cn(buttonStyles(...), 'h-auto min-h-10 text-center')` in `About.astro`. The durable fix belongs here:
+  change `h-10` → `min-h-10` in `button.styles.ts` (or add an `auto` size variant), then delete the
+  About call-site override, which currently hand-copies the `10` with nothing linking the two values.
 - **Risk:** This is where the craftsmanship claim is either paid or refuted — a site that fails inspection damages the positioning harder than any copy supports it; the competing risk is that a `quality` bias turns this into open-ended polishing against a one-week window.
 - **Status:** proposed
 

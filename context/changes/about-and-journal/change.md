@@ -1,7 +1,7 @@
 ---
 change_id: about-and-journal
 title: About and journal
-status: implemented
+status: impl_reviewed
 created: 2026-07-27
 updated: 2026-07-27
 archived_at: null
@@ -27,6 +27,24 @@ Each block carries an `<h3>`, giving the section an `h2 About → h3 / h3` hiera
 level. The `h3`s are sized with `text-2xl` at the call site, mirroring `SologyRole.astro` and
 `MeetmediaRole.astro` — `globals.css` sizes only `h1`/`h2` and is F-01-frozen, so the call-site
 utility is the established workaround rather than new drift.
+
+**What this trades, named explicitly.** The constraint overridden is not `plan.md`'s — it is
+**FR-008's own** (`context/foundation/prd.md:189-193`), which resolves a considered counter-argument
+by naming "length discipline — one paragraph, teaching in a single sentence" as the binding
+constraint. That is what the two-block version spends.
+
+It is spendable because of *why* the PRD imposed it. The counter-argument the PRD weighed was "a long
+About pushes proof down the page — 'projects buried under a long About' is a documented
+anti-pattern," and its own resolution turns on placement: About sits *after* Work in the locked flow,
+so the anti-pattern does not apply. That reasoning is unchanged here — Work still precedes About, and
+no proof was displaced. What remains is length discipline as a stylistic preference, weighed against
+`plan-brief.md`'s Open Risk that the section "can also read as underweight next to the Work block
+directly above it." The author judged the second risk the live one on the preview.
+
+FR-008 is still satisfied on its face: the teaching background is present, and its first sentence is
+the audited vault sentence carrying the decade in one sentence, as required. What changed is only
+that the section no longer stops there. Recorded here so the v1 cutover review — which reads the PRD,
+not this folder — meets a decision rather than a discrepancy.
 
 ### 2026-07-27 — Journal button clipped its label on mobile
 
