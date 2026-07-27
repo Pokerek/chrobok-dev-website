@@ -30,7 +30,7 @@ const STACK = ['HTML', 'CSS', 'Sass', 'JavaScript', 'jQuery', 'PHP'];
   <div class="space-y-tight">
     <p id={STACK_CAPTION_ID} class="text-text-secondary">Stack at the time</p>
     <ul role="list" aria-labelledby={STACK_CAPTION_ID} class="flex flex-wrap gap-tight">
-      {STACK.map((item) => <li class={tagStyles}>{item}</li>)}
+      {STACK.map((item) => <li class={tagStyles()}>{item}</li>)}
     </ul>
   </div>
 </article>

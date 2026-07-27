@@ -1,0 +1,130 @@
+---
+import { tagStyles } from 'ui/base/tag/tag.styles';
+
+import Section from '../layout/Section.astro';
+
+import type { VariantProps } from 'class-variance-authority';
+
+type Tier = NonNullable<VariantProps<typeof tagStyles>['tier']>;
+
+const TIER_LEGEND: { tier: Tier; label: string; meaning: string }[] = [
+  { tier: 'core', label: 'Core', meaning: 'used daily, and defensible in a technical interview' },
+  { tier: 'supporting', label: 'Supporting', meaning: 'really used, but not my daily craft' },
+];
+
+const SKILL_CATEGORIES: { id: string; caption: string; items: { name: string; tier: Tier }[] }[] = [
+  {
+    id: 'skills-languages',
+    caption: 'Languages',
+    items: [
+      { name: 'TypeScript', tier: 'core' },
+      { name: 'JavaScript', tier: 'core' },
+      { name: 'HTML', tier: 'core' },
+      { name: 'CSS', tier: 'core' },
+    ],
+  },
+  {
+    id: 'skills-frameworks',
+    caption: 'Frameworks & UI',
+    items: [
+      { name: 'React 19', tier: 'core' },
+      { name: 'Next.js 14', tier: 'core' },
+      { name: 'Astro', tier: 'core' },
+      { name: 'Tailwind CSS', tier: 'core' },
+      { name: 'Radix UI', tier: 'supporting' },
+      { name: 'Sass', tier: 'supporting' },
+    ],
+  },
+  {
+    id: 'skills-testing',
+    caption: 'Testing & docs',
+    items: [
+      { name: 'Jest', tier: 'core' },
+      { name: 'Testing Library', tier: 'core' },
+      { name: 'Playwright', tier: 'supporting' },
+      { name: 'Storybook', tier: 'supporting' },
+    ],
+  },
+  {
+    id: 'skills-backend',
+    caption: 'Backend & data',
+    items: [
+      { name: 'REST APIs', tier: 'core' },
+      { name: 'Node.js', tier: 'supporting' },
+      { name: 'next-auth', tier: 'supporting' },
+      { name: 'Ruby on Rails', tier: 'supporting' },
+    ],
+  },
+  {
+    id: 'skills-i18n',
+    caption: 'i18n & experimentation',
+    items: [
+      { name: 'Lingui', tier: 'core' },
+      { name: 'GrowthBook', tier: 'core' },
+    ],
+  },
+  {
+    id: 'skills-infra',
+    caption: 'Infrastructure',
+    items: [
+      { name: 'AWS', tier: 'supporting' },
+      { name: 'Sentry', tier: 'supporting' },
+    ],
+  },
+  {
+    id: 'skills-tooling',
+    caption: 'Tooling',
+    items: [
+      { name: 'Git', tier: 'core' },
+      { name: 'GitHub', tier: 'core' },
+    ],
+  },
+  {
+    id: 'skills-ai',
+    caption: 'AI-assisted development',
+    items: [
+      { name: 'Claude Code', tier: 'core' },
+      { name: 'Cursor', tier: 'core' },
+    ],
+  },
+];
+---
+
+<Section id="skills">
+  <div slot="label" class="space-y-element">
+    <h2>Skills</h2>
+
+    <dl class="space-y-element">
+      {
+        TIER_LEGEND.map((entry) => (
+          <div class="space-y-tight">
+            <dt class={tagStyles({ tier: entry.tier })}>{entry.label}</dt>
+            <dd class="text-sm text-text-secondary">{entry.meaning}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+
+  <div class="max-w-3xl">
+    <div class="space-y-element">
+      {
+        SKILL_CATEGORIES.map((category) => (
+          <div class="space-y-tight">
+            <p id={category.id} class="text-text-secondary">
+              {category.caption}
+            </p>
+            <ul role="list" aria-labelledby={category.id} class="flex flex-wrap gap-tight">
+              {category.items.map((item) => (
+                <li class={tagStyles({ tier: item.tier })}>
+                  {item.name}
+                  {item.tier === 'supporting' && <span class="sr-only">&nbsp;(supporting)</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Section>

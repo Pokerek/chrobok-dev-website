@@ -61,15 +61,14 @@ and a chip-by-chip diff against `02-umiejetnosci.md`.
 
 ## What We're NOT Doing
 
-- Not adding a CVA variant axis, a new `src/ui/base` primitive, or any React island — this section has no
-  interactive state.
+- Not adding a new `src/ui/base` primitive or any React island — this section has no interactive state.
 - Not showing levels, years, star ratings, progress bars, percentages or a proficiency matrix in any form.
-- Not listing Ruby on Rails, Ruby, SQL, Docker, Redis, jQuery, PHP, Cypress, Vitest, TanStack Query, JWT or
-  Postman — all are *liznięte*, *brak*, or explicitly retracted in the vault.
-- Not listing Figma, Crowdin, ESLint/Prettier or GitHub Actions — Figma and Crowdin have no level row in the
-  vault at all, ESLint/Prettier is marked "higiena, nie skill", GitHub Actions is *liznięte*.
-- Not editing `SologyRole.astro` or any shipped S-02 copy — the Work tags stay per-role and the overlap
-  between the two sections is accepted.
+- Not listing Ruby, SQL, Docker, Redis, jQuery, PHP, Cypress, Vitest, TanStack Query, JWT or Postman — all
+  are *liznięte*, *brak*, or explicitly retracted in the vault.
+- Not listing Figma, Crowdin or ESLint/Prettier — Figma and Crowdin have no level row in the vault at all,
+  ESLint/Prettier is marked "higiena, nie skill".
+- Not editing shipped S-02 *copy* — the role bullets, headings and dates stay as they are. The Work stack
+  tags do change (see the Phase 1 amendment).
 - Not adding the section to a navigation component — the sticky nav is S-06 and consumes the `#skills`
   anchor this slice creates.
 - Not touching `src/components/about`, the journal or the footer — S-04 and S-05.
@@ -95,9 +94,8 @@ ships is recorded where the next reader looks, rather than in this change folder
 
 **Heading size.** `globals.css` gives `h1` and `h2` an explicit `font-size` and stops there. An `h3` written
 without a size class inherits the UA default and renders *smaller than body text* against the 28px `h2` — the
-failure looks like a styling oversight but is invisible in the markup. The tier headings must carry an
-explicit size class; `SologyRole.astro:20` uses `text-2xl` for the same reason, and tier headings should sit
-at or below that so they do not compete with the role headings above them.
+failure looks like a styling oversight but is invisible in the markup. (Superseded by the Phase 1 amendment:
+the merged section has no `h3` at all. Kept because it still binds any future heading added here.)
 
 **Category captions must not become headings.** Using `<h4>` for the category captions would technically
 validate, but it puts "Languages" and "Testing" into the document outline at the same weight as content
@@ -114,42 +112,84 @@ sections, and a screen-reader heading list for a one-page site then fills with l
 
 Create the component with its full content and mount it in the page.
 
+### Amendment (2026-07-27, during implementation)
+
+The approved design — two tier bands, each with an `h3` heading and a gloss, categories nested inside — was
+replaced at the author's direction by a **single merged section where the tier rides on the chip itself**.
+Three consequences, all authorised:
+
+1. `tagStyles` becomes a CVA with a `tier` axis (`core` → `border-solid`, `supporting` → `border-dashed`,
+   default `core`). This reverses the plan's "not adding a CVA variant axis" exclusion.
+2. Categories become the primary axis; each category row mixes core and supporting chips. A legend in the
+   `label` slot — sample chip plus meaning, core row first — carries the honesty signal the tier headings
+   used to carry.
+3. The Work stack tags are restyled to the same vocabulary, so dashed never means two different things on
+   one page. This reverses the plan's "not editing `SologyRole.astro`" exclusion. Role copy is untouched.
+
+Content also moved during implementation, at the author's direction and **against** the vault in eight
+places. Ruby on Rails returns to the supporting tier — reversing this change's founding "vault wins"
+decision and landing back on what FR-007 originally specified. The full divergence list is in the Todoist
+task raised for reconciling the vault (see References).
+
 ### Changes Required:
 
-#### 1. Skills component
+#### 1. Tag primitive — tier variant
+
+**File**: `src/ui/base/tag/tag.styles.ts`, `tag.types.ts`, `tag.tsx`
+
+**Intent**: Give the chip a two-value tier axis so a single list can carry both tiers visually.
+
+**Contract**: `tagStyles` becomes `cva(<current base classes>, { variants: { tier: { core: 'border-solid',
+supporting: 'border-dashed' } }, defaultVariants: { tier: 'core' } })`. `TagProps` gains
+`VariantProps<typeof tagStyles>`; `Tag` destructures `tier` and passes it through `cn(tagStyles({ tier }), …)`.
+Existing call sites become `tagStyles()` and render byte-identically.
+
+#### 2. Skills component
 
 **File**: `src/components/skills/Skills.astro`
 
-**Intent**: Render the vault's skill inventory as two glossed tiers, each sub-grouped by category, using the
-tier/chip pattern already shipped in Work. Content lives in a module-scope constant so the markup stays one
-double `map` and the inventory is editable in one place.
+**Intent**: Render the vault's skill inventory as one category-grouped list whose chips carry their own
+tier, preceded by a legend that decodes the two chip styles.
 
-**Contract**: A `SKILL_TIERS` constant shaped
-`{ id: string; heading: string; gloss: string; categories: { id: string; caption: string; items: string[] }[] }[]`,
-rendered inside `<Section id="skills">` with `<h2 slot="label">Skills</h2>`. Per tier: an `<h3>` carrying an
-explicit size class, the gloss as a `text-text-secondary` paragraph, then one block per category with a
-`<p id={category.id}>` caption and `<ul role="list" aria-labelledby={category.id} class="flex flex-wrap gap-tight">`
-of `<li class={tagStyles}>`. All ids prefixed `skills-`.
+**Contract**: `type Tier = NonNullable<VariantProps<typeof tagStyles>['tier']>` derived from the CVA so the
+data cannot drift from the variant axis. Two constants: `TIER_LEGEND`
+(`{ tier: Tier; label: string; meaning: string }[]`) and `SKILL_CATEGORIES`
+(`{ id: string; caption: string; items: { name: string; tier: Tier }[] }[]`).
 
-The content is fixed by this plan — transcribe it exactly:
+Rendered inside `<Section id="skills">`. The `label` slot holds `<h2>Skills</h2>` above a `<dl>` legend —
+one `<div>` per entry with the sample chip as `<dt class={tagStyles({ tier })}>` and its meaning as `<dd>`,
+core first. The content slot holds one block per category: `<p id={category.id}>` caption plus
+`<ul role="list" aria-labelledby={category.id} class="flex flex-wrap gap-tight">` of
+`<li class={tagStyles({ tier: item.tier })}>`. Supporting chips carry a `<span class="sr-only">` "(supporting)"
+suffix, because a dashed border is a purely visual signal. All ids prefixed `skills-`.
 
-| Tier | Gloss | Category | Items |
-| --- | --- | --- | --- |
-| Core | used daily, and defensible in a technical interview | Languages | TypeScript, JavaScript, HTML, CSS |
-| | | Frameworks & UI | React 18, Next.js (App Router), Tailwind CSS |
-| | | Testing | Jest, Testing Library |
-| | | Tooling | Git |
-| | | AI-assisted development | Claude Code |
-| Supporting | really used, but not my daily craft | Frameworks & UI | Radix UI, Sass |
-| | | Testing & docs | Playwright, Storybook |
-| | | Backend & data | Node.js, REST APIs, next-auth |
-| | | i18n & experimentation | Lingui, GrowthBook |
-| | | Infrastructure | AWS, Sentry |
+The content as shipped:
 
-Gloss wording may be adjusted for tone but must keep two properties: it states what membership in the tier
+| Category | Core | Supporting |
+| --- | --- | --- |
+| Languages | TypeScript, JavaScript, HTML, CSS | — |
+| Frameworks & UI | React 19, Next.js 14, Astro, Tailwind CSS | Radix UI, Sass |
+| Testing & docs | Jest, Testing Library | Playwright, Storybook |
+| Backend & data | REST APIs | Node.js, next-auth, Ruby on Rails |
+| i18n & experimentation | Lingui, GrowthBook | — |
+| Infrastructure | — | AWS, Sentry |
+| Tooling | Git, GitHub | — |
+| AI-assisted development | Claude Code, Cursor | — |
+
+Legend wording may be adjusted for tone but must keep two properties: it states what membership in the tier
 means, and it does not name a level, a year count or a number.
 
-#### 2. Page mount
+#### 3. Work stack tags
+
+**File**: `src/components/work/SologyRole.astro`, `src/components/work/MeetmediaRole.astro`
+
+**Intent**: Keep one visual vocabulary on the page — a dashed chip means "supporting" everywhere.
+
+**Contract**: `SologyRole`'s `STACK_TIERS` entries gain a `tier` field driving `tagStyles({ tier: tier.tier })`;
+Ruby on Rails joins its supporting items. `MeetmediaRole`'s untiered historical stack uses `tagStyles()`
+(solid, unchanged). No role copy, heading, date or bullet is touched.
+
+#### 4. Page mount
 
 **File**: `src/pages/index.astro`
 
@@ -187,15 +227,17 @@ Record the vault-wins decision in the PRD so FR-007's example list stops contrad
 
 **File**: `context/foundation/prd.md`
 
-**Intent**: FR-007's Socrates resolution names Rails and SQL as supporting-tier members. The vault rates both
-*liznięte* with an explicit do-not-list, so what ships diverges from what the PRD describes. Append a dated
-correction under FR-007 recording the divergence and the reason, leaving the requirement itself
-(two tiers, no ratings) intact.
+**Intent**: FR-007's Socrates resolution names Rails **and SQL** as supporting-tier members and describes a
+core tier that omits several things that shipped. Rails is on the page as specified; SQL is not. Append a
+dated correction under FR-007 recording where the shipped section departs from its example list and why,
+leaving the requirement itself (two tiers, no ratings) intact.
 
 **Contract**: A `> **Correction (2026-07-27, S-03):**` blockquote appended to the FR-007 entry, in the same
-blockquote style as the existing `> Socrates:` notes. It states that tier membership is drawn from
-`kariera/02-umiejetnosci.md`, that Rails, SQL, Docker and Redis are excluded as *liznięte*, and that CSS and
-Claude Code join core. Does not alter the FR-007 requirement line.
+blockquote style as the existing `> Socrates:` notes. It records: SQL, Docker and Redis are excluded as
+*liznięte* per `kariera/02-umiejetnosci.md`; Ruby on Rails ships as supporting per FR-007 despite the same
+ruling; CSS, Astro, Git/GitHub and the AI tooling join core, none of which FR-007 names; and the two tiers
+are expressed as one merged list with a chip-level variant rather than two bands. Does not alter the FR-007
+requirement line.
 
 ### Success Criteria:
 
@@ -286,15 +328,15 @@ None. New section, additive; the `#skills` anchor is the interface S-06 will con
 
 #### Automated
 
-- [ ] 1.1 Build and type-check pass: `yarn build`
-- [ ] 1.2 Lint passes: `yarn lint`
-- [ ] 1.3 Section renders at the `#skills` anchor in the built output
+- [x] 1.1 Build and type-check pass: `yarn build`
+- [x] 1.2 Lint passes: `yarn lint`
+- [x] 1.3 Section renders at the `#skills` anchor in the built output
 
 #### Manual
 
-- [ ] 1.4 Both tiers render with heading, gloss and all category rows; tier heading size correct
-- [ ] 1.5 Chip rows wrap cleanly at 320px, at the `md` boundary, and at container max width
-- [ ] 1.6 No rating, bar, percentage, year count or level appears anywhere in the section
+- [x] 1.4 Legend and all category rows render; solid/dashed chip variants legible
+- [x] 1.5 Chip rows wrap cleanly at 320px, at the `md` boundary, and at container max width
+- [x] 1.6 No rating, bar, percentage, year count or level appears anywhere in the section
 
 ### Phase 2: Spec reconciliation
 

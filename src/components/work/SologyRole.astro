@@ -5,12 +5,14 @@ const STACK_TIERS = [
   {
     id: 'sology-stack-core',
     caption: 'Core',
+    tier: 'core' as const,
     items: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'CSS', 'Jest'],
   },
   {
     id: 'sology-stack-supporting',
     caption: 'Supporting',
-    items: ['Node.js', 'Playwright', 'Radix UI', 'Storybook', 'AWS', 'Sentry'],
+    tier: 'supporting' as const,
+    items: ['Node.js', 'Playwright', 'Radix UI', 'Storybook', 'AWS', 'Sentry', 'Ruby on Rails'],
   },
 ];
 ---
@@ -55,7 +57,7 @@ const STACK_TIERS = [
           </p>
           <ul role="list" aria-labelledby={tier.id} class="flex flex-wrap gap-tight">
             {tier.items.map((item) => (
-              <li class={tagStyles}>{item}</li>
+              <li class={tagStyles({ tier: tier.tier })}>{item}</li>
             ))}
           </ul>
         </div>
