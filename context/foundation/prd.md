@@ -190,12 +190,18 @@ and its resolution.
   > as downgraded after the 2026-07-21 evidence audit. (2) Ruby on Rails does ship, in the
   > supporting tier as this entry specifies, despite carrying that same vault ruling. (3) Core
   > additionally carries CSS, JavaScript, HTML, Astro, REST APIs, Lingui, GrowthBook, Git, GitHub,
-  > Claude Code and Cursor, none of which this entry names; and the testing stack splits rather
-  > than moving wholesale — Jest and Testing Library are core, Playwright and Storybook supporting.
-  > (4) The two tiers are expressed as one category-grouped list whose chips carry the tier
-  > themselves — solid for core, dashed for supporting, decoded by a legend — rather than as two
-  > separate bands. The requirement itself is unchanged: two honest tiers, no ratings, levels, bars
-  > or percentages.
+  > Claude Code and Cursor, none of which this entry names — and Cursor ships against the vault's
+  > own "Cursor/Codex — nie wpisywać" (2026-07-23), the same class of ruling that keeps SQL off the
+  > page. The testing stack splits rather than moving wholesale: Jest and Testing Library are core,
+  > Playwright and Storybook supporting. (4) The two tiers are expressed as one category-grouped
+  > list whose chips carry the tier themselves — solid for core, dashed for supporting, decoded by a
+  > legend — rather than as two separate bands. The requirement itself is unchanged: two honest
+  > tiers, no ratings, levels, bars or percentages.
+  >
+  > All eight places where the shipped section departs from `kariera/02-umiejetnosci.md` — the two
+  > above plus React 19 for React 18, Astro and GitHub having no vault row, and Lingui, GrowthBook
+  > and REST APIs promoted from *uzupełniające* — are tracked for reconciliation against the vault,
+  > the CV and the portal profiles, which draw from the same file.
 
 ### About
 

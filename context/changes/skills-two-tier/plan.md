@@ -342,25 +342,25 @@ None. New section, additive; the `#skills` anchor is the interface S-06 will con
 
 #### Automated
 
-- [x] 2.1 No build impact: `yarn build` still passes
+- [x] 2.1 No build impact: `yarn build` still passes — 7eec320
 
 #### Manual
 
-- [x] 2.2 FR-007's requirement line unchanged; correction reads as an amendment
-- [x] 2.3 A cold reader can tell why the shipped page omits Rails and SQL
+- [x] 2.2 FR-007's requirement line unchanged; correction reads as an amendment — 7eec320
+- [x] 2.3 A cold reader can tell why the shipped page omits Rails and SQL — 7eec320
 
 ### Phase 3: Inspection verification
 
 #### Automated
 
-- [ ] 3.1 Build, type-check and lint clean on the final state
+- [x] 3.1 Build, type-check and lint clean on the final state
 
 #### Manual
 
-- [ ] 3.2 Vault cross-check: every chip traceable to a core or uzupełniające row
-- [ ] 3.3 Internal consistency: no tier contradiction with `SologyRole.astro`
-- [ ] 3.4 Confidentiality: no client, product or internal repo name in the section
-- [ ] 3.5 Keyboard and screen reader: no trap; chip lists announced with their caption
-- [ ] 3.6 No-JS: full section renders with scripts disabled
-- [ ] 3.7 Contrast: caption and gloss text meets WCAG AA
-- [ ] 3.8 No CLS: no layout shift after first paint, no added motion
+- [x] 3.2 Vault cross-check: every chip traceable to a core or uzupełniające row
+- [x] 3.3 Internal consistency: no tier contradiction with `SologyRole.astro`
+- [x] 3.4 Confidentiality: no client, product or internal repo name in the section
+- [x] 3.5 Keyboard and screen reader: no trap; chip lists announced with their caption
+- [x] 3.6 No-JS: full section renders with scripts disabled
+- [x] 3.7 Contrast: caption and gloss text meets WCAG AA
+- [x] 3.8 No CLS: no layout shift after first paint, no added motion
