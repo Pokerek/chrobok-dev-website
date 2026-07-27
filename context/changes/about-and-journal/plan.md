@@ -326,33 +326,33 @@ Not applicable — no stored content, no data, no existing About section to migr
 
 #### Automated
 
-- [x] 1.1 Build and type-check pass: `yarn build`
-- [x] 1.2 Lint passes: `yarn lint`
-- [x] 1.3 The section renders into the static output (`id="about"` present once in `dist/index.html`)
-- [x] 1.4 The journal anchor ships `target="_blank"` and `rel="noopener noreferrer"`
-- [x] 1.5 The announced-new-tab `sr-only` span is inside the anchor
-- [x] 1.6 No client-side JavaScript was added (JS bundle count unchanged)
+- [x] 1.1 Build and type-check pass: `yarn build` — 5e7eb40
+- [x] 1.2 Lint passes: `yarn lint` — 5e7eb40
+- [x] 1.3 The section renders into the static output (`id="about"` present once in `dist/index.html`) — 5e7eb40
+- [x] 1.4 The journal anchor ships `target="_blank"` and `rel="noopener noreferrer"` — 5e7eb40
+- [x] 1.5 The announced-new-tab `sr-only` span is inside the anchor — 5e7eb40
+- [x] 1.6 No client-side JavaScript was added (JS bundle count unchanged) — 5e7eb40
 
 #### Manual
 
-- [x] 1.7 Reads as one paragraph plus one link at 375px, no horizontal overflow
-- [x] 1.8 Label sits beside the paragraph at `md+` and stacks below `md`
-- [x] 1.9 Journal link is keyboard-reachable and shows the standard focus ring
-- [x] 1.10 Screen reader announces the link including "(opens in a new tab)"
-- [x] 1.11 The link opens Instagram in a new tab, leaving the page in place
+- [x] 1.7 Reads as one paragraph plus one link at 375px, no horizontal overflow — 5e7eb40
+- [x] 1.8 Label sits beside the paragraph at `md+` and stacks below `md` — 5e7eb40
+- [x] 1.9 Journal link is keyboard-reachable and shows the standard focus ring — 5e7eb40
+- [x] 1.10 Screen reader announces the link including "(opens in a new tab)" — 5e7eb40
+- [x] 1.11 The link opens Instagram in a new tab, leaving the page in place — 5e7eb40
 
 ### Phase 2: Inspection verification
 
 #### Automated
 
-- [ ] 2.1 All guardrail greps return zero matches across `src/`
-- [ ] 2.2 `yarn build` and `yarn lint` pass after any fix applied in this phase
-- [ ] 2.3 Page HTML weight has not grown materially
+- [x] 2.1 All guardrail greps return zero matches across `src/`
+- [x] 2.2 `yarn build` and `yarn lint` pass after any fix applied in this phase
+- [x] 2.3 Page HTML weight has not grown materially
 
 #### Manual
 
-- [ ] 2.4 With JavaScript disabled, paragraph and link are present and the link works
-- [ ] 2.5 Text contrast meets WCAG AA on the paragraph and the link label
-- [ ] 2.6 No layout shift after first paint
-- [ ] 2.7 Renders correctly in Chromium, Firefox and WebKit at mobile and desktop widths
-- [ ] 2.8 The page states no availability, no client name and no unverified number
+- [x] 2.4 With JavaScript disabled, paragraph and link are present and the link works
+- [x] 2.5 Text contrast meets WCAG AA on the paragraph and the link label
+- [x] 2.6 No layout shift after first paint
+- [x] 2.7 Renders correctly in Chromium, Firefox and WebKit at mobile and desktop widths
+- [x] 2.8 The page states no availability, no client name and no unverified number
