@@ -225,6 +225,27 @@ Foundations below assume these are present and do NOT re-scaffold them.
   `cn(buttonStyles(...), 'h-auto min-h-10 text-center')` in `About.astro`. The durable fix belongs here:
   change `h-10` → `min-h-10` in `button.styles.ts` (or add an `auto` size variant), then delete the
   About call-site override, which currently hand-copies the `10` with nothing linking the two values.
+- **Carried-in work (found during S-05, 2026-07-27): extract a `Link` component.** By the end of S-05 the
+  page has three distinct link affordances, none of them owned by a component, all of them re-derived by
+  hand at each call site:
+  - **The bordered-link skin** — `cn(buttonStyles({ variant: 'outline' }), 'h-auto min-h-10 text-center')`
+    now appears in `About.astro` and `Contact.astro` (declared once there, applied to three anchors). Every
+    copy hand-copies the `10` from `button.styles.ts`. This compounds the `h-10` item above: fixing the
+    primitive means finding and deleting every one of these strings.
+  - **The external-link contract** — `target="_blank" rel="noopener noreferrer"` plus an `sr-only`
+    "(opens in a new tab)" span **inside** the anchor, at three call sites (About journal, Contact
+    LinkedIn, Contact GitHub). Placing that span outside the anchor leaves the link unlabelled for the
+    change of context; S-04 recorded that as its key risk, and nothing but care currently prevents it.
+  - **The inline text link** — the Contact email uses raw `underline underline-offset-4` because
+    `buttonStyles({ variant: 'link' })` still applies the `h-10 px-6` default size and CVA's
+    `defaultVariants` cannot be opted out of by passing `null`.
+
+  A single `Link` owning these three shapes (a variant for skin, an `external` flag that renders the rel,
+  the target and the screen-reader suffix together) makes the accessibility contract structural rather than
+  remembered, and collapses the `min-h-10` fix to one edit. **Open question:** whether it lands as
+  `Link.astro` next to `Section.astro` in `src/components/layout/` — consistent with the zero-JS page and
+  the existing primitive — or as a React `src/ui/base/link/` folder per the `src/ui/base` convention.
+  Decide before implementing; the Astro form is the cheaper default for a page that ships no JavaScript.
 - **Risk:** This is where the craftsmanship claim is either paid or refuted — a site that fails inspection damages the positioning harder than any copy supports it; the competing risk is that a `quality` bias turns this into open-ended polishing against a one-week window.
 - **Status:** proposed
 

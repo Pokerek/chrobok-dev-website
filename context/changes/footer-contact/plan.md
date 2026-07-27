@@ -165,36 +165,31 @@ confirmation before proceeding.
 
 ---
 
-## Phase 2: Section `as` prop and the footer contact block
+## Phase 2: Contact section
+
+> **Decision changed during implementation (2026-07-27).** The contact block was originally specced as a
+> rewritten `Footer.astro` rendered through a new `as` prop on `Section.astro`. It is now a **separate
+> `<section id="contact">` inside `<main>`**, and `Footer.astro` stays exactly as it shipped — the
+> copyright strip. The `as` prop is therefore not needed and `Section.astro` is untouched. The text below
+> reflects the implemented shape; the superseded shape is preserved in the plan's git history.
 
 ### Overview
 
-Widen the F-01 skeleton primitive to render a caller-chosen element, then rebuild `Footer.astro` on it as
-the page's contact block — with the two carried-in hard-coded values fixed on the way through.
+A new `Contact.astro` section built on the existing F-01 skeleton primitive, rendered as the last child of
+`<main>`. `Footer.astro` and `Section.astro` are not modified.
 
 ### Changes Required:
 
-#### 1. Polymorphic section element
+#### 1. Contact section
 
-**File**: `src/components/layout/Section.astro`
+**File**: `src/components/contact/Contact.astro` (new)
 
-**Intent**: Let the footer inherit the container, the `label | content` grid, the gap and the scroll anchor
-instead of hand-copying them, without changing what any current caller renders.
+**Intent**: Give FR-010 and FR-011 their own labelled section, aligned with Work and About, and hand S-06
+the `#contact` anchor it will need.
 
-**Contract**: Add an optional prop `as?: 'section' | 'footer'` defaulting to `'section'`. The rendered
-element becomes the prop's value; `id`, the `class:list` (`scroll-mt-section py-section` plus caller
-classes), the `label` slot handling and the grid markup are untouched. Update the component's header
-comment to say the primitive renders a caller-chosen landmark element.
-
-#### 2. Footer contact block
-
-**File**: `src/components/footer/Footer.astro`
-
-**Intent**: Replace the copyright-only strip with the contact block FR-010 and FR-011 describe, keeping the
-footer where it is in the layout and giving it the anchor S-06 will need.
-
-**Contract**: Renders `Section` with `as="footer"`, `id="contact"` and `class="border-t border-border-default"`.
-The `label` slot carries `<h2>Contact</h2>`, matching Work and About. The content column holds, in order:
+**Contract**: Renders `Section` with `id="contact"` — no extra classes, so it inherits the same container,
+grid, `py-section` rhythm and scroll anchor as every other section. The `label` slot carries
+`<h2>Contact</h2>`, matching Work and About. The content column holds, in order:
 
 1. The email as a plain underlined anchor whose visible text is the full address —
    `href={`mailto:${EMAIL}`}`. Not `buttonStyles`: its `link` variant still applies the `h-10 px-6` default
@@ -206,11 +201,18 @@ The `label` slot carries `<h2>Contact</h2>`, matching Work and About. The conten
    workaround declared once and reused three times rather than repeated inline. LinkedIn and GitHub carry
    `target="_blank" rel="noopener noreferrer"` and the inner `sr-only` "(opens in a new tab)" span; the CV
    anchor is a plain same-tab `href={CV_PATH}` labelled `CV_LABEL`, with no `download` and no new tab.
-4. The existing copyright line, retained verbatim, in `text-text-secondary`.
 
-`border-black` and the `mt-2 pt-2 text-center` spacing are gone — the border uses the token and the
-vertical rhythm comes from `Section`'s `py-section`. Vertical spacing inside the column uses
-`space-y-element` / `space-y-tight`. The build-time `new Date().getFullYear()` stays as is.
+Vertical spacing inside the column uses `space-y-element` / `space-y-tight`. The copyright line is **not**
+duplicated here — `Footer.astro` still owns it.
+
+#### 2. Page composition
+
+**File**: `src/pages/index.astro`
+
+**Intent**: Render the new section. (This supersedes the plan's original "not touching `index.astro`" —
+that constraint only held while the contact block was the footer, which `Layout.astro` already rendered.)
+
+**Contract**: Import `Contact` and render `<Contact />` as the last child of `<main>`, after `<About />`.
 
 ### Success Criteria:
 
@@ -219,10 +221,9 @@ vertical rhythm comes from `Section`'s `py-section`. Vertical spacing inside the
 - Build and type-check pass: `yarn build`
 - Lint passes: `yarn lint`
 - No hard-coded colour utilities remain: `grep -rn "border-black\|text-black\|bg-white\|#[0-9A-Fa-f]\{3,6\}" src/components src/layouts` returns nothing
-- The footer renders one `id="contact"` anchor and no nested `<section>` inside `<footer>` in
-  `dist/index.html` after `yarn build`
-- Hero, Work and About markup is unchanged by the `as` prop: their rendered wrappers in `dist/index.html`
-  are still `<section id="hero|work|about">`
+- `dist/index.html` renders exactly one `id="contact"` anchor, as `<section id="contact">` inside `<main>`
+- Hero, Work and About markup is untouched: their rendered wrappers are still `<section id="hero|work|about">`,
+  and `<footer>` is byte-identical to the shipped copyright strip
 
 #### Manual Verification:
 
@@ -233,7 +234,7 @@ vertical rhythm comes from `Section`'s `py-section`. Vertical spacing inside the
   email link with the address as its name
 - The CV link opens the same PDF the hero links to, in the browser, in the same tab
 - At 200% text zoom no link label is clipped by its box
-- Nothing in the footer states availability, a start date, a notice period or a client name
+- Nothing in the contact section states availability, a start date, a notice period or a client name
 
 **Implementation Note**: After this phase and all automated verification passes, pause for manual
 confirmation before proceeding.
@@ -335,10 +336,10 @@ None — no stored data, no URLs change, and the footer is not linked from anywh
 
 #### Automated
 
-- [x] 1.1 Build and type-check pass: `yarn build`
-- [x] 1.2 Lint passes: `yarn lint`
-- [x] 1.3 No `download` attribute remains on a CV link
-- [x] 1.4 Email and CV path appear exactly once each in `src/`
+- [x] 1.1 Build and type-check pass: `yarn build` — b4dbfa5
+- [x] 1.2 Lint passes: `yarn lint` — b4dbfa5
+- [x] 1.3 No `download` attribute remains on a CV link — b4dbfa5
+- [x] 1.4 Email and CV path appear exactly once each in `src/` — b4dbfa5
 
 #### Manual
 
@@ -346,24 +347,24 @@ None — no stored data, no URLs change, and the footer is not linked from anywh
 - [ ] 1.6 Hero "Email me" button still opens a mail composer
 - [ ] 1.7 Hero otherwise renders unchanged at mobile and desktop width
 
-### Phase 2: Section `as` prop and the footer contact block
+### Phase 2: Contact section
 
 #### Automated
 
-- [ ] 2.1 Build and type-check pass: `yarn build`
-- [ ] 2.2 Lint passes: `yarn lint`
-- [ ] 2.3 No hard-coded colour utilities remain in `src/components` or `src/layouts`
-- [ ] 2.4 One `id="contact"` anchor and no nested `<section>` inside `<footer>` in `dist/index.html`
-- [ ] 2.5 Hero, Work and About still render as `<section id="…">` — unchanged by the `as` prop
+- [x] 2.1 Build and type-check pass: `yarn build`
+- [x] 2.2 Lint passes: `yarn lint`
+- [x] 2.3 No hard-coded colour utilities remain in `src/components` or `src/layouts`
+- [x] 2.4 One `id="contact"` anchor in `dist/index.html`, rendered as `<section id="contact">` inside `<main>`
+- [x] 2.5 Hero, Work, About and the `<footer>` render unchanged
 
 #### Manual
 
 - [ ] 2.6 Contact label aligns with Work and About on desktop, stacks below `md`
 - [ ] 2.7 Every footer link reachable and operable by keyboard, focus ring visible, tab order correct
 - [ ] 2.8 Screen reader announces the new-tab suffix on LinkedIn and GitHub, and the address on the email link
-- [ ] 2.9 Footer CV link opens the same PDF as the hero, in the browser, same tab
+- [ ] 2.9 Contact CV link opens the same PDF as the hero, in the browser, same tab
 - [ ] 2.10 No label clipped at 200% text zoom
-- [ ] 2.11 Footer states no availability, start date, notice period or client name
+- [ ] 2.11 Contact section states no availability, start date, notice period or client name
 
 ### Phase 3: Inspection verification
 
