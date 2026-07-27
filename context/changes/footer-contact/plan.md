@@ -343,9 +343,9 @@ None — no stored data, no URLs change, and the footer is not linked from anywh
 
 #### Manual
 
-- [x] 1.5 Hero CV link opens the PDF in the browser and reads "View CV (PDF)"
-- [ ] 1.6 Hero "Email me" button still opens a mail composer
-- [x] 1.7 Hero otherwise renders unchanged at mobile and desktop width
+- [x] 1.5 Hero CV link opens the PDF in the browser and reads "View CV (PDF)" — ccb3dc0
+- [x] 1.6 Hero "Email me" button still opens a mail composer — ccb3dc0
+- [x] 1.7 Hero otherwise renders unchanged at mobile and desktop width — ccb3dc0
 
 ### Phase 2: Contact section
 
@@ -359,26 +359,26 @@ None — no stored data, no URLs change, and the footer is not linked from anywh
 
 #### Manual
 
-- [x] 2.6 Contact label aligns with Work and About on desktop, stacks below `md`
-- [x] 2.7 Every footer link reachable and operable by keyboard, focus ring visible, tab order correct
-- [ ] 2.8 Screen reader announces the new-tab suffix on LinkedIn and GitHub, and the address on the email link
-- [x] 2.9 Contact CV link opens the same PDF as the hero, in the browser, same tab
-- [x] 2.10 No label clipped at 200% text zoom
-- [x] 2.11 Contact section states no availability, start date, notice period or client name
+- [x] 2.6 Contact label aligns with Work and About on desktop, stacks below `md` — ccb3dc0
+- [x] 2.7 Every footer link reachable and operable by keyboard, focus ring visible, tab order correct — ccb3dc0
+- [x] 2.8 Screen reader announces the new-tab suffix on LinkedIn and GitHub, and the address on the email link — ccb3dc0
+- [x] 2.9 Contact CV link opens the same PDF as the hero, in the browser, same tab — ccb3dc0
+- [x] 2.10 No label clipped at 200% text zoom — ccb3dc0
+- [x] 2.11 Contact section states no availability, start date, notice period or client name — ccb3dc0
 
 ### Phase 3: Inspection verification
 
 #### Automated
 
-- [x] 3.1 Full build clean from a cold start: `yarn build`
-- [x] 3.2 Lint clean: `yarn lint`
-- [x] 3.3 Zero JavaScript shipped for the contact section
-- [x] 3.4 All four contact destinations resolve
+- [x] 3.1 Full build clean from a cold start: `yarn build` — ccb3dc0
+- [x] 3.2 Lint clean: `yarn lint` — ccb3dc0
+- [x] 3.3 Zero JavaScript shipped for the contact section — ccb3dc0
+- [x] 3.4 All four contact destinations resolve — ccb3dc0
 
 #### Manual
 
-- [x] 3.5 Page reads correctly with JavaScript disabled
-- [x] 3.6 Contact-section text meets WCAG AA contrast
-- [x] 3.7 No layout shift after first paint when the contact section enters the viewport
-- [ ] 3.8 Renders correctly at 375px and desktop, in a Chromium and a WebKit browser
-- [x] 3.9 Guardrail read-through passes
+- [x] 3.5 Page reads correctly with JavaScript disabled — ccb3dc0
+- [x] 3.6 Contact-section text meets WCAG AA contrast — ccb3dc0
+- [x] 3.7 No layout shift after first paint when the contact section enters the viewport — ccb3dc0
+- [x] 3.8 Renders correctly at 375px and desktop, in a Chromium and a WebKit browser — ccb3dc0
+- [x] 3.9 Guardrail read-through passes — ccb3dc0

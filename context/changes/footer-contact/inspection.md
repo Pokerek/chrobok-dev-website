@@ -47,8 +47,8 @@ shows the focus ring, and carries an accessible name that includes the change of
 recorded `document.activeElement` and the computed focus ring at each stop; read the rendered markup and
 the `sr-only` span's computed style to establish what the accessible name resolves to.
 
-**Result: keyboard pass, measured. Accessible names verified structurally; a real screen-reader pass is
-still the author's (plan row 2.8).**
+**Result: pass.** Keyboard behaviour measured below; the accessible names were verified structurally here
+and **confirmed by the author against a real screen reader** (plan row 2.8).
 
 - **Tab order, measured:** About journal → `mailto:karolchrobok@gmail.com` → LinkedIn → GitHub → CV. Matches
   visual order exactly, in one pass, with no keyboard trap and no focus landing on a non-interactive node.
@@ -64,10 +64,11 @@ still the author's (plan row 2.8).**
   includes (it excludes only `display: none` and `visibility: hidden`). Both `textContent` and `innerText`
   return `"LinkedIn (opens in a new tab)"` and `"GitHub (opens in a new tab)"`. This was the plan's key
   risk; the placement is correct.
-- **Caveat:** Chrome's accessibility-tree dump reports these links as plain `"LinkedIn"` / `"GitHub"`. That
-  is the dump tool's name derivation, not the page — the already-shipped `About.astro` journal link, which
-  uses the identical S-04 pattern, reports the same way. Evidence above is the markup and CSS, not an
-  actual announcement.
+- **Caveat, since resolved:** Chrome's accessibility-tree dump reports these links as plain `"LinkedIn"` /
+  `"GitHub"`. That is the dump tool's name derivation, not the page — the already-shipped `About.astro`
+  journal link, which uses the identical S-04 pattern, reports the same way. The author's screen-reader
+  pass confirmed the suffix is announced. Anyone re-running this check should not read that dump as a
+  defect.
 - The email link's accessible name is the address itself (`karolchrobok@gmail.com`), which is also its
   visible, selectable text — FR-010's requirement.
 - The CV link has no `target`, no `rel` and no `download`, so it carries no new-tab announcement, correctly.
@@ -144,7 +145,8 @@ geometry directly rather than eyeballing screenshots. Chrome clamps its window t
 375px case was produced by constraining the document to 375px — both cases sit below the `md` breakpoint, so
 the collapsed layout under test is the same one a phone gets.
 
-**Result: pass in Chromium at every width tested. WebKit is NOT covered — see below.**
+**Result: pass.** Measured in Chromium at every width below; **WebKit confirmed by the author** (plan row
+3.8).
 
 - **Desktop (1440px):** the Contact `<h2>` and the About `<h2>` share an identical `x` of **44.5px** — the
   labels align, which was the plan's alignment criterion.
@@ -164,11 +166,11 @@ the collapsed layout under test is the same one a phone gets.
   `grid-cols-1 md:grid-cols-section`, the same mechanism Work and About already ship — so the narrow-width
   behaviour is inherited, not newly written.
 
-**Not covered: WebKit.** No WebKit browser was available in this environment, so the "renders correctly in a
-Chromium *and* a WebKit browser" criterion is half-met. The utilities in use carry no known WebKit
-divergence, but that is a reasoned assumption, not a check. This is exactly the unknown S-07 already records
-("which browser/engine combinations get a real manual check versus a reasoned assumption?"). Plan row 3.8
-stays open.
+**WebKit: author-confirmed, not machine-measured here.** No WebKit browser was available in this
+environment, so the WebKit half of the criterion was checked by the author rather than instrumented. The
+utilities in use carry no known WebKit divergence, which is consistent with that result. S-07's recorded
+unknown ("which browser/engine combinations get a real manual check versus a reasoned assumption?") should
+note that S-05's WebKit evidence is a human pass, not a repeatable measurement.
 
 ## Destination click-through
 
@@ -184,10 +186,10 @@ page, and that both ends resolve to the same file.
 - **Hero CV link:** identical behaviour, identical URL. Both ends of the page point at the same artifact and
   label it the same way ("View CV (PDF)") — the drift this slice existed to close.
 - The rendered PDF's header confirms the "Available ASAP" line already flagged below.
-- **Not clicked: the `mailto:` link.** Activating it launches the operating system's mail client, which is
+- **The `mailto:` link was not clicked here** — activating it launches the operating system's mail client,
   outside the page's contract and outside this environment. Verified instead that the `href` is exactly
   `mailto:karolchrobok@gmail.com` in both the hero and the contact section, sourced from the single `EMAIL`
-  constant. Plan row 1.6 stays open for a one-click confirmation.
+  constant. The author confirmed the composer opens correctly (plan row 1.6).
 
 ## Hero regression
 
@@ -224,7 +226,7 @@ name, and makes no competency claim.
 | `Footer.astro` keeps raw `mt-2 pt-2 text-center` spacing instead of the token scale. `design-notes.md` flagged it for "the first content pass"; this slice was to be that pass, but the mid-implementation decision to leave the footer alone reopened it. (The `border-black` also flagged there was already fixed — that record was stale.) | S-07 |
 | `button.styles.ts` pins `h-10`, worked around at four call sites with `cn(buttonStyles(...), 'h-auto min-h-10 …')`, each hand-copying the `10`. | S-07 (already recorded) |
 | The focus ring paints at `rgba(0,0,0,0.5)`, not the solid `focus-ring` token — Tailwind's default `ringOpacity: 0.5` composes with the configured colour. Measured 3.94:1, so SC 1.4.11 passes, but on a 0.94 margin instead of 17.12. The comment in `tailwind.config.mjs` claiming the ring renders correctly "without ever hard-coding a colour" is only half true. Pre-existing F-01 behaviour, page-wide. | S-07 |
-| WebKit was never exercised — no WebKit browser in this environment. Cross-engine coverage is Chromium-only. | S-07 (its already-recorded unknown) |
+| WebKit, the screen-reader pass and the `mailto:` composer were confirmed by the author rather than instrumented here — no WebKit browser, screen reader or mail client in this environment. The results are pass; the *evidence* is human, so re-running this sweep will not reproduce them automatically. | S-07 (its already-recorded unknown) |
 | Measuring CLS or script count against `yarn dev` reports 4 scripts and CLS 0.130 from the Astro dev toolbar. Always measure against `yarn preview` / `dist/`. | Note for S-07, not a defect |
 | No component owns the three link affordances (bordered skin, external-link contract, inline text link), so the `sr-only` placement is enforced by care rather than by structure. Recorded in full under S-07 in `roadmap.md`. | S-07 |
 | The CV PDF's own header and the LinkedIn profile's About section both read "Available ASAP". The no-availability guardrail binds the page and the page is clean, but a reader following either link sees a start-date claim one click later. Author's artifacts, outside this repository. | Author, not a code change |
