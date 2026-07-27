@@ -35,16 +35,14 @@ const JOURNAL_URL = 'https://www.instagram.com/chrobok.dev/';
         </p>
       </div>
 
-      <div class="flex flex-wrap gap-element">
-        <a
-          class={cn(buttonStyles({ variant: 'outline' }), 'h-auto min-h-10 text-center')}
-          href={JOURNAL_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Journal on Instagram<span class="sr-only"> (opens in a new tab)</span>
-        </a>
-      </div>
+      <a
+        class={cn(buttonStyles({ variant: 'outline' }), 'flex h-auto min-h-10 w-fit text-center')}
+        href={JOURNAL_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Journal on Instagram<span class="sr-only"> (opens in a new tab)</span>
+      </a>
     </div>
   </div>
 </Section>
