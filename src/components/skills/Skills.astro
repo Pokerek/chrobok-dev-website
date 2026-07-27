@@ -3,9 +3,14 @@ import { tagStyles } from 'ui/base/tag/tag.styles';
 
 import Section from '../layout/Section.astro';
 
-import type { VariantProps } from 'class-variance-authority';
+import type { TagVariant } from 'ui/base/tag/tag.types';
 
-type Tier = NonNullable<VariantProps<typeof tagStyles>['tier']>;
+type Tier = 'core' | 'supporting';
+
+const TIER_VARIANT: Record<Tier, TagVariant> = {
+  core: 'solid',
+  supporting: 'dashed',
+};
 
 const TIER_LEGEND: { tier: Tier; label: string; meaning: string }[] = [
   { tier: 'core', label: 'Core', meaning: 'used daily, and defensible in a technical interview' },
@@ -98,7 +103,7 @@ const SKILL_CATEGORIES: { id: string; caption: string; items: { name: string; ti
       {
         TIER_LEGEND.map((entry) => (
           <div class="space-y-tight">
-            <dt class={tagStyles({ tier: entry.tier })}>{entry.label}</dt>
+            <dt class={tagStyles({ variant: TIER_VARIANT[entry.tier] })}>{entry.label}</dt>
             <dd class="text-sm text-text-secondary">{entry.meaning}</dd>
           </div>
         ))
@@ -116,7 +121,7 @@ const SKILL_CATEGORIES: { id: string; caption: string; items: { name: string; ti
             </p>
             <ul role="list" aria-labelledby={category.id} class="flex flex-wrap gap-tight">
               {category.items.map((item) => (
-                <li class={tagStyles({ tier: item.tier })}>
+                <li class={tagStyles({ variant: TIER_VARIANT[item.tier] })}>
                   {item.name}
                   <span class="sr-only">&nbsp;({item.tier})</span>
                 </li>
