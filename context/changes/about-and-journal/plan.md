@@ -345,14 +345,14 @@ Not applicable — no stored content, no data, no existing About section to migr
 
 #### Automated
 
-- [x] 2.1 All guardrail greps return zero matches across `src/`
-- [x] 2.2 `yarn build` and `yarn lint` pass after any fix applied in this phase
-- [x] 2.3 Page HTML weight has not grown materially
+- [x] 2.1 All guardrail greps return zero matches across `src/` — 4d59ec7
+- [x] 2.2 `yarn build` and `yarn lint` pass after any fix applied in this phase — 4d59ec7
+- [x] 2.3 Page HTML weight has not grown materially — 4d59ec7
 
 #### Manual
 
-- [x] 2.4 With JavaScript disabled, paragraph and link are present and the link works
-- [x] 2.5 Text contrast meets WCAG AA on the paragraph and the link label
-- [x] 2.6 No layout shift after first paint
-- [x] 2.7 Renders correctly in Chromium, Firefox and WebKit at mobile and desktop widths
-- [x] 2.8 The page states no availability, no client name and no unverified number
+- [x] 2.4 With JavaScript disabled, paragraph and link are present and the link works — 4d59ec7
+- [x] 2.5 Text contrast meets WCAG AA on the paragraph and the link label — 4d59ec7
+- [x] 2.6 No layout shift after first paint — 4d59ec7
+- [x] 2.7 Renders correctly in Chromium, Firefox and WebKit at mobile and desktop widths — 4d59ec7
+- [x] 2.8 The page states no availability, no client name and no unverified number — 4d59ec7
