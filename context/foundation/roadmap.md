@@ -3,7 +3,7 @@ project: "Chrobok.dev"
 version: 1
 status: draft
 created: 2026-07-22
-updated: 2026-07-26
+updated: 2026-07-27
 prd_version: 1
 main_goal: quality
 top_blocker: time
@@ -51,7 +51,7 @@ to recruiters at any point.
 | F-02 | v1-release-staging        | (foundation) v1 work merges without reaching production                      | —                              | §Success Criteria (primary)    | done     |
 | F-03 | inspection-gate           | (foundation) build, types and lint gate every v1 merge; inspection checklist runnable | F-02                  | §NFRs, §Guardrails             | done |
 | S-01 | hero-first-screen         | read name, role title, core stack and a positioning line, and reach email + CV, without scrolling | F-01, F-02   | US-01, FR-001, FR-002, FR-003  | done     |
-| S-02 | work-proof-block          | read the commercial work with its ownership scope, numeric proof points and two-tier stack tags | F-01, F-02     | US-01, FR-004, FR-005, FR-006  | proposed |
+| S-02 | work-proof-block          | read the commercial work with its ownership scope, numeric proof points and two-tier stack tags | F-01, F-02     | US-01, FR-004, FR-005, FR-006  | done |
 | S-03 | skills-two-tier           | scan a grouped core/supporting technology list with no ratings or bars      | F-01, F-02                     | FR-007                         | proposed |
 | S-04 | about-and-journal         | read the one-paragraph bio incl. teaching, and open the Instagram journal    | F-01, F-02                     | FR-008, FR-009                 | proposed |
 | S-05 | footer-contact            | select the email as text and open LinkedIn, GitHub and the ungated CV PDF   | F-01, F-02                     | FR-010, FR-011                 | proposed |
@@ -155,7 +155,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Unknowns:**
   - Which of the four candidate numbers (A/B experiments, locales, SEO migrations, payments flow) make the cut, given that the PR count was removed as an activity metric? — Owner: author. Block: no.
 - **Risk:** The single place on the page where level is calibrated — if the ownership scope is not explicit here, nothing on the page states seniority and the reader guesses downward; the opposite failure is overstating, which collides with the no-overstated-competencies guardrail.
-- **Status:** proposed
+- **Status:** done
 
 ### S-03: Skills — two honest tiers
 
@@ -272,3 +272,4 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **F-01: (foundation) the page skeleton and token contract are settled — grid and its mobile collapse, the border-radius scale, the focus-visible ring, and the rule for keeping hard-coded values out — so no content slice has to re-open a visual decision.** — Archived 2026-07-24 → `context/archive/2026-07-24-design-system-contract/`. Lesson: —.
 - **F-03: (foundation) every v1 merge is gated on build, type-check and lint, and the inspection checklist behind the NFRs is a repeatable run rather than a memory exercise.** — Archived 2026-07-24 → `context/archive/2026-07-24-inspection-gate/`. Lesson: —.
 - **S-01: Visitor can read the author's name, role title and core stack, read the one-line positioning statement, and reach the email address and the CV — all without scrolling, on a phone as well as on desktop.** — Archived 2026-07-26 → `context/archive/2026-07-26-hero-first-screen/`. Lesson: —.
+- **S-02: Visitor can read the commercial work as a single block dominated by the Rentola role, including the ownership scope that signals seniority, the outcome-based numbers, and stack tags split into core and supporting tiers.** — Archived 2026-07-27 → `context/archive/2026-07-27-work-proof-block/`. Lesson: —.
