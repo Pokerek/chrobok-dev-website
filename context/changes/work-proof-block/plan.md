@@ -462,17 +462,17 @@ gains a section below the hero.
 
 #### Automated
 
-- [x] 3.1 Full build from clean passes: `yarn build`
-- [x] 3.2 Lint passes: `yarn lint`
-- [x] 3.3 Proof points and tier captions are present in the server-rendered HTML
-- [x] 3.4 No placeholder copy survives anywhere in `dist/`
+- [x] 3.1 Full build from clean passes: `yarn build` — 4beb90a
+- [x] 3.2 Lint passes: `yarn lint` — 4beb90a
+- [x] 3.3 Proof points and tier captions are present in the server-rendered HTML — 4beb90a
+- [x] 3.4 No placeholder copy survives anywhere in `dist/` — 4beb90a
 
 #### Manual
 
-- [x] 3.5 Keyboard: tab order unchanged; the Work section adds no focusable element
-- [x] 3.6 Screen reader: each tag list is announced with its tier caption
-- [x] 3.7 No-JS: the section is fully readable with scripts disabled
-- [x] 3.8 Contrast: meta line and tag text both meet WCAG AA
-- [x] 3.9 No layout shift: CLS stays 0
-- [x] 3.10 Cross-engine: renders correctly in Chromium, Firefox and WebKit
-- [x] 3.11 Guardrail read-through: no availability language, no competency the profile lists as a gap
+- [x] 3.5 Keyboard: tab order unchanged; the Work section adds no focusable element — 4beb90a
+- [x] 3.6 Screen reader: each tag list is announced with its tier caption — 4beb90a
+- [x] 3.7 No-JS: the section is fully readable with scripts disabled — 4beb90a
+- [x] 3.8 Contrast: meta line and tag text both meet WCAG AA — 4beb90a
+- [x] 3.9 No layout shift: CLS stays 0 — 4beb90a
+- [x] 3.10 Cross-engine: renders correctly in Chromium, Firefox and WebKit — 4beb90a
+- [x] 3.11 Guardrail read-through: no availability language, no competency the profile lists as a gap — 4beb90a
