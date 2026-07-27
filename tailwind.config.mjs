@@ -31,6 +31,7 @@ export default {
         element: '1.5rem', // 24px
         card: '1.5rem', // 24px
         container: '2rem', // 32px
+        tight: '0.5rem', // 8px — rhythm inside an element (heading/meta, list items, chip rows)
       },
       gap: {
         grid: '3rem', // 48px
@@ -44,9 +45,6 @@ export default {
       // renders correctly without ever hard-coding a colour at the call site.
       ringColor: ({ theme }) => ({ DEFAULT: theme('colors.focus-ring') }),
       ringOffsetColor: ({ theme }) => ({ DEFAULT: theme('colors.page-bg') }),
-      minHeight: {
-        'without-footer': 'calc(100dvh - 33px)',
-      },
     },
     // Square corners are the design identity: every named radius resolves to 0 so
     // `rounded-md` / `rounded-lg` / `rounded-full` can never leak a rounded corner.

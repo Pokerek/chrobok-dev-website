@@ -18,7 +18,9 @@ Tokens are configured in `tailwind.config.mjs` (colors, fonts, spacing) and `src
   `border-default`, `focus-ring` (used as `bg-page-bg`, `text-text-primary`, `border-border-default`, …).
 - **Border radius**: **every** named radius resolves to `0` — `rounded`, `rounded-md`, `rounded-lg`,
   `rounded-full` are all square. Corners are never rounded in v1; don't reintroduce a rounded value.
-- **Spacing**: token scale — `p-card`, `gap-grid`, `space-y-element`, `section`, `container`.
+- **Spacing**: token scale — `p-card`, `gap-grid`, `space-y-element`, `space-y-tight`/`gap-tight`,
+  `section`, `container`. `tight` (0.5rem) is the sub-element step: rhythm *inside* a block (heading and
+  its meta line, list items, chip rows), where `element` (1.5rem) is too wide.
 
 ## Layout skeleton (F-01 contract)
 
