@@ -53,7 +53,7 @@ to recruiters at any point.
 | S-01 | hero-first-screen         | read name, role title, core stack and a positioning line, and reach email + CV, without scrolling | F-01, F-02   | US-01, FR-001, FR-002, FR-003  | done     |
 | S-02 | work-proof-block          | read the commercial work with its ownership scope, numeric proof points and two-tier stack tags | F-01, F-02     | US-01, FR-004, FR-005, FR-006  | done |
 | S-03 | skills-two-tier           | scan a grouped core/supporting technology list with no ratings or bars      | F-01, F-02                     | FR-007                         | proposed |
-| S-04 | about-and-journal         | read the one-paragraph bio incl. teaching, and open the Instagram journal    | F-01, F-02                     | FR-008, FR-009                 | proposed |
+| S-04 | about-and-journal         | read the one-paragraph bio incl. teaching, and open the Instagram journal    | F-01, F-02                     | FR-008, FR-009                 | done |
 | S-05 | footer-contact            | select the email as text and open LinkedIn, GitHub and the ungated CV PDF   | F-01, F-02                     | FR-010, FR-011                 | proposed |
 | S-06 | sticky-section-nav        | jump to any section from a sticky header on every breakpoint                | S-01, S-02, S-03, S-04, S-05   | FR-012                         | proposed |
 | S-07 | inspection-hardening-pass | reach every link by keyboard and screen reader, with scripts disabled, on a phone, in under a second | F-03, S-06     | US-01, §NFRs (all four)        | proposed |
@@ -179,7 +179,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** —
 - **Unknowns:** —
 - **Risk:** Two adjacent, low-weight sections combined so neither becomes a one-line slice; the risk is length discipline — a long About pushes the proof further down the page.
-- **Status:** proposed
+- **Status:** done
 
 ### S-05: Footer contact
 
@@ -202,7 +202,8 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Prerequisites:** S-01, S-02, S-03, S-04, S-05
 - **Parallel with:** —
 - **Blockers:** —
-- **Unknowns:** —
+- **Unknowns:**
+  - **There is no `#journal` anchor, and the journal is now a visible heading (settled in S-04, 2026-07-27 — do not rediscover this as a gap).** The PRD's locked flow lists About (5) and Journal (6) as separate steps, but S-04 shipped them as one `#about` section to avoid a genuinely one-line `#journal` section. The implementation then gave the journal its own `<h3>Developer&rsquo;s journal</h3>` block, so a reader can see a titled journal section that the nav will not list. Decide deliberately: nav lists "About" only (status quo), or S-06 adds the `#journal` anchor S-04 declined to add. — Owner: author. Block: no.
 - **Risk:** Sequenced last among content slices because it needs every section anchor to exist; the accepted trade-off recorded in FR-012 is that a sticky header eats first-screen area on mobile, which is exactly where the recruiter opens the pasted link — worth re-checking against S-01 once both are on the preview.
 - **Status:** proposed
 
@@ -216,6 +217,14 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** —
 - **Unknowns:**
   - Which browser/engine combinations get a real manual check versus a reasoned assumption? — Owner: author. Block: no.
+- **Carried-in work (found during S-04, 2026-07-27):** `src/ui/base/button/button.styles.ts` pins `h-10`
+  (a fixed 2.5rem) on the `default` size, so any label that wraps overflows the button box. WCAG AA
+  requires 200% text resize without loss of content, and at that zoom *every* button label wraps — so
+  `Hero.astro`'s two buttons (`Email me`, `Download CV`) clip today. S-04 could not fix it at the source
+  because `src/ui/base/**` is F-01-frozen; it worked around it at the call site with
+  `cn(buttonStyles(...), 'h-auto min-h-10 text-center')` in `About.astro`. The durable fix belongs here:
+  change `h-10` → `min-h-10` in `button.styles.ts` (or add an `auto` size variant), then delete the
+  About call-site override, which currently hand-copies the `10` with nothing linking the two values.
 - **Risk:** This is where the craftsmanship claim is either paid or refuted — a site that fails inspection damages the positioning harder than any copy supports it; the competing risk is that a `quality` bias turns this into open-ended polishing against a one-week window.
 - **Status:** proposed
 
@@ -273,3 +282,4 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **F-03: (foundation) every v1 merge is gated on build, type-check and lint, and the inspection checklist behind the NFRs is a repeatable run rather than a memory exercise.** — Archived 2026-07-24 → `context/archive/2026-07-24-inspection-gate/`. Lesson: —.
 - **S-01: Visitor can read the author's name, role title and core stack, read the one-line positioning statement, and reach the email address and the CV — all without scrolling, on a phone as well as on desktop.** — Archived 2026-07-26 → `context/archive/2026-07-26-hero-first-screen/`. Lesson: —.
 - **S-02: Visitor can read the commercial work as a single block dominated by the Rentola role, including the ownership scope that signals seniority, the outcome-based numbers, and stack tags split into core and supporting tiers.** — Archived 2026-07-27 → `context/archive/2026-07-27-work-proof-block/`. Lesson: —.
+- **S-04: Visitor can read a short bio paragraph that includes the decade of teaching in one sentence, and can open the developer's journal on Instagram from a labelled link.** — Archived 2026-07-27 → `context/archive/2026-07-27-about-and-journal/`. Lesson: —.
