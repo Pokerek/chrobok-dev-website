@@ -86,19 +86,20 @@ and none of the confidential client/product names.
 One new `src/ui/base` primitive and three new feature components — a section shell plus one component
 per role — composed from what F-01 already froze.
 
-`Tag` follows the `button/` folder pattern exactly — `tag.styles.ts` (CVA), `tag.types.ts`,
-`tag.tsx` (forwardRef + displayName) — and exists so S-03 inherits a settled contract instead of
-diverging. The Astro call site applies `tagStyles()` to `<li>` elements, mirroring how `Hero.astro`
-applies `buttonStyles()` to `<a>` elements; no React island, no client directive, zero shipped JS.
+`Tag` follows the `button/` folder pattern — `tag.styles.ts`, `tag.types.ts`, `tag.tsx` — with a
+deliberately simpler component contract (plain class string, no `forwardRef`), recorded in Phase 1. It
+exists so S-03 inherits a settled contract instead of diverging. The Astro call sites apply `tagStyles`
+to `<li>` elements, mirroring how `Hero.astro` applies `buttonStyles()` to `<a>` elements; no React
+island, no client directive, zero shipped JS.
 
 `Work.astro` fills the `Section` `label` slot with the `<h2>`, giving the section a persistent left-column
-marker on `md+` and setting the convention S-03–S-05 follow. Copy lives inline — the PRD rules out a
-content layer.
+marker on `md+` and setting the convention S-03–S-05 follow. It delegates each role to its own component
+so a new role is an import rather than an edit. Copy lives inline — the PRD rules out a content layer.
 
 ## Critical Implementation Details
 
 **`h3` has no size in the type scale.** The role heading must be an `<h3>` for a valid document outline
-(`h1` hero → `h2` Work → `h3` Rentola), but `globals.css` sizes only `h1` and `h2`, so an unstyled `h3`
+(`h1` hero → `h2` Work → `h3` per role), but `globals.css` sizes only `h1` and `h2`, so an unstyled `h3`
 renders at the browser's UA default in Ramaraja 700 — visually smaller than body copy in places and
 inconsistent across engines. Apply a Tailwind type utility at the call site. Do not add an `h3` rule to
 `globals.css`; F-01 is frozen and every section after this one would inherit the change unreviewed.
@@ -432,46 +433,46 @@ gains a section below the hero.
 
 #### Manual
 
-- [x] 1.6 Folder mirrors `src/ui/base/button/` — same file suffixes; simpler component contract recorded as a decision
-- [x] 1.7 No rounded corner, hover state or focus ring on a rendered tag
+- [x] 1.6 Folder mirrors `src/ui/base/button/` — same file suffixes; simpler component contract recorded as a decision — 00e34b6
+- [x] 1.7 No rounded corner, hover state or focus ring on a rendered tag — 00e34b6
 
 ### Phase 2: Work section
 
 #### Automated
 
-- [x] 2.1 Build and type-check pass: `yarn build`
-- [x] 2.2 Lint passes: `yarn lint`
-- [x] 2.3 One `<h1>`, one `<h2>` and one `<h3>` per role block in the built page
-- [x] 2.4 Section anchor exists for S-06: `id="work"` appears once
-- [x] 2.5 Zero client JavaScript: no `astro-island` and no `<script>` in `dist/index.html`
-- [x] 2.6 The banned PR count `614` and the confidential client/product names do not appear in the built page
-- [x] 2.7 No availability language in the built page
-- [x] 2.8 SQL is not claimed anywhere in the built page
-- [x] 2.9 Every tag row caption is associated via `aria-labelledby` (3 occurrences)
-- [x] 2.10 Both hard numbers `~52` and `~60` reach the HTML
+- [x] 2.1 Build and type-check pass: `yarn build` — 00e34b6
+- [x] 2.2 Lint passes: `yarn lint` — 00e34b6
+- [x] 2.3 One `<h1>`, one `<h2>` and one `<h3>` per role block in the built page — 00e34b6
+- [x] 2.4 Section anchor exists for S-06: `id="work"` appears once — 00e34b6
+- [x] 2.5 Zero client JavaScript: no `astro-island` and no `<script>` in `dist/index.html` — 00e34b6
+- [x] 2.6 The banned PR count `614` and the confidential client/product names do not appear in the built page — 00e34b6
+- [x] 2.7 No availability language in the built page — 00e34b6
+- [x] 2.8 SQL is not claimed anywhere in the built page — 00e34b6
+- [x] 2.9 Every tag row caption is associated via `aria-labelledby` (3 occurrences) — 00e34b6
+- [x] 2.10 Both hard numbers `~52` and `~60` reach the HTML — 00e34b6
 
 #### Manual
 
-- [x] 2.11 On `md+`, "Work" sits in the left label column and content in the right
-- [x] 2.12 At 375×667 the section reads with no horizontal scroll and no tag overflow
-- [x] 2.13 The `h3` renders larger than body copy and smaller than the `h2`
-- [x] 2.14 Tags render square, bordered, on `element-bg`, with no hover or focus affordance
+- [x] 2.11 On `md+`, "Work" sits in the left label column and content in the right — 00e34b6
+- [x] 2.12 At 375×667 the section reads with no horizontal scroll and no tag overflow — 00e34b6
+- [x] 2.13 The `h3` renders larger than body copy and smaller than the `h2` — 00e34b6
+- [x] 2.14 Tags render square, bordered, on `element-bg`, with no hover or focus affordance — 00e34b6
 
 ### Phase 3: Inspection verification
 
 #### Automated
 
-- [ ] 3.1 Full build from clean passes: `yarn build`
-- [ ] 3.2 Lint passes: `yarn lint`
-- [ ] 3.3 Proof points and tier captions are present in the server-rendered HTML
-- [ ] 3.4 No placeholder copy survives anywhere in `dist/`
+- [x] 3.1 Full build from clean passes: `yarn build`
+- [x] 3.2 Lint passes: `yarn lint`
+- [x] 3.3 Proof points and tier captions are present in the server-rendered HTML
+- [x] 3.4 No placeholder copy survives anywhere in `dist/`
 
 #### Manual
 
-- [ ] 3.5 Keyboard: tab order unchanged; the Work section adds no focusable element
-- [ ] 3.6 Screen reader: each tag list is announced with its tier caption
-- [ ] 3.7 No-JS: the section is fully readable with scripts disabled
-- [ ] 3.8 Contrast: meta line and tag text both meet WCAG AA
-- [ ] 3.9 No layout shift: CLS stays 0
-- [ ] 3.10 Cross-engine: renders correctly in Chromium, Firefox and WebKit
-- [ ] 3.11 Guardrail read-through: no availability language, no competency the profile lists as a gap
+- [x] 3.5 Keyboard: tab order unchanged; the Work section adds no focusable element
+- [x] 3.6 Screen reader: each tag list is announced with its tier caption
+- [x] 3.7 No-JS: the section is fully readable with scripts disabled
+- [x] 3.8 Contrast: meta line and tag text both meet WCAG AA
+- [x] 3.9 No layout shift: CLS stays 0
+- [x] 3.10 Cross-engine: renders correctly in Chromium, Firefox and WebKit
+- [x] 3.11 Guardrail read-through: no availability language, no competency the profile lists as a gap
