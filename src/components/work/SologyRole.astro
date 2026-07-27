@@ -1,16 +1,20 @@
 ---
 import { tagStyles } from 'ui/base/tag/tag.styles';
 
-const STACK_TIERS = [
+import type { TagVariant } from 'ui/base/tag/tag.types';
+
+const STACK_TIERS: { id: string; caption: string; variant: TagVariant; items: string[] }[] = [
   {
     id: 'sology-stack-core',
     caption: 'Core',
+    variant: 'solid',
     items: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'CSS', 'Jest'],
   },
   {
     id: 'sology-stack-supporting',
     caption: 'Supporting',
-    items: ['Node.js', 'Playwright', 'Radix UI', 'Storybook', 'AWS', 'Sentry'],
+    variant: 'dashed',
+    items: ['Node.js', 'Playwright', 'Radix UI', 'Storybook', 'AWS', 'Sentry', 'Ruby on Rails'],
   },
 ];
 ---
@@ -55,7 +59,7 @@ const STACK_TIERS = [
           </p>
           <ul role="list" aria-labelledby={tier.id} class="flex flex-wrap gap-tight">
             {tier.items.map((item) => (
-              <li class={tagStyles}>{item}</li>
+              <li class={tagStyles({ variant: tier.variant })}>{item}</li>
             ))}
           </ul>
         </div>

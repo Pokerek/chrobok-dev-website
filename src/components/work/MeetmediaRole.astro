@@ -28,9 +28,9 @@ const STACK = ['HTML', 'CSS', 'Sass', 'JavaScript', 'jQuery', 'PHP'];
   </ul>
 
   <div class="space-y-tight">
-    <p id={STACK_CAPTION_ID} class="text-text-secondary">Stack at the time</p>
+    <p id={STACK_CAPTION_ID} class="text-text-secondary">Stack at the time &mdash; not a current skill claim</p>
     <ul role="list" aria-labelledby={STACK_CAPTION_ID} class="flex flex-wrap gap-tight">
-      {STACK.map((item) => <li class={tagStyles}>{item}</li>)}
+      {STACK.map((item) => <li class={tagStyles()}>{item}</li>)}
     </ul>
   </div>
 </article>
