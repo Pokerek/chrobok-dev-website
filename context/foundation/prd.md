@@ -183,6 +183,19 @@ and its resolution.
   > Core covers TypeScript, React, Next.js, Tailwind and the testing stack; supporting covers
   > Node.js, Rails, SQL and infrastructure tooling. No numeric self-assessment of any kind —
   > percentage bars are an explicitly rejected junior signal.
+  >
+  > **Correction (2026-07-27, S-03):** the shipped section departs from the example list above in
+  > four ways. (1) SQL is excluded, as are Docker and Redis — `kariera/02-umiejetnosci.md` rates
+  > all three *liznięte* under an explicit "nie wpisywać jako skill", and records Docker and Redis
+  > as downgraded after the 2026-07-21 evidence audit. (2) Ruby on Rails does ship, in the
+  > supporting tier as this entry specifies, despite carrying that same vault ruling. (3) Core
+  > additionally carries CSS, JavaScript, HTML, Astro, REST APIs, Lingui, GrowthBook, Git, GitHub,
+  > Claude Code and Cursor, none of which this entry names; and the testing stack splits rather
+  > than moving wholesale — Jest and Testing Library are core, Playwright and Storybook supporting.
+  > (4) The two tiers are expressed as one category-grouped list whose chips carry the tier
+  > themselves — solid for core, dashed for supporting, decoded by a legend — rather than as two
+  > separate bands. The requirement itself is unchanged: two honest tiers, no ratings, levels, bars
+  > or percentages.
 
 ### About
 

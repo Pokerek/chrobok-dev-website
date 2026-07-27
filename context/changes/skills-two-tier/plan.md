@@ -328,26 +328,26 @@ None. New section, additive; the `#skills` anchor is the interface S-06 will con
 
 #### Automated
 
-- [x] 1.1 Build and type-check pass: `yarn build`
-- [x] 1.2 Lint passes: `yarn lint`
-- [x] 1.3 Section renders at the `#skills` anchor in the built output
+- [x] 1.1 Build and type-check pass: `yarn build` — e8feb43
+- [x] 1.2 Lint passes: `yarn lint` — e8feb43
+- [x] 1.3 Section renders at the `#skills` anchor in the built output — e8feb43
 
 #### Manual
 
-- [x] 1.4 Legend and all category rows render; solid/dashed chip variants legible
-- [x] 1.5 Chip rows wrap cleanly at 320px, at the `md` boundary, and at container max width
-- [x] 1.6 No rating, bar, percentage, year count or level appears anywhere in the section
+- [x] 1.4 Legend and all category rows render; solid/dashed chip variants legible — e8feb43
+- [x] 1.5 Chip rows wrap cleanly at 320px, at the `md` boundary, and at container max width — e8feb43
+- [x] 1.6 No rating, bar, percentage, year count or level appears anywhere in the section — e8feb43
 
 ### Phase 2: Spec reconciliation
 
 #### Automated
 
-- [ ] 2.1 No build impact: `yarn build` still passes
+- [x] 2.1 No build impact: `yarn build` still passes
 
 #### Manual
 
-- [ ] 2.2 FR-007's requirement line unchanged; correction reads as an amendment
-- [ ] 2.3 A cold reader can tell why the shipped page omits Rails and SQL
+- [x] 2.2 FR-007's requirement line unchanged; correction reads as an amendment
+- [x] 2.3 A cold reader can tell why the shipped page omits Rails and SQL
 
 ### Phase 3: Inspection verification
 
