@@ -15,8 +15,8 @@ const STACK_TIERS = [
 ];
 ---
 
-<div class="space-y-element">
-  <div class="space-y-2">
+<article class="space-y-element">
+  <div class="space-y-tight">
     <h3 class="text-2xl">Sology Software House</h3>
     <p class="text-text-secondary">Frontend Developer &middot; Aug 2023 &ndash; Jul 2026 &middot; Remote, B2B</p>
   </div>
@@ -27,7 +27,7 @@ const STACK_TIERS = [
     as a junior with no React or Next.js experience and grew into that ownership over three years.
   </p>
 
-  <ul class="space-y-2">
+  <ul role="list" class="space-y-tight">
     <li>
       ~52 A/B experiments in GrowthBook across the registration and subscription funnel &mdash; building the variants
       defined with product and business, shipping winners as defaults, removing losing-experiment code.
@@ -49,11 +49,11 @@ const STACK_TIERS = [
   <div class="space-y-element">
     {
       STACK_TIERS.map((tier) => (
-        <div class="space-y-2">
+        <div class="space-y-tight">
           <p id={tier.id} class="text-text-secondary">
             {tier.caption}
           </p>
-          <ul aria-labelledby={tier.id} class="flex flex-wrap gap-2">
+          <ul role="list" aria-labelledby={tier.id} class="flex flex-wrap gap-tight">
             {tier.items.map((item) => (
               <li class={tagStyles}>{item}</li>
             ))}
@@ -62,4 +62,4 @@ const STACK_TIERS = [
       ))
     }
   </div>
-</div>
+</article>
