@@ -41,6 +41,7 @@ check your work.
 - `src/components` — feature components (`.astro` static, `.tsx` interactive)
 - `src/ui/base` — shadcn/ui + design-system primitives
 - `src/lib` — services and helpers; `src/middleware/index.ts` — Astro middleware
+- `src/constants` — shared constant modules (`*.constants.ts`)
 - `src/styles` — `globals.css`, `utils.ts` (`cn()`)
 - `src/assets` — internal assets; `public/` — public assets
 

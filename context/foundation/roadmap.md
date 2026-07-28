@@ -3,7 +3,7 @@ project: "Chrobok.dev"
 version: 1
 status: draft
 created: 2026-07-22
-updated: 2026-07-27
+updated: 2026-07-28
 prd_version: 1
 main_goal: quality
 top_blocker: time
@@ -54,7 +54,7 @@ to recruiters at any point.
 | S-02 | work-proof-block          | read the commercial work with its ownership scope, numeric proof points and two-tier stack tags | F-01, F-02     | US-01, FR-004, FR-005, FR-006  | done |
 | S-03 | skills-two-tier           | scan a grouped core/supporting technology list with no ratings or bars      | F-01, F-02                     | FR-007                         | done     |
 | S-04 | about-and-journal         | read the one-paragraph bio incl. teaching, and open the Instagram journal    | F-01, F-02                     | FR-008, FR-009                 | done |
-| S-05 | footer-contact            | select the email as text and open LinkedIn, GitHub and the ungated CV PDF   | F-01, F-02                     | FR-010, FR-011                 | proposed |
+| S-05 | footer-contact            | select the email as text and open LinkedIn, GitHub and the ungated CV PDF   | F-01, F-02                     | FR-010, FR-011                 | done     |
 | S-06 | sticky-section-nav        | jump to any section from a sticky header on every breakpoint                | S-01, S-02, S-03, S-04, S-05   | FR-012                         | proposed |
 | S-07 | inspection-hardening-pass | reach every link by keyboard and screen reader, with scripts disabled, on a phone, in under a second | F-03, S-06     | US-01, §NFRs (all four)        | proposed |
 | S-08 | v1-production-cutover     | see the complete seven-section page at chrobok.dev instead of the placeholder | S-07                          | US-01, §Success Criteria       | blocked  |
@@ -192,7 +192,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Unknowns:**
   - What is the CV's public path and filename, so both this slice and S-01 link to the same target? — Owner: author. Block: no.
 - **Risk:** Together with S-01 this satisfies the success criterion that a contact channel is reachable from both the top and the bottom of the page; the external CV artifact means the slice can be fully built and still not be releasable.
-- **Status:** proposed
+- **Status:** done
 
 ### S-06: Sticky section navigation
 
@@ -225,6 +225,27 @@ Foundations below assume these are present and do NOT re-scaffold them.
   `cn(buttonStyles(...), 'h-auto min-h-10 text-center')` in `About.astro`. The durable fix belongs here:
   change `h-10` → `min-h-10` in `button.styles.ts` (or add an `auto` size variant), then delete the
   About call-site override, which currently hand-copies the `10` with nothing linking the two values.
+- **Carried-in work (found during S-05, 2026-07-27): extract a `Link` component.** By the end of S-05 the
+  page has three distinct link affordances, none of them owned by a component, all of them re-derived by
+  hand at each call site:
+  - **The bordered-link skin** — `cn(buttonStyles({ variant: 'outline' }), 'h-auto min-h-10 text-center')`
+    now appears in `About.astro` and `Contact.astro` (declared once there, applied to three anchors). Every
+    copy hand-copies the `10` from `button.styles.ts`. This compounds the `h-10` item above: fixing the
+    primitive means finding and deleting every one of these strings.
+  - **The external-link contract** — `target="_blank" rel="noopener noreferrer"` plus an `sr-only`
+    "(opens in a new tab)" span **inside** the anchor, at three call sites (About journal, Contact
+    LinkedIn, Contact GitHub). Placing that span outside the anchor leaves the link unlabelled for the
+    change of context; S-04 recorded that as its key risk, and nothing but care currently prevents it.
+  - **The inline text link** — the Contact email uses raw `underline underline-offset-4` because
+    `buttonStyles({ variant: 'link' })` still applies the `h-10 px-6` default size and CVA's
+    `defaultVariants` cannot be opted out of by passing `null`.
+
+  A single `Link` owning these three shapes (a variant for skin, an `external` flag that renders the rel,
+  the target and the screen-reader suffix together) makes the accessibility contract structural rather than
+  remembered, and collapses the `min-h-10` fix to one edit. **Open question:** whether it lands as
+  `Link.astro` next to `Section.astro` in `src/components/layout/` — consistent with the zero-JS page and
+  the existing primitive — or as a React `src/ui/base/link/` folder per the `src/ui/base` convention.
+  Decide before implementing; the Astro form is the cheaper default for a page that ships no JavaScript.
 - **Risk:** This is where the craftsmanship claim is either paid or refuted — a site that fails inspection damages the positioning harder than any copy supports it; the competing risk is that a `quality` bias turns this into open-ended polishing against a one-week window.
 - **Status:** proposed
 
@@ -238,6 +259,11 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** The CV PDF must exist at its public path before release (PRD Open Question 3). Owner: author.
 - **Unknowns:**
   - Is the CV PDF final and published at the path S-01 and S-05 link to? — Owner: author. Block: yes.
+  - Does the `@astrojs/react` integration still earn its place? — Found during S-05 (2026-07-28). `yarn build`
+    emits a ~143 kB `dist/_astro/client.*.js` from it, but `index.html` references no script at all: neither
+    `button.tsx` nor `tag.tsx` is rendered anywhere in `src/`, only their `*Styles` class strings are
+    imported. The bundle is deployed and never fetched. Decide at the cutover whether to drop the
+    integration or keep it for post-v1 islands. Owner: author. Block: no.
 - **Risk:** The north star, and the only slice that changes what a recruiter actually sees; releasing it with a dead CV link would break FR-011 on the exact path the site exists to shorten, which is why the unknown above blocks rather than warns.
 - **Status:** blocked
 
@@ -284,3 +310,4 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **S-02: Visitor can read the commercial work as a single block dominated by the Rentola role, including the ownership scope that signals seniority, the outcome-based numbers, and stack tags split into core and supporting tiers.** — Archived 2026-07-27 → `context/archive/2026-07-27-work-proof-block/`. Lesson: —.
 - **S-04: Visitor can read a short bio paragraph that includes the decade of teaching in one sentence, and can open the developer's journal on Instagram from a labelled link.** — Archived 2026-07-27 → `context/archive/2026-07-27-about-and-journal/`. Lesson: —.
 - **S-03: Visitor can scan a grouped technology list split into a core tier and a supporting tier, with no ratings, levels, bars or percentages.** — Archived 2026-07-27 → `context/archive/2026-07-27-skills-two-tier/`. Lesson: —.
+- **S-05: Visitor can select the email address as text and open the LinkedIn profile, the GitHub profile and the CV PDF — the last as a direct, ungated download.** — Archived 2026-07-28 → `context/archive/2026-07-27-footer-contact/`. Lesson: —.
