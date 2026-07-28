@@ -10,12 +10,7 @@ export const buttonStyles = cva(
         link: 'text-text-primary underline-offset-4 hover:underline',
       },
       size: {
-        // Heights are minimums, not fixed: at 200% text zoom a label wraps, and a fixed box
-        // clips it. `icon` is the exception — a fixed square with no label to wrap.
         default: 'min-h-10 px-6 py-2',
-        sm: 'min-h-9 px-4',
-        lg: 'min-h-11 px-8',
-        icon: 'h-10 w-10',
       },
     },
     defaultVariants: {
