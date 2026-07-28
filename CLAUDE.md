@@ -38,8 +38,11 @@ check your work.
 ## Project structure
 
 - `src/pages` — Astro pages; `src/pages/api` — Server Endpoints
+- `src/pages/_<page>/sections` — page-private section components, one folder per section (e.g.
+  `src/pages/_home/sections/hero/Hero.astro`). The leading `_` is load-bearing: Astro excludes any
+  `_`-prefixed path under `src/pages` from routing, so these stay importable without becoming pages.
 - `src/layouts` — Astro layouts
-- `src/components` — feature components (`.astro`)
+- `src/components` — shared components used across more than one page (`.astro`)
 - `src/ui/base` — design-system primitives
 - `src/lib` — services and helpers; `src/middleware/index.ts` — Astro middleware
 - `src/constants` — shared constant modules (`*.constants.ts`)
