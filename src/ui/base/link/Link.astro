@@ -1,0 +1,13 @@
+---
+import { linkStyles } from './link.styles';
+
+import type { LinkProps as Props } from './link.types';
+
+const { href, variant, external, class: className, ...rest } = Astro.props;
+
+const externalAttributes = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+<a href={href} class:list={[linkStyles({ variant }), className]} {...externalAttributes} {...rest}>
+  <slot />
+</a>

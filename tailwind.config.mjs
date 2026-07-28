@@ -64,5 +64,5 @@ export default {
       full: '0px',
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [],
 };

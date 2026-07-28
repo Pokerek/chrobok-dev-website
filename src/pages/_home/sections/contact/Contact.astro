@@ -1,0 +1,27 @@
+---
+import { CV_LABEL, CV_PATH, EMAIL, GITHUB_URL, LINKEDIN_URL, LOCATION } from 'constants/contact.constants';
+import Link from 'ui/base/link/Link.astro';
+import Section from 'ui/base/section/Section.astro';
+---
+
+<Section id="contact">
+  <h2 slot="label">Contact</h2>
+
+  <div class="space-y-element">
+    <div class="space-y-tight">
+      <p>
+        <Link variant="inline" href={`mailto:${EMAIL}`}>{EMAIL}</Link>
+      </p>
+
+      <p class="text-text-secondary">{LOCATION} &mdash; remote</p>
+    </div>
+
+    <div class="flex flex-wrap gap-element">
+      <Link variant="bordered" href={LINKEDIN_URL} external>LinkedIn</Link>
+
+      <Link variant="bordered" href={GITHUB_URL} external>GitHub</Link>
+
+      <Link variant="bordered" href={CV_PATH}>{CV_LABEL}</Link>
+    </div>
+  </div>
+</Section>

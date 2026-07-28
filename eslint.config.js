@@ -4,7 +4,6 @@ import { join } from 'node:path';
 import jsPlugin from '@eslint/js';
 import eslintPluginAstro from 'eslint-plugin-astro';
 import prettierPlugin from 'eslint-plugin-prettier/recommended';
-import reactPlugin from 'eslint-plugin-react';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import tseslint from 'typescript-eslint';
 
@@ -37,7 +36,6 @@ export default tseslint.config(
   jsPlugin.configs.recommended,
   ...tseslint.configs.recommended,
   ...eslintPluginAstro.configs.recommended,
-  reactPlugin.configs.flat['jsx-runtime'],
   prettierPlugin,
   {
     plugins: {
@@ -52,8 +50,8 @@ export default tseslint.config(
             ['^\\u0000'],
             // Node.js builtins
             ['^node:(?!.*\\u0000$)'],
-            // React and Astro core packages only
-            ['^react($|/|-dom)(?!.*\\u0000$)', '^astro($|/)(?!.*\\u0000$)', '^@astrojs/(?!.*\\u0000$)'],
+            // Astro core packages only
+            ['^astro($|/)(?!.*\\u0000$)', '^@astrojs/(?!.*\\u0000$)'],
             // External packages
             ['^@?\\w(?!.*\\u0000$)'],
             // Internal modules (folders and files from src/ directory)
@@ -62,7 +60,7 @@ export default tseslint.config(
             ['^\\.\\.(?!.*\\u0000$)'],
             // Same-folder imports
             ['^\\.(?!.*\\u0000$)'],
-            // All type imports (React, Astro, external, internal, parent, etc.)
+            // All type imports (Astro, external, internal, parent, etc.)
             ['.*\\u0000$'],
           ],
         },
@@ -104,7 +102,6 @@ export default tseslint.config(
       ],
 
       'no-console': 'warn',
-      'react/display-name': 'off',
     },
   },
   {
