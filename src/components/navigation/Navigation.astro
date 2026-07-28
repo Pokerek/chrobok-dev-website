@@ -1,0 +1,52 @@
+---
+import { NAV_ITEMS, WORDMARK } from './navigation.constants';
+---
+
+<header class="sticky top-0 z-50 border-b border-border-default bg-page-bg">
+  <div class="container">
+    <div class="flex h-header items-center justify-between">
+      <a href={WORDMARK.href} class="font-heading text-xl font-bold transition-colors hover:bg-hover-bg">
+        {WORDMARK.label}
+      </a>
+
+      <nav aria-label="Sections">
+        <ul class="hidden gap-element md:flex">
+          {
+            NAV_ITEMS.map((item) => (
+              <li>
+                <a href={item.href} class="px-tight py-tight transition-colors hover:bg-hover-bg">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <details id="nav-disclosure" class="md:hidden">
+          <summary class="cursor-pointer px-tight py-tight transition-colors hover:bg-hover-bg">Menu</summary>
+          <ul class="absolute inset-x-0 top-full border-b border-border-default bg-page-bg">
+            {
+              NAV_ITEMS.map((item) => (
+                <li>
+                  <a href={item.href} class="container flex min-h-11 items-center transition-colors hover:bg-hover-bg">
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </details>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  /* eslint-disable prettier/prettier -- prettier-plugin-astro (0.14.1) cannot format this <script is:inline>
+     block: eslint --fix oscillates forever between two formattings of the same content (ESLint reports
+     "circular fixes detected"), and a prettier-ignore comment on the tag crashes the plugin outright. */
+  const menu = document.getElementById('nav-disclosure');
+  const close = () => menu.removeAttribute('open');
+  menu?.addEventListener('click', (e) => e.target.closest('a') && close());
+  /* eslint-enable prettier/prettier */
+</script>

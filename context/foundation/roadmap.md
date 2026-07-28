@@ -55,7 +55,7 @@ to recruiters at any point.
 | S-03 | skills-two-tier           | scan a grouped core/supporting technology list with no ratings or bars      | F-01, F-02                     | FR-007                         | done     |
 | S-04 | about-and-journal         | read the one-paragraph bio incl. teaching, and open the Instagram journal    | F-01, F-02                     | FR-008, FR-009                 | done |
 | S-05 | footer-contact            | select the email as text and open LinkedIn, GitHub and the ungated CV PDF   | F-01, F-02                     | FR-010, FR-011                 | done     |
-| S-06 | sticky-section-nav        | jump to any section from a sticky header on every breakpoint                | S-01, S-02, S-03, S-04, S-05   | FR-012                         | proposed |
+| S-06 | sticky-section-nav        | jump to any section from a sticky header on every breakpoint                | S-01, S-02, S-03, S-04, S-05   | FR-012                         | done |
 | S-07 | inspection-hardening-pass | reach every link by keyboard and screen reader, with scripts disabled, on a phone, in under a second | F-03, S-06     | US-01, §NFRs (all four)        | proposed |
 | S-08 | v1-production-cutover     | see the complete seven-section page at chrobok.dev instead of the placeholder | S-07                          | US-01, §Success Criteria       | blocked  |
 
@@ -205,7 +205,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Unknowns:**
   - **There is no `#journal` anchor, and the journal is now a visible heading (settled in S-04, 2026-07-27 — do not rediscover this as a gap).** The PRD's locked flow lists About (5) and Journal (6) as separate steps, but S-04 shipped them as one `#about` section to avoid a genuinely one-line `#journal` section. The implementation then gave the journal its own `<h3>Developer&rsquo;s journal</h3>` block, so a reader can see a titled journal section that the nav will not list. Decide deliberately: nav lists "About" only (status quo), or S-06 adds the `#journal` anchor S-04 declined to add. — Owner: author. Block: no.
 - **Risk:** Sequenced last among content slices because it needs every section anchor to exist; the accepted trade-off recorded in FR-012 is that a sticky header eats first-screen area on mobile, which is exactly where the recruiter opens the pasted link — worth re-checking against S-01 once both are on the preview.
-- **Status:** proposed
+- **Status:** done
 
 ### S-07: Inspection hardening pass
 
@@ -311,3 +311,4 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **S-04: Visitor can read a short bio paragraph that includes the decade of teaching in one sentence, and can open the developer's journal on Instagram from a labelled link.** — Archived 2026-07-27 → `context/archive/2026-07-27-about-and-journal/`. Lesson: —.
 - **S-03: Visitor can scan a grouped technology list split into a core tier and a supporting tier, with no ratings, levels, bars or percentages.** — Archived 2026-07-27 → `context/archive/2026-07-27-skills-two-tier/`. Lesson: —.
 - **S-05: Visitor can select the email address as text and open the LinkedIn profile, the GitHub profile and the CV PDF — the last as a direct, ungated download.** — Archived 2026-07-28 → `context/archive/2026-07-27-footer-contact/`. Lesson: —.
+- **S-06: Visitor can jump to any of the seven sections from a sticky header, on every breakpoint.** — Archived 2026-07-28 → `context/archive/2026-07-27-sticky-section-nav/`. Lesson: —.
