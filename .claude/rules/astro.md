@@ -8,7 +8,9 @@ paths:
 
 # Astro
 
-- Use `.astro` for static content and layout; hydrate a React island only where interactivity is needed.
+- Everything is `.astro`. This page ships **no client JavaScript** — there is no UI framework installed
+  and no `client:` directive anywhere. Reach for native HTML (`<details>`, `<picture>`, anchors) before
+  proposing any script; adding an island means reversing S-07 and needs a real requirement behind it.
 - Use the View Transitions API (`ClientRouter`) for page transitions.
 - Use type-safe content collections for blog posts, docs, and similar structured content.
 - Use the Astro Image integration for image optimization.

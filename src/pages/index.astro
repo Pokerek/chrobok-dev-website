@@ -1,14 +1,17 @@
 ---
 import Layout from 'layouts/Layout.astro';
 
-import About from '../components/about/About.astro';
-import Contact from '../components/contact/Contact.astro';
-import Hero from '../components/hero/Hero.astro';
-import Skills from '../components/skills/Skills.astro';
-import Work from '../components/work/Work.astro';
+import About from './_home/sections/about/About.astro';
+import Contact from './_home/sections/contact/Contact.astro';
+import Hero from './_home/sections/hero/Hero.astro';
+import Skills from './_home/sections/skills/Skills.astro';
+import Work from './_home/sections/work/Work.astro';
 ---
 
-<Layout title="Chrobok.dev" description="Chrobok.dev is a personal website of a software developer.">
+<Layout
+  title="Karol Chrobok — Frontend Developer"
+  description="Frontend developer working in React, Next.js and TypeScript. I don’t generate code, I craft it."
+>
   <Hero />
   <Work />
   <Skills />

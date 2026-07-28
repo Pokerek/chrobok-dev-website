@@ -8,12 +8,14 @@ paths:
 # Design System
 
 Tokens are configured in `tailwind.config.mjs` (colors, fonts, spacing) and `src/styles/globals.css`
-(font imports, base typography). Read those before inventing a value.
+(`@font-face` declarations, base typography). Read those before inventing a value.
 
 ## Principles
 
-- **Fonts**: Ramaraja 700 for headings (`font-heading`), IBM Plex Mono for body/accents (`font-body`).
-  This pair is the frozen v1 typography contract — do not swap it while building sections.
+- **Fonts**: Ramaraja 400 for headings (`font-heading`), IBM Plex Mono 400/500 for body/accents
+  (`font-body`). This pair is the frozen v1 typography contract — do not swap it while building sections.
+  Ramaraja is a single-weight display serif: never put `font-bold` (or any weight utility) on
+  `font-heading`, or the browser renders synthetic bold.
 - **Colors**: token names only — `page-bg`, `element-bg`, `hover-bg`, `text-primary`, `text-secondary`,
   `border-default`, `focus-ring` (used as `bg-page-bg`, `text-text-primary`, `border-border-default`, …).
 - **Border radius**: **every** named radius resolves to `0` — `rounded`, `rounded-md`, `rounded-lg`,
@@ -26,7 +28,7 @@ Tokens are configured in `tailwind.config.mjs` (colors, fonts, spacing) and `src
 
 - **Container**: centered, `2rem` horizontal padding, max width `1400px` at `2xl` (Tailwind `container`).
 - **Grid**: the page skeleton is section-level, not a global two-column frame. Use the `Section` primitive
-  at `src/components/layout/Section.astro`: a semantic `<section>` with a scroll anchor plus the container.
+  at `src/ui/base/section/Section.astro`: a semantic `<section>` with a scroll anchor plus the container.
   Fill the `label` slot to get the `label | content` two-column layout (`md:grid-cols-section`), which
   **collapses to a single column below `md`**; omit the `label` slot for a full-width section.
 - Sections own their own heading level and ARIA — pass headings as slot content, don't let the primitive
@@ -42,16 +44,18 @@ Tokens are configured in `tailwind.config.mjs` (colors, fonts, spacing) and `src
 
 ## No hard-coded values
 
-Colours, spacing, radius and ring all come from tokens — never a raw hex, px, or `border-black`. shadcn is
-configured with `cssVariables: false` (`components.json`), so generated components must be re-pointed at the
-named tokens above before they compile against anything real.
+Colours, spacing, radius and ring all come from tokens — never a raw hex, px, or `border-black`. Any
+snippet copied in from outside (a component gallery, a blog post, a generator) must be re-pointed at the
+named tokens above before it compiles against anything real.
 
 ## Checklist for a new or modified `src/ui/base` component
 
-- [ ] Folder structure: separate `.tsx`, `.types.ts`, `.styles.ts`
-- [ ] CVA variants in the `.styles.ts` file, combined via `cn()`
+- [ ] Folder structure: `ComponentName.astro` (when it renders markup) plus `.types.ts` and `.styles.ts`.
+      A primitive that is only a style contract (`button`, `tag`) needs no `.astro` file.
+- [ ] CVA variants in the `.styles.ts` file; `class:list` at the call site, `cn()` only where
+      tailwind-merge's conflict resolution is needed
 - [ ] Design-system color, font, and spacing tokens — no raw values
 - [ ] Square corners (radius 0)
-- [ ] `forwardRef` pattern, with `displayName` set
-- [ ] Props exported as `ComponentNameProps`
+- [ ] No `client:` directive and no framework import — this page ships no client JavaScript
+- [ ] Props declared with `type` in `.types.ts`, exported as `ComponentNameProps`
 - [ ] Accessible: semantic element or correct ARIA, keyboard navigable

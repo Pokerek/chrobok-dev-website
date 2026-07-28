@@ -1,0 +1,47 @@
+---
+import monk from 'assets/monk.webp';
+import { CV_LABEL, CV_PATH, EMAIL } from 'constants/contact.constants';
+import Link from 'ui/base/link/Link.astro';
+import Section from 'ui/base/section/Section.astro';
+
+/*
+ * The <img> needs a src the browser will never fetch: `display: none` does not prevent a
+ * download, so a plain <img> hidden below md still costs phones the full asset. The artwork
+ * therefore hangs off a <source> whose media query fails below 768px, leaving this 1x1 GIF —
+ * inline, so zero requests — as the fallback nobody ever sees.
+ */
+const TRANSPARENT_PIXEL = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+---
+
+<Section id="hero" class="flex min-h-[calc(100svh_-_theme(spacing.header))] flex-col justify-center">
+  <div class="grid items-center gap-grid md:grid-cols-2">
+    <div class="space-y-element">
+      <div class="space-y-2">
+        <h1>Karol Chrobok</h1>
+        <p>Frontend Developer</p>
+        <p class="text-text-secondary">React &middot; Next.js &middot; TypeScript</p>
+      </div>
+
+      <p class="max-w-lg">
+        I don&rsquo;t generate code, I craft it. AI is a tool I use every day &mdash; the result is owned by a human.
+      </p>
+
+      <div class="flex flex-wrap gap-element">
+        <Link variant="bordered" href={`mailto:${EMAIL}`}>Email me</Link>
+        <Link variant="bordered" href={CV_PATH}>{CV_LABEL}</Link>
+      </div>
+    </div>
+
+    <picture class="hidden w-full max-w-sm justify-self-end md:block">
+      <source media="(min-width: 768px)" srcset={monk.src} />
+      <img
+        src={TRANSPARENT_PIXEL}
+        alt=""
+        width={monk.width}
+        height={monk.height}
+        class="h-auto w-full"
+        loading="eager"
+      />
+    </picture>
+  </div>
+</Section>

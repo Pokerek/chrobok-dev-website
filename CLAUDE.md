@@ -1,9 +1,11 @@
 # chrobok-dev-website
 
-Personal site at https://www.chrobok.dev. Astro 5 + React 18 islands, Tailwind 3, shadcn/ui, TypeScript 5.
+Personal site at https://www.chrobok.dev. Astro 5, Tailwind 3, TypeScript 5. **The page ships no client
+JavaScript** — there is no UI framework and no islands. S-07 removed React once it was clear nothing on
+the page needed it; keep it that way unless a requirement genuinely demands interactivity.
 
 Detailed, file-scoped conventions live in `.claude/rules/` and load automatically when you touch matching
-files (TypeScript, React, Astro, Tailwind, design system, shadcn/ui). Release rules load every session.
+files (TypeScript, Astro, Tailwind, design system). Release rules load every session.
 
 ## CRITICAL: `main` is production
 
@@ -16,7 +18,6 @@ model, gates and merge constraints: `.claude/rules/release-process.md`.
 `yarn` is the package manager. `preinstall` runs `only-allow yarn`, so npm is rejected outright.
 
 - `yarn` / `yarn add <pkg>` / `yarn add -D <pkg>` / `yarn <script>`
-- Exception: `npx shadcn@latest add <component>` — a one-off generator, not a dependency install.
 
 ## CRITICAL: code is written in English
 
@@ -37,9 +38,12 @@ check your work.
 ## Project structure
 
 - `src/pages` — Astro pages; `src/pages/api` — Server Endpoints
+- `src/pages/_<page>/sections` — page-private section components, one folder per section (e.g.
+  `src/pages/_home/sections/hero/Hero.astro`). The leading `_` is load-bearing: Astro excludes any
+  `_`-prefixed path under `src/pages` from routing, so these stay importable without becoming pages.
 - `src/layouts` — Astro layouts
-- `src/components` — feature components (`.astro` static, `.tsx` interactive)
-- `src/ui/base` — shadcn/ui + design-system primitives
+- `src/components` — shared components used across more than one page (`.astro`)
+- `src/ui/base` — design-system primitives
 - `src/lib` — services and helpers; `src/middleware/index.ts` — Astro middleware
 - `src/constants` — shared constant modules (`*.constants.ts`)
 - `src/styles` — `globals.css`, `utils.ts` (`cn()`)
@@ -50,17 +54,20 @@ When the structure changes, update this section.
 
 ## Architecture
 
-- Astro components (`.astro`) for static content and layout. React (`.tsx`) **only** where interactivity
-  is needed (state, hooks, event handlers).
-- Never use the `"use client"` directive — this is Astro, not Next.js.
+- Everything is an Astro component (`.astro`). There are no `client:` directives and no UI framework;
+  the small amount of behaviour the page needs (the `<details>` mobile menu) is native HTML plus one
+  inline script.
 - Every `src/ui/base` component lives in its own folder:
   ```
   componentName/
-    componentName.tsx        # component
+    ComponentName.astro      # component, when it renders markup
     componentName.types.ts   # types, props exported as ComponentNameProps
     componentName.styles.ts  # CVA variants — ALWAYS a separate file
-    componentName.test.tsx   # tests (optional)
   ```
+  A primitive that is only a style contract (`button`, `tag`) has no `.astro` file — it is the
+  `.styles.ts`, plus a `.types.ts` only when there is a type worth exporting (`tag` exports
+  `TagVariant`; `button` exports nothing, so it is a lone `.styles.ts`). These are consumed by
+  feature components rather than rendered directly.
 - Compound components are namespaced: `ComponentName.SubComponentName`.
 - **Feature components keep data and types out of the `.astro` file.** Module-scope constants go in a
   sibling `componentName.constants.ts`, types in `componentName.types.ts`. The `.astro` frontmatter
@@ -74,10 +81,10 @@ When the structure changes, update this section.
 
 ## Naming
 
-- Components `PascalCase`; hooks `useCamelCase`; utilities `camelCase`; constants `UPPER_SNAKE_CASE`
+- Components `PascalCase`; utilities `camelCase`; constants `UPPER_SNAKE_CASE`
 - Types in `*.types.ts`, `PascalCase`; component props as `ComponentNameProps`
-- Tests `*.test.ts(x)` next to the file under test
-- Components exported as `export const ComponentName = () => { ... }`
+- `.astro` props are imported under the alias Astro requires:
+  `import type { LayoutProps as Props } from './layout.types';`
 
 ## Before adding anything
 

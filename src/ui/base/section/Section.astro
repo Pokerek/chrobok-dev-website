@@ -10,12 +10,7 @@
  * Semantics are left to the caller: pass the section heading (and its label)
  * as slot content so each section owns its own heading level and ARIA wiring.
  */
-interface Props {
-  /** Anchor id — the scroll target for the sticky section nav (S-06), offset by `scroll-mt-anchor` to clear the sticky bar. */
-  id: string;
-  /** Extra classes for the outer <section>. */
-  class?: string;
-}
+import type { SectionProps as Props } from './section.types';
 
 const { id, class: className } = Astro.props;
 const hasLabel = Astro.slots.has('label');

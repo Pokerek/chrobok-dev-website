@@ -2,10 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import fonts */
-@import '@fontsource/ramaraja/700.css';
-@import '@fontsource/ibm-plex-mono/400.css';
-@import '@fontsource/ibm-plex-mono/500.css';
+@font-face {
+  font-family: 'Ramaraja';
+  font-style: normal;
+  font-weight: 400;
+  font-display: optional;
+  src: url('/fonts/ramaraja-latin-400-normal.woff2') format('woff2');
+  /*
+   * No unicode-range on purpose. This is a single-subset file, so the property cannot save a
+   * download — and the latin range the other two faces declare would be a lie here: Ramaraja
+   * ships 122 codepoints and covers only 7 of the 64 in U+00C0-00FF, so it has no ó, é, ä, ç or
+   * ñ. Omitting the range lets font fallback do its job per glyph; a Polish heading renders its
+   * diacritics in the fallback serif instead of claiming coverage the file does not have.
+   */
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: optional;
+  src: url('/fonts/ibm-plex-mono-latin-400-normal.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: optional;
+  src: url('/fonts/ibm-plex-mono-latin-500-normal.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 @layer base {
   /*
@@ -41,7 +73,6 @@
   h5,
   h6 {
     @apply font-heading;
-    font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.2;
   }
