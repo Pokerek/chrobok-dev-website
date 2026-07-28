@@ -1,7 +1,7 @@
 ---
 change_id: sticky-section-nav
 title: Sticky section navigation across all breakpoints (S-06)
-status: implementing
+status: implemented
 created: 2026-07-27
 updated: 2026-07-28
 archived_at: null

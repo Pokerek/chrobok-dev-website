@@ -432,16 +432,16 @@ primitive — that it picks up `scroll-mt-anchor` from this branch rather than r
 
 #### Automated
 
-- [x] 3.1 Build and type-check pass: `yarn build`
-- [x] 3.2 Lint passes: `yarn lint`
-- [x] 3.3 No raw colour, `border-black` or non-zero radius in `src/components/navigation/`
+- [x] 3.1 Build and type-check pass: `yarn build` — 68798fb
+- [x] 3.2 Lint passes: `yarn lint` — 68798fb
+- [x] 3.3 No raw colour, `border-black` or non-zero radius in `src/components/navigation/` — 68798fb
 
 #### Manual
 
-- [x] 3.4 No-JS: sticky, navigable and expandable with scripts disabled
-- [x] 3.5 Keyboard: skip link → wordmark → links → content, ring visible at every stop
-- [x] 3.6 Screen reader: navigation landmark named "Sections"; disclosure state announced
-- [x] 3.7 Contrast: bar text and border meet WCAG AA against `page-bg`
-- [x] 3.8 No layout shift after first paint at any breakpoint
-- [x] 3.9 Cross-engine: bar pins and `100svh` resolves in Chromium, Firefox and WebKit
-- [x] 3.10 FR-012 restated: Work, Skills and About reachable in one interaction from any scroll position; Contact re-checked on `development` after S-05
+- [x] 3.4 No-JS: sticky, navigable and expandable with scripts disabled — 68798fb
+- [x] 3.5 Keyboard: skip link → wordmark → links → content, ring visible at every stop — 68798fb
+- [x] 3.6 Screen reader: navigation landmark named "Sections"; disclosure state announced — 68798fb
+- [x] 3.7 Contrast: bar text and border meet WCAG AA against `page-bg` — 68798fb
+- [x] 3.8 No layout shift after first paint at any breakpoint — 68798fb
+- [x] 3.9 Cross-engine: bar pins and `100svh` resolves in Chromium, Firefox and WebKit — 68798fb
+- [x] 3.10 FR-012 restated: Work, Skills and About reachable in one interaction from any scroll position; Contact re-checked on `development` after S-05 — 68798fb
