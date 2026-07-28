@@ -697,12 +697,12 @@ that phase rather than follow-up work.
 
 #### Automated
 
-- [x] 4.1 Build passes: `yarn build`
-- [x] 4.2 Lint passes: `yarn lint`
-- [x] 4.3 No `.js` files emitted to `dist/_astro/`
-- [x] 4.4 No `react` references in `src/`
-- [x] 4.5 No `react` references in `package.json`
-- [x] 4.6 `TagVariant` still exported from `tag.types.ts`
+- [x] 4.1 Build passes: `yarn build` — 0909e5e
+- [x] 4.2 Lint passes: `yarn lint` — 0909e5e
+- [x] 4.3 No `.js` files emitted to `dist/_astro/` — 0909e5e
+- [x] 4.4 No `react` references in `src/` — 0909e5e
+- [x] 4.5 No `react` references in `package.json` — 0909e5e
+- [x] 4.6 `TagVariant` still exported from `tag.types.ts` — 0909e5e
 
 #### Manual
 
@@ -714,9 +714,9 @@ that phase rather than follow-up work.
 
 #### Automated
 
-- [ ] 5.1 Build passes: `yarn build`
-- [ ] 5.2 Lint passes: `yarn lint`
-- [ ] 5.3 `dist/index.html` contains `<main`, all four anchors and every link href
+- [x] 5.1 Build passes: `yarn build`
+- [x] 5.2 Lint passes: `yarn lint`
+- [x] 5.3 `dist/index.html` contains `<main`, all four anchors and every link href
 
 #### Manual
 

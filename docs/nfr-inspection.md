@@ -44,10 +44,17 @@ There are only **three shipping browser engines** — "4 engines × 2 versions" 
 current + previous of each. Do not burn time hunting a nonexistent fourth engine. Automating the
 full matrix is deliberately out of scope (see the note below).
 
-- [ ] **Blink** — Chrome (current) and Edge (current Chromium)
-- [ ] **WebKit** — Safari (current, desktop) and Safari on iOS (current)
-- [ ] **Gecko** — Firefox (current) and Firefox ESR (the "previous" line)
-- [ ] For each: layout intact, fonts load, interactive islands work, no console errors
+**Matrix resolution — one real check per engine, settled by S-07. Do not re-litigate this at the
+cutover.** Run four real checks: Chrome, Safari and Firefox at current version, plus Safari on iOS
+on a real phone. Edge and the previous-version line are covered by written argument in the PR rather
+than by a run, because every feature this page uses — `svh` units, `:focus-visible`, `<details>`,
+`<picture>`, `woff2`, CSS grid — is years past its baseline in all three engines, and Edge is Blink,
+already covered by the Chrome run. A second Blink check tests the same rendering engine twice.
+
+- [ ] **Blink** — Chrome (current). Edge: argued, not run — same engine.
+- [ ] **WebKit** — Safari (current, desktop) **and** Safari on iOS (current, real device)
+- [ ] **Gecko** — Firefox (current). ESR: argued, not run.
+- [ ] For each: layout intact, fonts load (Ramaraja and IBM Plex Mono, not fallbacks), no console errors
 
 ## Guardrail — "survives a technical inspection"
 
