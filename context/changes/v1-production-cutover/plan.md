@@ -404,7 +404,7 @@ another fast-forward. This is the property the squash merge would have destroyed
 
 #### Automated
 
-- [ ] 2.1 Pre-flight build passes: `yarn build`
+- [x] 2.1 Pre-flight build passes: `yarn build`
 - [ ] 2.2 The `inspect` workflow passes on the feature PR
 - [ ] 2.3 Change folder has moved to `context/archive/2026-07-28-v1-production-cutover`
 - [ ] 2.4 `main` is still a strict ancestor of `development`
