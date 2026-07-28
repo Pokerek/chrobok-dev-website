@@ -33,11 +33,6 @@ const ogImageUrl = new URL(OG_IMAGE.path, Astro.site);
     <meta property="og:image:height" content={String(OG_IMAGE.height)} />
     <meta name="twitter:card" content="summary_large_image" />
 
-    {
-      /* `font-display: optional` in globals.css only renders these faces if they are preloaded,
-        and each href must match its @font-face src byte for byte or the font is fetched twice.
-        `crossorigin` is mandatory on font preloads even same-origin, for the same reason. */
-    }
     <link rel="preload" href="/fonts/ramaraja-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/ibm-plex-mono-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin />
