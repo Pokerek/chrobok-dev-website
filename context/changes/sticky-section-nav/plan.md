@@ -404,9 +404,9 @@ primitive — that it picks up `scroll-mt-anchor` from this branch rather than r
 
 #### Manual
 
-- [ ] 1.6 The rendered page is visually identical to `development`
-- [ ] 1.7 Navigating to `#work`, `#skills` and `#about` by URL lands on each section
-- [ ] 1.8 Smooth scroll appears and disappears with the OS reduce-motion setting
+- [x] 1.6 The rendered page is visually identical to `development`
+- [x] 1.7 Navigating to `#work`, `#skills` and `#about` by URL lands on each section
+- [x] 1.8 Smooth scroll appears and disappears with the OS reduce-motion setting
 
 ### Phase 2: The navigation component
 

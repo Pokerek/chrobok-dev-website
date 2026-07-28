@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
+const HEADER_HEIGHT = '3.5rem'; // 56px — sticky nav bar height (S-06)
+
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   darkMode: ['class'],
@@ -32,6 +34,8 @@ export default {
         card: '1.5rem', // 24px
         container: '2rem', // 32px
         tight: '0.5rem', // 8px — rhythm inside an element (heading/meta, list items, chip rows)
+        header: HEADER_HEIGHT, // sticky nav bar height (S-06)
+        anchor: `calc(${HEADER_HEIGHT} + 2rem)`, // scroll-mt: clears the sticky bar plus section rhythm (S-06)
       },
       gap: {
         grid: '3rem', // 48px

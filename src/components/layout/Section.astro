@@ -11,7 +11,7 @@
  * as slot content so each section owns its own heading level and ARIA wiring.
  */
 interface Props {
-  /** Anchor id — also the scroll target for the sticky section nav (S-06). */
+  /** Anchor id — the scroll target for the sticky section nav (S-06), offset by `scroll-mt-anchor` to clear the sticky bar. */
   id: string;
   /** Extra classes for the outer <section>. */
   class?: string;
@@ -21,7 +21,7 @@ const { id, class: className } = Astro.props;
 const hasLabel = Astro.slots.has('label');
 ---
 
-<section id={id} class:list={['scroll-mt-section py-section', className]}>
+<section id={id} class:list={['scroll-mt-anchor py-section', className]}>
   <div class="container">
     <div class:list={['grid gap-grid', hasLabel ? 'grid-cols-1 md:grid-cols-section' : 'grid-cols-1']}>
       {

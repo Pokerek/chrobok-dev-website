@@ -8,6 +8,17 @@
 @import '@fontsource/ibm-plex-mono/500.css';
 
 @layer base {
+  /*
+   * Sanctioned exception to the transition-colors motion ceiling: smooth
+   * in-page scrolling for the sticky section nav (S-06), guarded so it never
+   * runs for visitors who have asked for less motion.
+   */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   body {
     @apply font-body text-text-primary;
     letter-spacing: 0;
