@@ -45,12 +45,12 @@ import { NAV_ITEMS, WORDMARK } from './navigation.constants';
   // eslint-disable-next-line prettier/prettier
   const menu = document.getElementById('nav-disclosure');
 
-  if (!menu) return;
+  if (menu) {
+    const close = () => menu.removeAttribute('open');
 
-  const close = () => menu.removeAttribute('open');
-
-  menu.addEventListener('click', (e) => e.target.closest('a') && close());
-  document.addEventListener('click', (e) => {
-    if (menu.hasAttribute('open') && !menu.contains(e.target)) close();
-  });
+    menu.addEventListener('click', (e) => e.target.closest('a') && close());
+    document.addEventListener('click', (e) => {
+      if (menu.hasAttribute('open') && !menu.contains(e.target)) close();
+    });
+  }
 </script>
