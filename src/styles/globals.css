@@ -2,27 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
- * These faces are declared by hand, over files committed to `public/fonts/`, rather than
- * pulled from a font package: the package hardcodes `font-display: swap`, and a CSS `@import`
- * would have to precede the `@tailwind` directives above — where PostCSS drops it silently.
- * `url()` cannot take a `var()`, which rules out the Astro `?url` + `define:vars` idiom too.
- *
- * `font-display: optional` is what makes "no layout shift after first paint" structural: the
- * face gets a ~100ms block period and then never swaps. It only wins that race when the file
- * is already in flight, so every family and weight below MUST have a matching
- * <link rel="preload"> in Layout.astro whose href is byte-identical to its src here — a
- * mismatch fetches the font twice and logs a console warning. Without the preload the face
- * loses the race every time and the page renders permanently in fallback.
- *
- * Latin subsets only: Ramaraja's telugu subset is 139 KB and this page has no Telugu text.
- *
- * Provenance: the three files in `public/fonts/` were copied verbatim from the Fontsource
- * packages for Ramaraja and IBM Plex Mono. Those packages are no longer dependencies — the
- * committed woff2 files are self-sufficient — so upgrading a face means re-adding the package,
- * copying the new `files/*-latin-*-normal.woff2`, and re-checking the filenames against the
- * preload hrefs in Layout.astro.
- */
 @font-face {
   font-family: 'Ramaraja';
   font-style: normal;
