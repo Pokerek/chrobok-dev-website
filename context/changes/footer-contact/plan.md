@@ -3,19 +3,20 @@
 ## Overview
 
 Roadmap slice **S-05**, closing **FR-010** (email selectable as text, LinkedIn and GitHub reachable from
-the footer) and **FR-011** (the CV as a direct, ungated PDF link). The contact facts move into one shared
-constants file, `Footer.astro` grows from a copyright strip into the page's contact block, and the hero's
-CV link is realigned to the behaviour settled here so both ends of the page point at the same artifact and
-describe it the same way.
+the contact section) and **FR-011** (the CV as a direct, ungated PDF link). The contact facts move into one
+shared constants file, a new `Contact.astro` section renders them as the last child of `<main>`, and the
+hero's CV link is realigned to the behaviour settled here so both ends of the page point at the same
+artifact and describe it the same way.
 
 ## Current State Analysis
 
 - `src/components/footer/Footer.astro` is nine lines: a `<footer>` with a top border and a copyright line.
   `Layout.astro:26` renders it after `<slot />`, so it sits **outside** `<main>` — correct landmark
   placement, and this plan keeps it there.
-- The footer carries two of the three hard-coded values `design-notes.md` flagged as "fix on the first
-  content pass": `border-black` instead of `border-border-default` (`Footer.astro:5`), and raw `mt-2 pt-2`
-  spacing instead of the token scale. This slice is that content pass for this file.
+- The footer carries raw `mt-2 pt-2` spacing instead of the token scale — one of the values
+  `design-notes.md` flagged as "fix on the first content pass". (Its `border-black` was already fixed in
+  F-01; that record is stale.) This slice leaves `Footer.astro` untouched, so the spacing stays open as
+  S-07 work.
 - `src/components/hero/Hero.astro:9-11` declares `EMAIL`, `CV_PATH` and `CV_FILENAME` as local frontmatter
   constants. The roadmap's one recorded unknown for S-05 is exactly *"what is the CV's public path and
   filename, so both this slice and S-01 link to the same target"* — two hard-coded copies is the drift it
@@ -45,20 +46,21 @@ describe it the same way.
 - The CV PDF's own header reads "Available ASAP". That is the author's artifact and outside this
   repository — but it means the no-availability guardrail holds for the *page* and not for the linked file.
   Recorded, not acted on.
-- `Layout.astro` renders `<Footer />` for every page, so giving the footer `id="contact"` also gives S-06
-  its seventh nav anchor without a second component.
+- The contact block needs an `id="contact"` anchor regardless of where it lives, so this slice also hands
+  S-06 its seventh nav anchor.
 
 ## Desired End State
 
 A visitor who scrolls to the bottom of the page sees a block labelled **Contact**, aligned with the Work
 and About labels on desktop and stacked below `md`. It shows the full email address as selectable,
-clickable text; a row of three bordered links to LinkedIn, GitHub and the CV; the author's location; and
-the copyright line. LinkedIn and GitHub open in a new tab with the context change announced to a screen
-reader; the CV opens the PDF in the same tab with no download prompt and no gate.
+clickable text; a row of three bordered links to LinkedIn, GitHub and the CV; and the author's location.
+The copyright line stays in `Footer.astro`, below and outside this section. LinkedIn and GitHub open in a
+new tab with the context change announced to a screen reader; the CV opens the PDF in the same tab with no
+download prompt and no gate.
 
-Verify by loading the built page: the footer is reachable and operable by keyboard alone, every link works
-with JavaScript disabled, the CV link resolves to the same file the hero links to, and nothing in the
-footer states availability, a start date or a notice period.
+Verify by loading the built page: the contact section is reachable and operable by keyboard alone, every
+link works with JavaScript disabled, the CV link resolves to the same file the hero links to, and nothing
+in it states availability, a start date or a notice period.
 
 ## What We're NOT Doing
 
@@ -67,7 +69,7 @@ footer states availability, a start date or a notice period.
 - **Not** fixing `h-10` in `src/ui/base/button/button.styles.ts`. That is S-07 carried-in work against an
   F-01-frozen directory; this slice repeats the documented call-site workaround.
 - **Not** adding a contact form, a newsletter, analytics, an obfuscated email, a copy-to-clipboard button
-  or any JavaScript. PRD §Non-Goals; the footer ships zero JS.
+  or any JavaScript. PRD §Non-Goals; the contact section ships zero JS.
 - **Not** adding a "built with / source" line, social icons, or an availability, contract-form or
   notice-period statement.
 - **Not** building the sticky nav (S-06) or wiring its links — this slice only provides the `#contact`
@@ -81,21 +83,18 @@ Three phases, ordered so the riskiest edit to already-shipped code lands first a
 
 Phase 1 extracts the contact facts into `src/constants/contact.constants.ts` and points `Hero.astro` at
 them, dropping the `download` attribute and relabelling to "View CV (PDF)" — a behaviour change to a
-shipped section, verified in isolation. Phase 2 teaches `Section.astro` to render a caller-chosen tag and
-rewrites `Footer.astro` on top of it, so the footer inherits the F-01 skeleton instead of copying it.
-Phase 3 is the inspection sweep.
+shipped section, verified in isolation. Phase 2 adds `Contact.astro` on top of the existing `Section.astro`
+primitive and renders it last inside `<main>`, so the contact block inherits the F-01 skeleton instead of
+copying it. `Footer.astro` and `Section.astro` are not modified. Phase 3 is the inspection sweep.
 
-The `as` prop is a widening, not a change: the default stays `'section'`, so Hero, Work and About render
-byte-identical markup. That is what Phase 2's regression criteria check.
+Because `Section.astro` is untouched, Hero, Work and About render byte-identical markup — that is what
+Phase 2's regression criteria check.
 
 ## Critical Implementation Details
 
 **The `sr-only` span goes *inside* the anchor.** Placed after the closing `</a>` it announces as stray
 text and the link itself stays unlabelled for the change of context — the failure S-04 called out as its
 key risk. Copy the shape from `About.astro:44`, don't re-derive it.
-
-**Astro dynamic tags require a capitalised binding.** `const Tag = as;` then `<Tag …>` renders the tag
-name; a lowercase `const tag` is treated as a literal HTML element named `tag`.
 
 ## Phase 1: Shared contact constants and hero alignment
 
@@ -111,7 +110,7 @@ settled in the place that already ships it. No new UI.
 **File**: `src/constants/contact.constants.ts` (new; `src/constants/` is a new directory)
 
 **Intent**: Give the email, CV path, CV link label, profile URLs and location one home, so the hero and
-the footer cannot state different things about the same fact.
+the contact section cannot state different things about the same fact.
 
 **Contract**: Named `UPPER_SNAKE_CASE` string exports — `EMAIL`, `CV_PATH`, `CV_LABEL`, `LINKEDIN_URL`,
 `GITHUB_URL`, `LOCATION`. Values: `karolchrobok@gmail.com`, `/karol_chrobok_cv.pdf`, `View CV (PDF)`,
@@ -297,27 +296,28 @@ zero moving parts, and every prior slice verified the same way.
 
 ### Manual testing steps:
 
-1. `yarn dev`, scroll to the footer at desktop width — Contact label aligned with Work and About
+1. `yarn dev`, scroll to the contact section at desktop width — Contact label aligned with Work and About
 2. Narrow to 375px — label stacks above the content, link row wraps, nothing overflows horizontally
-3. Tab from the last About link through every footer link — focus ring visible on each, order matches
+3. Tab from the last About link through every contact link — focus ring visible on each, order matches
    visual order
-4. Screen reader over the footer — email announces as the address, LinkedIn and GitHub announce the new-tab
-   suffix, CV announces as "View CV (PDF)"
-5. Click the CV link in the footer, then the one in the hero — same file, same in-browser behaviour
+4. Screen reader over the contact section — email announces as the address, LinkedIn and GitHub announce
+   the new-tab suffix, CV announces as "View CV (PDF)"
+5. Click the CV link in the contact section, then the one in the hero — same file, same in-browser behaviour
 6. Set browser text size to 200% — no label clipped by its button box
-7. Disable JavaScript, reload — footer identical and every link operable
+7. Disable JavaScript, reload — contact section identical and every link operable
 
 ## Performance Considerations
 
-The footer adds no JavaScript, no font, no image and no network request. `buttonStyles` is imported for its
+The contact section adds no JavaScript, no font, no image and no network request. `buttonStyles` is imported for its
 class string only, exactly as `Hero.astro` and `About.astro` do, so nothing hydrates. The one performance-
 adjacent risk is layout shift, which is bounded by the same rule as the rest of v1: no animation beyond
 `transition-colors`.
 
 ## Migration Notes
 
-None — no stored data, no URLs change, and the footer is not linked from anywhere yet. The `as` prop on
-`Section.astro` is backwards-compatible by default, so no caller needs updating.
+None — no stored data, no URLs change, and the contact section is not linked from anywhere yet (S-06 wires
+the `#contact` anchor it exposes). `Section.astro` and `Footer.astro` are unmodified, so no caller needs
+updating.
 
 ## References
 

@@ -259,6 +259,11 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** The CV PDF must exist at its public path before release (PRD Open Question 3). Owner: author.
 - **Unknowns:**
   - Is the CV PDF final and published at the path S-01 and S-05 link to? — Owner: author. Block: yes.
+  - Does the `@astrojs/react` integration still earn its place? — Found during S-05 (2026-07-28). `yarn build`
+    emits a ~143 kB `dist/_astro/client.*.js` from it, but `index.html` references no script at all: neither
+    `button.tsx` nor `tag.tsx` is rendered anywhere in `src/`, only their `*Styles` class strings are
+    imported. The bundle is deployed and never fetched. Decide at the cutover whether to drop the
+    integration or keep it for post-v1 islands. Owner: author. Block: no.
 - **Risk:** The north star, and the only slice that changes what a recruiter actually sees; releasing it with a dead CV link would break FR-011 on the exact path the site exists to shorten, which is why the unknown above blocks rather than warns.
 - **Status:** blocked
 
