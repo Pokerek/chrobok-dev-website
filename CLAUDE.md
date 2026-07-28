@@ -9,9 +9,10 @@ files (TypeScript, Astro, Tailwind, design system). Release rules load every ses
 
 ## CRITICAL: `main` is production
 
-`main` is the Vercel Production Branch — anything merged there is live immediately. **Never open a PR
-against `main`** while v1 is being built. Branch off `development`, PR into `development`. Full branch
-model, gates and merge constraints: `.claude/rules/release-process.md`.
+`main` is the Vercel Production Branch — anything merged there is live immediately. **Never open a
+feature PR against `main`.** Branch off `development`, PR into `development`. The one exception is the
+`development` → `main` release PR itself — see `.claude/rules/release-process.md` for the full branch
+model, gates and merge constraints.
 
 ## CRITICAL: yarn only
 
