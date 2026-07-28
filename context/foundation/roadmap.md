@@ -57,7 +57,7 @@ to recruiters at any point.
 | S-05 | footer-contact            | select the email as text and open LinkedIn, GitHub and the ungated CV PDF   | F-01, F-02                     | FR-010, FR-011                 | done     |
 | S-06 | sticky-section-nav        | jump to any section from a sticky header on every breakpoint                | S-01, S-02, S-03, S-04, S-05   | FR-012                         | done |
 | S-07 | inspection-hardening-pass | reach every link by keyboard and screen reader, with scripts disabled, on a phone, in under a second | F-03, S-06     | US-01, §NFRs (all four)        | done |
-| S-08 | v1-production-cutover     | see the complete seven-section page at chrobok.dev instead of the placeholder | S-07                          | US-01, §Success Criteria       | blocked  |
+| S-08 | v1-production-cutover     | see the complete seven-section page at chrobok.dev instead of the placeholder | S-07                          | US-01, §Success Criteria       | ready    |
 
 ## Streams
 
@@ -256,16 +256,18 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **PRD refs:** US-01, §Success Criteria (primary — both criteria close here)
 - **Prerequisites:** S-07
 - **Parallel with:** —
-- **Blockers:** The CV PDF must exist at its public path before release (PRD Open Question 3). Owner: author.
+- **Blockers:** ~~The CV PDF must exist at its public path before release (PRD Open Question 3).~~
+  Resolved 2026-07-28: `public/karol_chrobok_cv.pdf` (115.8 KB) is committed and wired via `CV_PATH` at
+  `src/constants/contact.constants.ts:3`. Owner: author.
 - **Unknowns:**
-  - Is the CV PDF final and published at the path S-01 and S-05 link to? — Owner: author. Block: yes.
-  - Does the `@astrojs/react` integration still earn its place? — Found during S-05 (2026-07-28). `yarn build`
-    emits a ~143 kB `dist/_astro/client.*.js` from it, but `index.html` references no script at all: neither
-    `button.tsx` nor `tag.tsx` is rendered anywhere in `src/`, only their `*Styles` class strings are
-    imported. The bundle is deployed and never fetched. Decide at the cutover whether to drop the
-    integration or keep it for post-v1 islands. Owner: author. Block: no.
-- **Risk:** The north star, and the only slice that changes what a recruiter actually sees; releasing it with a dead CV link would break FR-011 on the exact path the site exists to shorten, which is why the unknown above blocks rather than warns.
-- **Status:** blocked
+  - ~~Is the CV PDF final and published at the path S-01 and S-05 link to?~~ Resolved 2026-07-28 — see
+    Blockers above. Owner: author. Block: no.
+  - ~~Does the `@astrojs/react` integration still earn its place?~~ Resolved in S-07 (2026-07-28): the
+    integration, `react`, `react-dom`, `@radix-ui/react-slot` and `lucide-react` were dropped from
+    `package.json`, and the repo now ships no `.tsx`/`.jsx` files and no `dist/_astro/client.*.js`
+    bundle. Owner: author. Block: no.
+- **Risk:** The north star, and the only slice that changes what a recruiter actually sees; releasing it with a dead CV link would break FR-011 on the exact path the site exists to shorten — mitigated: both blockers above are resolved.
+- **Status:** ready
 
 ## Backlog Handoff
 
@@ -281,7 +283,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 | S-05       | footer-contact            | Footer: selectable email, LinkedIn, GitHub, ungated CV PDF        | no                    | Needs F-01, F-02; CV artifact external |
 | S-06       | sticky-section-nav        | Sticky section navigation across all breakpoints                  | no                    | Needs all five section slices |
 | S-07       | inspection-hardening-pass | Accessibility, no-JS, performance and cross-engine hardening pass | no                    | Needs F-03, S-06 |
-| S-08       | v1-production-cutover     | Cut v1 over to production and delete the placeholder              | no                    | Blocked on the CV PDF |
+| S-08       | v1-production-cutover     | Cut v1 over to production and delete the placeholder              | yes                   | CV PDF blocker resolved 2026-07-28 |
 
 ## Open Roadmap Questions
 
