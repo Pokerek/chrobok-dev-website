@@ -39,9 +39,18 @@ files with it.
   Consequences: criterion 2.5's "opens in a new tab" clause and criteria 2.8 / 5.7 no longer apply;
   the `noopener noreferrer` count of 3 still holds.
 - **Criterion 5.5 (axe DevTools) was skipped**, not run.
-- **Open defect — WCAG 2.1 AA 1.4.10 Reflow.** The Contact email address is a single unbreakable
-  token; at 200% text on a 375px viewport it measures 422px in a ~232px column and forces horizontal
-  page scroll (486px vs 360px). At the formal test condition — 1280px viewport at 400% zoom — the
-  page scrolls to 1933px against a 1265px viewport. Pre-existing: the anchor's classes are unchanged
-  by this slice, and axe does not test reflow, so nothing else would have caught it. Fix is one line
-  in `link.styles.ts` (`break-all` on the `inline` variant). Not yet applied.
+- **Fixed — WCAG 2.1 AA 1.4.10 Reflow, email address.** The Contact email is a single unbreakable
+  token; at 200% text on a 375px viewport it measured 422px in a ~232px column and pushed the page
+  to 486px against a 360px viewport, cutting the address off mid-string. `break-all` on the `inline`
+  link variant fixes it: the address now wraps to two lines at 230px and reads in full. Pre-existing
+  — the anchor's classes were unchanged by this slice — and axe does not test reflow, so only the
+  manual run would have caught it.
+
+- **Open defect — residual 30px horizontal scroll at 200% text on mobile.** Separate root cause,
+  left unfixed. The four mobile-menu anchors in `Navigation.astro` carry Tailwind's `container`,
+  whose `2rem` side padding doubles to 64px each at 200% text — 128px of padding in a menu column
+  that is narrower than that, so each anchor overflows to 376px against a 360px viewport. Present
+  whether the `<details>` is open or closed, and unchanged by swapping `container` for
+  `px-container` (same 2rem token). Nothing is visibly clipped; the symptom is a short scrollbar
+  over empty space. Pre-existing S-06 nav code, outside this slice's contract, and a fix touches the
+  sticky-nav layout — raised rather than absorbed, per the Phase 5 defect policy.

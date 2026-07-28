@@ -10,7 +10,10 @@ export const linkStyles = cva('', {
       // Composed from the outline button rather than restated, so the `min-h-10` fix that
       // stops labels clipping at 200% zoom keeps one source of truth and reaches every link.
       bordered: cn(buttonStyles({ variant: 'outline' }), 'flex w-fit text-center'),
-      inline: 'underline underline-offset-4',
+      // `break-all` is load-bearing, not cosmetic: an email address or URL is one unbreakable
+      // token, and at 200% text on a narrow screen it overruns the column and forces horizontal
+      // page scroll — a WCAG 2.1 AA 1.4.10 (Reflow) failure that axe does not detect.
+      inline: 'break-all underline underline-offset-4',
     },
   },
   defaultVariants: {
