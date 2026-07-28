@@ -226,6 +226,10 @@ these constants at every breakpoint; no label is written twice in markup.
 and does nothing when activated. Ship the item anyway — it resolves the moment both branches meet on
 `development`, and removing it would mean a second edit to put it back.
 
+**Addendum (2026-07-28, impl-review):** `WORDMARK.label` shipped as `"chrobok.dev"` rather than the
+`"Karol Chrobok"` drafted above — the domain reads more naturally as a wordmark next to the hero's own
+name heading. Recorded here rather than reopening implementation.
+
 #### 3. The header component
 
 **File**: `src/components/navigation/Navigation.astro`
@@ -259,6 +263,11 @@ a native disclosure below `md` — with no hydrated JavaScript.
 `sr-only focus:not-sr-only` and, when visible, absolutely positioned above the header (`z` greater than the
 header's) with the page background, `2rem`-consistent padding and the default border. Then `<Navigation />`,
 then the `<main id="main-content">` added in Phase 1.
+
+**Addendum (2026-07-28, impl-review):** shipped as `focus:fixed` rather than `focus:absolute` — `fixed`
+keeps the skip link pinned to the visible viewport if a user tabs in after scrolling past the top; the
+literal `absolute` spec would render it at the top of the document, out of view until scrolled back up.
+z-index, background, padding and border all match the contract as written.
 
 #### 5. Hero height correction
 
