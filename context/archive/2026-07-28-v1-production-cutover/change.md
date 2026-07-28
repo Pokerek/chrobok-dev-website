@@ -1,10 +1,10 @@
 ---
 change_id: v1-production-cutover
 title: V1 production cutover
-status: implementing
+status: archived
 created: 2026-07-28
 updated: 2026-07-28
-archived_at: null
+archived_at: 2026-07-28T17:06:09Z
 ---
 
 ## Notes

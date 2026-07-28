@@ -57,7 +57,7 @@ to recruiters at any point.
 | S-05 | footer-contact            | select the email as text and open LinkedIn, GitHub and the ungated CV PDF   | F-01, F-02                     | FR-010, FR-011                 | done     |
 | S-06 | sticky-section-nav        | jump to any section from a sticky header on every breakpoint                | S-01, S-02, S-03, S-04, S-05   | FR-012                         | done |
 | S-07 | inspection-hardening-pass | reach every link by keyboard and screen reader, with scripts disabled, on a phone, in under a second | F-03, S-06     | US-01, §NFRs (all four)        | done |
-| S-08 | v1-production-cutover     | see the complete seven-section page at chrobok.dev instead of the placeholder | S-07                          | US-01, §Success Criteria       | ready    |
+| S-08 | v1-production-cutover     | see the complete seven-section page at chrobok.dev instead of the placeholder | S-07                          | US-01, §Success Criteria       | done     |
 
 ## Streams
 
@@ -267,7 +267,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
     `package.json`, and the repo now ships no `.tsx`/`.jsx` files and no `dist/_astro/client.*.js`
     bundle. Owner: author. Block: no.
 - **Risk:** The north star, and the only slice that changes what a recruiter actually sees; releasing it with a dead CV link would break FR-011 on the exact path the site exists to shorten — mitigated: both blockers above are resolved.
-- **Status:** ready
+- **Status:** done
 
 ## Backlog Handoff
 
@@ -315,3 +315,4 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **S-05: Visitor can select the email address as text and open the LinkedIn profile, the GitHub profile and the CV PDF — the last as a direct, ungated download.** — Archived 2026-07-28 → `context/archive/2026-07-27-footer-contact/`. Lesson: —.
 - **S-06: Visitor can jump to any of the seven sections from a sticky header, on every breakpoint.** — Archived 2026-07-28 → `context/archive/2026-07-27-sticky-section-nav/`. Lesson: —.
 - **S-07: Visitor can reach every piece of content and every link by keyboard alone and with a screen reader, still gets all information and links with scripts disabled, sees text meeting WCAG AA contrast, and reads the page in under a second on a phone with no layout shift after first paint.** — Archived 2026-07-28 → `context/archive/2026-07-28-inspection-hardening-pass/`. Lesson: —.
+- **S-08: Visitor arriving at chrobok.dev from a pasted link sees the complete seven-section page, with no "Work in progress" or placeholder content anywhere on it.** — Archived 2026-07-28 → `context/archive/2026-07-28-v1-production-cutover/`. Lesson: —.
