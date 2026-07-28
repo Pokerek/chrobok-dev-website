@@ -61,8 +61,10 @@ When the structure changes, update this section.
     componentName.types.ts   # types, props exported as ComponentNameProps
     componentName.styles.ts  # CVA variants — ALWAYS a separate file
   ```
-  A primitive that is only a style contract (`button`, `tag`) is just the `.styles.ts` and
-  `.types.ts` — consumed by feature components rather than rendered directly.
+  A primitive that is only a style contract (`button`, `tag`) has no `.astro` file — it is the
+  `.styles.ts`, plus a `.types.ts` only when there is a type worth exporting (`tag` exports
+  `TagVariant`; `button` exports nothing, so it is a lone `.styles.ts`). These are consumed by
+  feature components rather than rendered directly.
 - Compound components are namespaced: `ComponentName.SubComponentName`.
 - **Feature components keep data and types out of the `.astro` file.** Module-scope constants go in a
   sibling `componentName.constants.ts`, types in `componentName.types.ts`. The `.astro` frontmatter

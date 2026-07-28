@@ -1,7 +1,7 @@
 ---
 change_id: inspection-hardening-pass
 title: Inspection hardening pass
-status: implementing
+status: impl_reviewed
 created: 2026-07-28
 updated: 2026-07-28
 archived_at: null
