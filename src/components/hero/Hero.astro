@@ -1,14 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 
+import { CV_LABEL, CV_PATH, EMAIL } from 'constants/contact.constants';
 import { buttonStyles } from 'ui/base/button/button.styles';
 
 import monk from '../../assets/monk.webp';
 import Section from '../layout/Section.astro';
-
-const EMAIL = 'karolchrobok@gmail.com';
-const CV_PATH = '/karol_chrobok_cv.pdf';
-const CV_FILENAME = 'karol-chrobok-en-cv.pdf';
 ---
 
 <Section id="hero" class="flex min-h-svh flex-col justify-center">
@@ -26,7 +23,7 @@ const CV_FILENAME = 'karol-chrobok-en-cv.pdf';
 
       <div class="flex flex-wrap gap-element">
         <a class={buttonStyles({ variant: 'outline' })} href={`mailto:${EMAIL}`}>Email me</a>
-        <a class={buttonStyles({ variant: 'outline' })} href={CV_PATH} download={CV_FILENAME}>Download CV</a>
+        <a class={buttonStyles({ variant: 'outline' })} href={CV_PATH}>{CV_LABEL}</a>
       </div>
     </div>
 
