@@ -5,6 +5,6 @@ import type { linkStyles } from 'ui/base/link/link.styles';
 export type LinkProps = HTMLAttributes<'a'> &
   VariantProps<typeof linkStyles> & {
     href: string;
-    /** Emits the full external-link contract: target, rel and the screen-reader suffix, together. */
+    /** Emits `target="_blank"` and `rel="noopener noreferrer"` together. */
     external?: boolean;
   };

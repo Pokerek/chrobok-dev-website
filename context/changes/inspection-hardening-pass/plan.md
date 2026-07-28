@@ -653,10 +653,10 @@ that phase rather than follow-up work.
 
 #### Manual
 
-- [ ] 1.8 Headings render in Ramaraja, body in IBM Plex Mono on the preview
-- [ ] 1.9 No synthetic-bold smearing at `h1` size
-- [ ] 1.10 Empty-cache reload shows no visible reflow
-- [ ] 1.11 Console free of font-preload warnings
+- [x] 1.8 Headings render in Ramaraja, body in IBM Plex Mono on the preview
+- [x] 1.9 No synthetic-bold smearing at `h1` size
+- [x] 1.10 Empty-cache reload shows no visible reflow
+- [x] 1.11 Console free of font-preload warnings
 
 ### Phase 2: Link Primitive and Button Height
 
@@ -670,10 +670,10 @@ that phase rather than follow-up work.
 
 #### Manual
 
-- [ ] 2.6 No clipped labels at 200% text zoom
-- [ ] 2.7 Tab order unchanged, focus ring on every link
-- [ ] 2.8 VoiceOver announces the external-link suffix as part of the link name
-- [ ] 2.9 Bordered links visually identical to before migration
+- [x] 2.6 No clipped labels at 200% text zoom
+- [x] 2.7 Tab order unchanged, focus ring on every link
+- [x] 2.8 VoiceOver announces the external-link suffix as part of the link name — n/a, suffix removed (see `change.md`)
+- [x] 2.9 Bordered links visually identical to before migration
 
 ### Phase 3: Head Metadata and Hero Payload
 
@@ -688,10 +688,10 @@ that phase rather than follow-up work.
 
 #### Manual
 
-- [ ] 3.7 `monk.webp` not requested at a 375px viewport
-- [ ] 3.8 Requested and rendered at 1280px with no layout shift
+- [x] 3.7 `monk.webp` not requested at a 375px viewport
+- [x] 3.8 Requested and rendered at 1280px with no layout shift
 - [ ] 3.9 Preview card renders correctly in a validator or private message
-- [ ] 3.10 Page title reads correctly in the browser tab
+- [x] 3.10 Page title reads correctly in the browser tab
 
 ### Phase 4: Zero-JS Build Surface
 
@@ -706,25 +706,25 @@ that phase rather than follow-up work.
 
 #### Manual
 
-- [ ] 4.7 Rendered page visually identical to Phase 3 output
-- [ ] 4.8 Mobile `<details>` menu opens and closes on link click
-- [ ] 4.9 CLAUDE.md and `.claude/rules/` describe the stack as it now is
+- [x] 4.7 Rendered page visually identical to Phase 3 output
+- [x] 4.8 Mobile `<details>` menu opens and closes on link click
+- [x] 4.9 CLAUDE.md and `.claude/rules/` describe the stack as it now is
 
 ### Phase 5: Inspection Run
 
 #### Automated
 
-- [x] 5.1 Build passes: `yarn build`
-- [x] 5.2 Lint passes: `yarn lint`
-- [x] 5.3 `dist/index.html` contains `<main`, all four anchors and every link href
+- [x] 5.1 Build passes: `yarn build` — ea485f4
+- [x] 5.2 Lint passes: `yarn lint` — ea485f4
+- [x] 5.3 `dist/index.html` contains `<main`, all four anchors and every link href — ea485f4
 
 #### Manual
 
-- [ ] 5.4 Lighthouse Mobile and Desktop: CLS = 0, LCP < 1s, Performance high
-- [ ] 5.5 axe DevTools: 0 critical, 0 serious
-- [ ] 5.6 Full keyboard tab-through passes
-- [ ] 5.7 VoiceOver spot check passes
-- [ ] 5.8 JavaScript disabled: full content and working nav anchors
-- [ ] 5.9 Chrome, Safari, Firefox and iOS Safari all render correctly with clean consoles
-- [ ] 5.10 View source: semantic HTML, no placeholder text, all links resolve
+- [x] 5.4 Lighthouse Mobile and Desktop: CLS = 0, LCP < 1s, Performance high — 96 / 100 / 100 / 100
+- [ ] 5.5 axe DevTools: 0 critical, 0 serious — skipped by decision
+- [x] 5.6 Full keyboard tab-through passes
+- [x] 5.7 VoiceOver spot check passes — n/a for the suffix, which was removed (see `change.md`)
+- [x] 5.8 JavaScript disabled: full content and working nav anchors
+- [x] 5.9 Chrome, Safari, Firefox and iOS Safari all render correctly with clean consoles
+- [x] 5.10 View source: semantic HTML, no placeholder text, all links resolve
 - [ ] 5.11 Ticked checklist pasted into the PR body
