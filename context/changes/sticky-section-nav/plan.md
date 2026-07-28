@@ -412,36 +412,36 @@ primitive — that it picks up `scroll-mt-anchor` from this branch rather than r
 
 #### Automated
 
-- [x] 2.1 Build and type-check pass: `yarn build`
-- [x] 2.2 Lint passes: `yarn lint`
-- [x] 2.3 No hydrated island was introduced: `grep -rn "client:" src/` returns nothing
-- [x] 2.4 `#hero`, `#work`, `#skills`, `#about` resolve in the built output; `#contact` is the only dangling anchor
-- [x] 2.5 The enhancement is inline; no new `.js` asset in `dist/_astro/`
+- [x] 2.1 Build and type-check pass: `yarn build` — e999698
+- [x] 2.2 Lint passes: `yarn lint` — e999698
+- [x] 2.3 No hydrated island was introduced: `grep -rn "client:" src/` returns nothing — e999698
+- [x] 2.4 `#hero`, `#work`, `#skills`, `#about` resolve in the built output; `#contact` is the only dangling anchor — e999698
+- [x] 2.5 The enhancement is inline; no new `.js` asset in `dist/_astro/` — e999698
 
 #### Manual
 
-- [x] 2.6 The bar stays pinned at 320px, 768px and 1440px
-- [x] 2.7 Below `md`: menu opens, bar height is unchanged, tap navigates and closes the menu
-- [x] 2.8 At `md`+: all four links sit inline and are reachable
-- [x] 2.9 Work, Skills and About each land clear of the bar; Contact is inert by design
-- [x] 2.10 The hero still fits the first screen on a phone
-- [x] 2.11 The first Tab press reveals "Skip to content" and it moves focus into the content
-- [x] 2.12 Focus rings on nav links match the rest of the site
+- [x] 2.6 The bar stays pinned at 320px, 768px and 1440px — e999698
+- [x] 2.7 Below `md`: menu opens, bar height is unchanged, tap navigates and closes the menu — e999698
+- [x] 2.8 At `md`+: all four links sit inline and are reachable — e999698
+- [x] 2.9 Work, Skills and About each land clear of the bar; Contact is inert by design — e999698
+- [x] 2.10 The hero still fits the first screen on a phone — e999698
+- [x] 2.11 The first Tab press reveals "Skip to content" and it moves focus into the content — e999698
+- [x] 2.12 Focus rings on nav links match the rest of the site — e999698
 
 ### Phase 3: Inspection verification
 
 #### Automated
 
-- [ ] 3.1 Build and type-check pass: `yarn build`
-- [ ] 3.2 Lint passes: `yarn lint`
-- [ ] 3.3 No raw colour, `border-black` or non-zero radius in `src/components/navigation/`
+- [x] 3.1 Build and type-check pass: `yarn build`
+- [x] 3.2 Lint passes: `yarn lint`
+- [x] 3.3 No raw colour, `border-black` or non-zero radius in `src/components/navigation/`
 
 #### Manual
 
-- [ ] 3.4 No-JS: sticky, navigable and expandable with scripts disabled
-- [ ] 3.5 Keyboard: skip link → wordmark → links → content, ring visible at every stop
-- [ ] 3.6 Screen reader: navigation landmark named "Sections"; disclosure state announced
-- [ ] 3.7 Contrast: bar text and border meet WCAG AA against `page-bg`
-- [ ] 3.8 No layout shift after first paint at any breakpoint
-- [ ] 3.9 Cross-engine: bar pins and `100svh` resolves in Chromium, Firefox and WebKit
-- [ ] 3.10 FR-012 restated: Work, Skills and About reachable in one interaction from any scroll position; Contact re-checked on `development` after S-05
+- [x] 3.4 No-JS: sticky, navigable and expandable with scripts disabled
+- [x] 3.5 Keyboard: skip link → wordmark → links → content, ring visible at every stop
+- [x] 3.6 Screen reader: navigation landmark named "Sections"; disclosure state announced
+- [x] 3.7 Contrast: bar text and border meet WCAG AA against `page-bg`
+- [x] 3.8 No layout shift after first paint at any breakpoint
+- [x] 3.9 Cross-engine: bar pins and `100svh` resolves in Chromium, Firefox and WebKit
+- [x] 3.10 FR-012 restated: Work, Skills and About reachable in one interaction from any scroll position; Contact re-checked on `development` after S-05
