@@ -8,12 +8,14 @@ paths:
 # Design System
 
 Tokens are configured in `tailwind.config.mjs` (colors, fonts, spacing) and `src/styles/globals.css`
-(font imports, base typography). Read those before inventing a value.
+(`@font-face` declarations, base typography). Read those before inventing a value.
 
 ## Principles
 
-- **Fonts**: Ramaraja 700 for headings (`font-heading`), IBM Plex Mono for body/accents (`font-body`).
-  This pair is the frozen v1 typography contract — do not swap it while building sections.
+- **Fonts**: Ramaraja 400 for headings (`font-heading`), IBM Plex Mono 400/500 for body/accents
+  (`font-body`). This pair is the frozen v1 typography contract — do not swap it while building sections.
+  Ramaraja is a single-weight display serif: never put `font-bold` (or any weight utility) on
+  `font-heading`, or the browser renders synthetic bold.
 - **Colors**: token names only — `page-bg`, `element-bg`, `hover-bg`, `text-primary`, `text-secondary`,
   `border-default`, `focus-ring` (used as `bg-page-bg`, `text-text-primary`, `border-border-default`, …).
 - **Border radius**: **every** named radius resolves to `0` — `rounded`, `rounded-md`, `rounded-lg`,

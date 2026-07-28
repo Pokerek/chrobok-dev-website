@@ -1,6 +1,7 @@
 ---
 paths:
   - "src/**/*.{ts,tsx}"
+  - "src/**/*.astro"
 ---
 
 # TypeScript
@@ -20,3 +21,8 @@ paths:
 
 - Prefix intentionally unused variables with `_`: `const _unused = ...`.
 - Types live in a sibling `.types.ts` file, `PascalCase`; component props exported as `ComponentNameProps`.
+- Declare types with `type`, never `interface` — including `.astro` component props. Compose with
+  intersections (`A & B`) where you would have reached for `extends`.
+- `.astro` props are no exception: the shape goes in the sibling `.types.ts` and the component imports it
+  under the name Astro requires — `import type { LayoutProps as Props } from './layout.types';`. Astro
+  resolves the local type named `Props`, so alias on import rather than renaming the exported type.

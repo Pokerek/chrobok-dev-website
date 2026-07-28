@@ -643,13 +643,13 @@ that phase rather than follow-up work.
 
 #### Automated
 
-- [ ] 1.1 Build passes: `yarn build`
-- [ ] 1.2 Lint passes: `yarn lint`
-- [ ] 1.3 Fonts are bundled: 3 `@font-face` rules in `dist/_astro/*.css`
-- [ ] 1.4 Font files are served: 3 woff2 files in `dist/fonts/`
-- [ ] 1.5 No stale imports: no `@fontsource` references in `src/`
-- [ ] 1.6 No interfaces remain in `src/`
-- [ ] 1.7 Telugu subset absent from `dist/fonts/`
+- [x] 1.1 Build passes: `yarn build`
+- [x] 1.2 Lint passes: `yarn lint`
+- [x] 1.3 Fonts are bundled: 3 `@font-face` rules in `dist/_astro/*.css`
+- [x] 1.4 Font files are served: 3 woff2 files in `dist/fonts/`
+- [x] 1.5 No stale imports: no `@fontsource` references in `src/`
+- [x] 1.6 No interfaces remain in `src/`
+- [x] 1.7 Telugu subset absent from `dist/fonts/`
 
 #### Manual
 

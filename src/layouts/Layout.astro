@@ -4,10 +4,7 @@ import 'styles/globals.css';
 import Footer from '../components/footer/Footer.astro';
 import Navigation from '../components/navigation/Navigation.astro';
 
-interface Props {
-  title: string;
-  description: string;
-}
+import type { LayoutProps as Props } from './layout.types';
 
 const { title, description } = Astro.props;
 ---
@@ -20,6 +17,15 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
+    {
+      /* `font-display: optional` in globals.css only renders these faces if they are preloaded,
+        and each href must match its @font-face src byte for byte or the font is fetched twice.
+        `crossorigin` is mandatory on font preloads even same-origin, for the same reason. */
+    }
+    <link rel="preload" href="/fonts/ramaraja-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/ibm-plex-mono-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin />
     <title>{title}</title>
   </head>
   <body class="bg-page-bg">

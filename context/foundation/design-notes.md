@@ -54,7 +54,9 @@ requirement — nothing implements it.
 
 ### Typography
 
-- **Headings** — Ramaraja 700, `letter-spacing: -0.02em`, `line-height: 1.2`.
+- **Headings** — Ramaraja 400, `letter-spacing: -0.02em`, `line-height: 1.2`. Ramaraja ships one
+  designed weight (400); S-07 dropped the `font-weight: 700` this section originally specified,
+  because against a 400-only family it rendered as synthetic bold.
   H1 `2.5rem` / 40px, H2 `1.75rem` / 28px. **H3–H6 are undefined** — they currently
   inherit H2's declaration block with no size, so they render at browser default. Define
   a scale in shape if the content needs deeper nesting; otherwise design around H1/H2 only.
@@ -63,8 +65,10 @@ requirement — nothing implements it.
   `letter-spacing: 0.02em`. **The accent letter-spacing is not implemented** — the button
   uses `font-medium` but no tracking utility.
 
-Only the used weights are imported (`ramaraja/700`, `ibm-plex-mono/400`, `/500`). Keep it
-that way — every extra weight is a font file on a page whose whole argument is craft.
+Only the used weights ship — Ramaraja 400, IBM Plex Mono 400 and 500, latin subsets only. Keep it
+that way — every extra weight is a font file on a page whose whole argument is craft. S-07 replaced
+the `@fontsource` `@import`s with hand-written `@font-face` rules in `globals.css` over files in
+`public/fonts/`, so `font-display: optional` and matching preloads are under this project's control.
 
 ### Layout & spacing
 
