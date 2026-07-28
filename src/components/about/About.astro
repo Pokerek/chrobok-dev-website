@@ -1,7 +1,5 @@
 ---
-import { cn } from 'styles/utils';
-import { buttonStyles } from 'ui/base/button/button.styles';
-
+import Link from '../layout/Link.astro';
 import Section from '../layout/Section.astro';
 
 const JOURNAL_URL = 'https://www.instagram.com/chrobok.dev/';
@@ -35,14 +33,7 @@ const JOURNAL_URL = 'https://www.instagram.com/chrobok.dev/';
         </p>
       </div>
 
-      <a
-        class={cn(buttonStyles({ variant: 'outline' }), 'flex h-auto min-h-10 w-fit text-center')}
-        href={JOURNAL_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Journal on Instagram<span class="sr-only"> (opens in a new tab)</span>
-      </a>
+      <Link variant="bordered" href={JOURNAL_URL} external>Journal on Instagram</Link>
     </div>
   </div>
 </Section>

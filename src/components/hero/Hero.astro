@@ -2,9 +2,9 @@
 import { Image } from 'astro:assets';
 
 import { CV_LABEL, CV_PATH, EMAIL } from 'constants/contact.constants';
-import { buttonStyles } from 'ui/base/button/button.styles';
 
 import monk from '../../assets/monk.webp';
+import Link from '../layout/Link.astro';
 import Section from '../layout/Section.astro';
 ---
 
@@ -22,8 +22,8 @@ import Section from '../layout/Section.astro';
       </p>
 
       <div class="flex flex-wrap gap-element">
-        <a class={buttonStyles({ variant: 'outline' })} href={`mailto:${EMAIL}`}>Email me</a>
-        <a class={buttonStyles({ variant: 'outline' })} href={CV_PATH}>{CV_LABEL}</a>
+        <Link variant="bordered" href={`mailto:${EMAIL}`}>Email me</Link>
+        <Link variant="bordered" href={CV_PATH}>{CV_LABEL}</Link>
       </div>
     </div>
 

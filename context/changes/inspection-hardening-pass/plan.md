@@ -643,13 +643,13 @@ that phase rather than follow-up work.
 
 #### Automated
 
-- [x] 1.1 Build passes: `yarn build`
-- [x] 1.2 Lint passes: `yarn lint`
-- [x] 1.3 Fonts are bundled: 3 `@font-face` rules in `dist/_astro/*.css`
-- [x] 1.4 Font files are served: 3 woff2 files in `dist/fonts/`
-- [x] 1.5 No stale imports: no `@fontsource` references in `src/`
-- [x] 1.6 No interfaces remain in `src/`
-- [x] 1.7 Telugu subset absent from `dist/fonts/`
+- [x] 1.1 Build passes: `yarn build` — 1ba6384
+- [x] 1.2 Lint passes: `yarn lint` — 1ba6384
+- [x] 1.3 Fonts are bundled: 3 `@font-face` rules in `dist/_astro/*.css` — 1ba6384
+- [x] 1.4 Font files are served: 3 woff2 files in `dist/fonts/` — 1ba6384
+- [x] 1.5 No stale imports: no `@fontsource` references in `src/` — 1ba6384
+- [x] 1.6 No interfaces remain in `src/` — 1ba6384
+- [x] 1.7 Telugu subset absent from `dist/fonts/` — 1ba6384
 
 #### Manual
 
@@ -662,11 +662,11 @@ that phase rather than follow-up work.
 
 #### Automated
 
-- [ ] 2.1 Build passes: `yarn build`
-- [ ] 2.2 Lint passes: `yarn lint`
-- [ ] 2.3 No `h-auto min-h-10` overrides remain in `src/`
-- [ ] 2.4 No `buttonStyles` imports remain in `src/components/`
-- [ ] 2.5 `noopener noreferrer` and `opens in a new tab` counts are equal and both 3
+- [x] 2.1 Build passes: `yarn build`
+- [x] 2.2 Lint passes: `yarn lint`
+- [x] 2.3 No `h-auto min-h-10` overrides remain in `src/`
+- [x] 2.4 No `buttonStyles` imports remain in `src/components/`
+- [x] 2.5 `noopener noreferrer` and `opens in a new tab` counts are equal and both 3
 
 #### Manual
 
