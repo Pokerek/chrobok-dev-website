@@ -1,11 +1,17 @@
 ---
-import { Image } from 'astro:assets';
-
 import { CV_LABEL, CV_PATH, EMAIL } from 'constants/contact.constants';
 
 import monk from '../../assets/monk.webp';
 import Link from '../layout/Link.astro';
 import Section from '../layout/Section.astro';
+
+/*
+ * The <img> needs a src the browser will never fetch: `display: none` does not prevent a
+ * download, so a plain <img> hidden below md still costs phones the full asset. The artwork
+ * therefore hangs off a <source> whose media query fails below 768px, leaving this 1x1 GIF —
+ * inline, so zero requests — as the fallback nobody ever sees.
+ */
+const TRANSPARENT_PIXEL = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 ---
 
 <Section id="hero" class="flex min-h-[calc(100svh_-_theme(spacing.header))] flex-col justify-center">
@@ -27,6 +33,16 @@ import Section from '../layout/Section.astro';
       </div>
     </div>
 
-    <Image src={monk} alt="" class="hidden h-auto w-full max-w-sm justify-self-end md:block" loading="eager" />
+    <picture class="hidden w-full max-w-sm justify-self-end md:block">
+      <source media="(min-width: 768px)" srcset={monk.src} />
+      <img
+        src={TRANSPARENT_PIXEL}
+        alt=""
+        width={monk.width}
+        height={monk.height}
+        class="h-auto w-full"
+        loading="eager"
+      />
+    </picture>
   </div>
 </Section>

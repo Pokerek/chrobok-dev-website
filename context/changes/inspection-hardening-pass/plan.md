@@ -662,11 +662,11 @@ that phase rather than follow-up work.
 
 #### Automated
 
-- [x] 2.1 Build passes: `yarn build`
-- [x] 2.2 Lint passes: `yarn lint`
-- [x] 2.3 No `h-auto min-h-10` overrides remain in `src/`
-- [x] 2.4 No `buttonStyles` imports remain in `src/components/`
-- [x] 2.5 `noopener noreferrer` and `opens in a new tab` counts are equal and both 3
+- [x] 2.1 Build passes: `yarn build` — f60ec8a
+- [x] 2.2 Lint passes: `yarn lint` — f60ec8a
+- [x] 2.3 No `h-auto min-h-10` overrides remain in `src/` — f60ec8a
+- [x] 2.4 No `buttonStyles` imports remain in `src/components/` — f60ec8a
+- [x] 2.5 `noopener noreferrer` and `opens in a new tab` counts are equal and both 3 — f60ec8a
 
 #### Manual
 
@@ -679,12 +679,12 @@ that phase rather than follow-up work.
 
 #### Automated
 
-- [ ] 3.1 Build passes: `yarn build`
-- [ ] 3.2 Lint passes: `yarn lint`
-- [ ] 3.3 At least 7 `og:` tags in `dist/index.html`
-- [ ] 3.4 Canonical link present in `dist/index.html`
-- [ ] 3.5 `public/og-image.png` is 1200x630
-- [ ] 3.6 Hero image sits behind a `min-width: 768px` media source
+- [x] 3.1 Build passes: `yarn build`
+- [x] 3.2 Lint passes: `yarn lint`
+- [x] 3.3 At least 7 `og:` tags in `dist/index.html`
+- [x] 3.4 Canonical link present in `dist/index.html`
+- [x] 3.5 `public/og-image.png` is 1200x630
+- [x] 3.6 Hero image sits behind a `min-width: 768px` media source
 
 #### Manual
 

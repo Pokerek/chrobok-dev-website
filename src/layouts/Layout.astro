@@ -4,9 +4,14 @@ import 'styles/globals.css';
 import Footer from '../components/footer/Footer.astro';
 import Navigation from '../components/navigation/Navigation.astro';
 
+import { OG_IMAGE } from './layout.constants';
+
 import type { LayoutProps as Props } from './layout.types';
 
 const { title, description } = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const ogImageUrl = new URL(OG_IMAGE.path, Astro.site);
 ---
 
 <!doctype html>
@@ -14,9 +19,19 @@ const { title, description } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content={String(OG_IMAGE.width)} />
+    <meta property="og:image:height" content={String(OG_IMAGE.height)} />
+    <meta name="twitter:card" content="summary_large_image" />
 
     {
       /* `font-display: optional` in globals.css only renders these faces if they are preloaded,
