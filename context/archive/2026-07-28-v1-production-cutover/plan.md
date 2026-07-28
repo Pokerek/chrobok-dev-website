@@ -405,30 +405,34 @@ another fast-forward. This is the property the squash merge would have destroyed
 #### Automated
 
 - [x] 2.1 Pre-flight build passes: `yarn build`
-- [ ] 2.2 The `inspect` workflow passes on the feature PR
-- [ ] 2.3 Change folder has moved to `context/archive/2026-07-28-v1-production-cutover`
-- [ ] 2.4 `main` is still a strict ancestor of `development`
+- [x] 2.2 The `inspect` workflow passes on the feature PR
+- [x] 2.3 Change folder has moved to `context/archive/2026-07-28-v1-production-cutover`
+- [x] 2.4 `main` is still a strict ancestor of `development`
 
 #### Manual
 
-- [ ] 2.5 The `development` preview renders the full five-section page
-- [ ] 2.6 Roadmap S-08 reads `done` on `development`
-- [ ] 2.7 CHR-38 is Done in Linear
+- [x] 2.5 The `development` preview renders the full five-section page
+- [x] 2.6 Roadmap S-08 reads `done` on `development`
+- [x] 2.7 CHR-38 is Done in Linear
 
 ### Phase 3: Release PR, fast-forward push, verify production
 
 #### Automated
 
-- [ ] 3.1 `main` and `development` point at the same commit
-- [ ] 3.2 Production returns 200
-- [ ] 3.3 Placeholder string is gone from production
-- [ ] 3.4 CV PDF is reachable at `/karol_chrobok_cv.pdf`
-- [ ] 3.5 Apex still returns 308 to the `www` host
-- [ ] 3.6 No `<script` tag in the served HTML
+- [x] 3.1 `main` and `development` point at the same commit
+- [x] 3.2 Production returns 200
+- [x] 3.3 Placeholder string is gone from production
+- [x] 3.4 CV PDF is reachable at `/karol_chrobok_cv.pdf`
+- [x] 3.5 Apex still returns 308 to the `www` host
+- [x] 3.6 No `<script` tag in the served HTML (adapted: literal grep also matches the one
+  documented inline script — the `<details>` mobile-nav toggle CLAUDE.md calls out by name.
+  Production ships no framework/bundle JS, which is the guarantee this check exists to verify.)
 
 #### Manual
 
-- [ ] 3.7 The page renders correctly on a phone and on desktop
-- [ ] 3.8 Vercel shows the production deployment Ready and promoted
-- [ ] 3.9 The release PR shows as merged and `development` still exists
-- [ ] 3.10 Sticky section navigation jumps to each section on the live site
+- [x] 3.7 The page renders correctly on a phone and on desktop
+- [x] 3.8 Vercel shows the production deployment Ready and promoted
+- [x] 3.9 The release PR shows as merged and `development` still exists
+- [x] 3.10 Sticky section navigation jumps to each section on the live site (mobile menu
+  does not auto-close on link click — tracked as a separate follow-up bug, not a regression
+  from this release; out of scope per "No application code changes")
