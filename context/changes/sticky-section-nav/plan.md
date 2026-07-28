@@ -396,37 +396,37 @@ primitive — that it picks up `scroll-mt-anchor` from this branch rather than r
 
 #### Automated
 
-- [x] 1.1 Build and type-check pass: `yarn build`
-- [x] 1.2 Lint passes: `yarn lint`
-- [x] 1.3 No stale token reference remains: `grep -rn "scroll-mt-section" src/` returns nothing
-- [x] 1.4 Exactly one `<main>` in the built output
-- [x] 1.5 The footer was not touched on this branch
+- [x] 1.1 Build and type-check pass: `yarn build` — 72fe6c0
+- [x] 1.2 Lint passes: `yarn lint` — 72fe6c0
+- [x] 1.3 No stale token reference remains: `grep -rn "scroll-mt-section" src/` returns nothing — 72fe6c0
+- [x] 1.4 Exactly one `<main>` in the built output — 72fe6c0
+- [x] 1.5 The footer was not touched on this branch — 72fe6c0
 
 #### Manual
 
-- [x] 1.6 The rendered page is visually identical to `development`
-- [x] 1.7 Navigating to `#work`, `#skills` and `#about` by URL lands on each section
-- [x] 1.8 Smooth scroll appears and disappears with the OS reduce-motion setting
+- [x] 1.6 The rendered page is visually identical to `development` — 72fe6c0
+- [x] 1.7 Navigating to `#work`, `#skills` and `#about` by URL lands on each section — 72fe6c0
+- [x] 1.8 Smooth scroll appears and disappears with the OS reduce-motion setting — 72fe6c0
 
 ### Phase 2: The navigation component
 
 #### Automated
 
-- [ ] 2.1 Build and type-check pass: `yarn build`
-- [ ] 2.2 Lint passes: `yarn lint`
-- [ ] 2.3 No hydrated island was introduced: `grep -rn "client:" src/` returns nothing
-- [ ] 2.4 `#hero`, `#work`, `#skills`, `#about` resolve in the built output; `#contact` is the only dangling anchor
-- [ ] 2.5 The enhancement is inline; no new `.js` asset in `dist/_astro/`
+- [x] 2.1 Build and type-check pass: `yarn build`
+- [x] 2.2 Lint passes: `yarn lint`
+- [x] 2.3 No hydrated island was introduced: `grep -rn "client:" src/` returns nothing
+- [x] 2.4 `#hero`, `#work`, `#skills`, `#about` resolve in the built output; `#contact` is the only dangling anchor
+- [x] 2.5 The enhancement is inline; no new `.js` asset in `dist/_astro/`
 
 #### Manual
 
-- [ ] 2.6 The bar stays pinned at 320px, 768px and 1440px
-- [ ] 2.7 Below `md`: menu opens, bar height is unchanged, tap navigates and closes the menu
-- [ ] 2.8 At `md`+: all four links sit inline and are reachable
-- [ ] 2.9 Work, Skills and About each land clear of the bar; Contact is inert by design
-- [ ] 2.10 The hero still fits the first screen on a phone
-- [ ] 2.11 The first Tab press reveals "Skip to content" and it moves focus into the content
-- [ ] 2.12 Focus rings on nav links match the rest of the site
+- [x] 2.6 The bar stays pinned at 320px, 768px and 1440px
+- [x] 2.7 Below `md`: menu opens, bar height is unchanged, tap navigates and closes the menu
+- [x] 2.8 At `md`+: all four links sit inline and are reachable
+- [x] 2.9 Work, Skills and About each land clear of the bar; Contact is inert by design
+- [x] 2.10 The hero still fits the first screen on a phone
+- [x] 2.11 The first Tab press reveals "Skip to content" and it moves focus into the content
+- [x] 2.12 Focus rings on nav links match the rest of the site
 
 ### Phase 3: Inspection verification
 

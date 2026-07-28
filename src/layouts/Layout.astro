@@ -2,6 +2,7 @@
 import 'styles/globals.css';
 
 import Footer from '../components/footer/Footer.astro';
+import Navigation from '../components/navigation/Navigation.astro';
 
 interface Props {
   title: string;
@@ -22,6 +23,13 @@ const { title, description } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="bg-page-bg">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-0 focus:top-0 focus:z-[60] focus:border focus:border-border-default focus:bg-page-bg focus:p-container"
+    >
+      Skip to content
+    </a>
+    <Navigation />
     <main id="main-content">
       <slot />
     </main>
