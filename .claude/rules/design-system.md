@@ -44,16 +44,18 @@ Tokens are configured in `tailwind.config.mjs` (colors, fonts, spacing) and `src
 
 ## No hard-coded values
 
-Colours, spacing, radius and ring all come from tokens — never a raw hex, px, or `border-black`. shadcn is
-configured with `cssVariables: false` (`components.json`), so generated components must be re-pointed at the
-named tokens above before they compile against anything real.
+Colours, spacing, radius and ring all come from tokens — never a raw hex, px, or `border-black`. Any
+snippet copied in from outside (a component gallery, a blog post, a generator) must be re-pointed at the
+named tokens above before it compiles against anything real.
 
 ## Checklist for a new or modified `src/ui/base` component
 
-- [ ] Folder structure: separate `.tsx`, `.types.ts`, `.styles.ts`
-- [ ] CVA variants in the `.styles.ts` file, combined via `cn()`
+- [ ] Folder structure: `ComponentName.astro` (when it renders markup) plus `.types.ts` and `.styles.ts`.
+      A primitive that is only a style contract (`button`, `tag`) needs no `.astro` file.
+- [ ] CVA variants in the `.styles.ts` file; `class:list` at the call site, `cn()` only where
+      tailwind-merge's conflict resolution is needed
 - [ ] Design-system color, font, and spacing tokens — no raw values
 - [ ] Square corners (radius 0)
-- [ ] `forwardRef` pattern, with `displayName` set
-- [ ] Props exported as `ComponentNameProps`
+- [ ] No `client:` directive and no framework import — this page ships no client JavaScript
+- [ ] Props declared with `type` in `.types.ts`, exported as `ComponentNameProps`
 - [ ] Accessible: semantic element or correct ARIA, keyboard navigable

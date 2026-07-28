@@ -31,23 +31,38 @@ export const componentStyles = cva('base-classes', {
 });
 ```
 
-`componentName.tsx`:
+`componentName.types.ts` — a `type`, never an `interface` (see `typescript.md`):
 
 ```typescript
 import type { VariantProps } from 'class-variance-authority';
-import { cn } from 'styles/utils';
-import { componentStyles } from './componentName.styles';
 
-interface ComponentProps extends VariantProps<typeof componentStyles> {
-  className?: string;
-}
+import type { componentStyles } from './componentName.styles';
 
-export const Component = ({ variant, size, className }: ComponentProps) => (
-  <div className={cn(componentStyles({ variant, size }), className)}>Content</div>
-);
+export type ComponentNameProps = VariantProps<typeof componentStyles> & {
+  class?: string;
+};
 ```
 
-Expose `className` so callers can override; for anything complex, add a CVA variant rather than a long
+`ComponentName.astro` — the props type is imported under the alias Astro requires:
+
+```astro
+---
+import { componentStyles } from './componentName.styles';
+import type { ComponentNameProps as Props } from './componentName.types';
+
+const { variant, size, class: className } = Astro.props;
+---
+
+<div class:list={[componentStyles({ variant, size }), className]}>
+  <slot />
+</div>
+```
+
+Use `class:list` for the common case — it merges the CVA output with the caller's classes without
+`cn()`. Reach for `cn()` only where tailwind-merge's conflict resolution is actually needed, such as
+one CVA variant composing another (`src/ui/base/link/link.styles.ts`).
+
+Expose `class` so callers can override; for anything complex, add a CVA variant rather than a long
 inline class list.
 
 ## Layout and state

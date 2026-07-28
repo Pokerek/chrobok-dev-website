@@ -679,12 +679,12 @@ that phase rather than follow-up work.
 
 #### Automated
 
-- [x] 3.1 Build passes: `yarn build`
-- [x] 3.2 Lint passes: `yarn lint`
-- [x] 3.3 At least 7 `og:` tags in `dist/index.html`
-- [x] 3.4 Canonical link present in `dist/index.html`
-- [x] 3.5 `public/og-image.png` is 1200x630
-- [x] 3.6 Hero image sits behind a `min-width: 768px` media source
+- [x] 3.1 Build passes: `yarn build` — 243ca30
+- [x] 3.2 Lint passes: `yarn lint` — 243ca30
+- [x] 3.3 At least 7 `og:` tags in `dist/index.html` — 243ca30
+- [x] 3.4 Canonical link present in `dist/index.html` — 243ca30
+- [x] 3.5 `public/og-image.png` is 1200x630 — 243ca30
+- [x] 3.6 Hero image sits behind a `min-width: 768px` media source — 243ca30
 
 #### Manual
 
@@ -697,12 +697,12 @@ that phase rather than follow-up work.
 
 #### Automated
 
-- [ ] 4.1 Build passes: `yarn build`
-- [ ] 4.2 Lint passes: `yarn lint`
-- [ ] 4.3 No `.js` files emitted to `dist/_astro/`
-- [ ] 4.4 No `react` references in `src/`
-- [ ] 4.5 No `react` references in `package.json`
-- [ ] 4.6 `TagVariant` still exported from `tag.types.ts`
+- [x] 4.1 Build passes: `yarn build`
+- [x] 4.2 Lint passes: `yarn lint`
+- [x] 4.3 No `.js` files emitted to `dist/_astro/`
+- [x] 4.4 No `react` references in `src/`
+- [x] 4.5 No `react` references in `package.json`
+- [x] 4.6 `TagVariant` still exported from `tag.types.ts`
 
 #### Manual
 
