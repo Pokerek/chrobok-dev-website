@@ -690,7 +690,7 @@ that phase rather than follow-up work.
 
 - [x] 3.7 `monk.webp` not requested at a 375px viewport
 - [x] 3.8 Requested and rendered at 1280px with no layout shift
-- [ ] 3.9 Preview card renders correctly in a validator or private message
+- [x] 3.9 Preview card renders correctly in a validator or private message
 - [x] 3.10 Page title reads correctly in the browser tab
 
 ### Phase 4: Zero-JS Build Surface
