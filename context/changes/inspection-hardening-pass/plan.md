@@ -290,7 +290,15 @@ unchanged — `icon` is a fixed square by design.
 
 #### 2. Link styles
 
-**File**: `src/components/layout/link.styles.ts` (new)
+**File**: `src/ui/base/link/link.styles.ts` (new)
+
+> **Landed differently.** The plan first placed all three Link files in
+> `src/components/layout/`. They ship in `src/ui/base/link/` instead: `Link.astro` renders markup
+> and carries no page-specific content, which makes it a design-system primitive by the
+> `.claude/rules/design-system.md` checklist, and the folder-per-component rule in CLAUDE.md keeps
+> the `.astro`, `.types.ts` and `.styles.ts` together. It also points the dependency the right way
+> — a primitive composes a sibling primitive (`buttonStyles`) instead of `components/` reaching
+> into `ui/`.
 
 **Intent**: Own the two link skins in one CVA definition. The `bordered` variant composes
 `buttonStyles({ variant: 'outline' })` rather than restating it, so the bordered skin keeps a
@@ -300,16 +308,20 @@ single source of truth and the `min-h-10` fix above propagates to every link aut
 `inline`. `bordered` composes the outline button styles plus `text-center`; `inline` is
 `underline underline-offset-4`. No focus styles — `globals.css:33-35` applies the ring globally.
 
+> `bordered` also carries `flex w-fit`, which the contract above does not mention. It preserves the
+> width and wrapping behaviour `About.astro` previously hand-coded; tailwind-merge lets `flex` beat
+> the base `inline-flex`.
+
 #### 3. Link types
 
-**File**: `src/components/layout/link.types.ts` (new)
+**File**: `src/ui/base/link/link.types.ts` (new)
 
 **Contract**: `LinkProps` intersects `HTMLAttributes<'a'>` (from `astro/types`),
 `VariantProps<typeof linkStyles>`, and `{ href: string; external?: boolean }`.
 
 #### 4. Link component
 
-**File**: `src/components/layout/Link.astro` (new)
+**File**: `src/ui/base/link/Link.astro` (new)
 
 **Intent**: Render an anchor whose `external` flag emits the target, the rel and the
 screen-reader suffix as one indivisible unit — the three cannot drift apart, which
