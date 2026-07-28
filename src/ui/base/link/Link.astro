@@ -5,11 +5,6 @@ import type { LinkProps as Props } from './link.types';
 
 const { href, variant, external, class: className, ...rest } = Astro.props;
 
-/*
- * target and rel ship as one unit: target="_blank" without the rel is a tabnabbing vector,
- * and they lived at three separate call sites before S-07 — which is how they drift apart.
- * Do not separate them.
- */
 const externalAttributes = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
 ---
 
