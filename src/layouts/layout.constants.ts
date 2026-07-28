@@ -1,7 +1,6 @@
 /**
- * Kept in sync with scripts/generate-og-image.sh, which writes the committed PNG.
- * Scrapers use the declared width and height to reserve the card before the image loads,
- * so these must match the file on disk.
+ * Must match public/og-image.png on disk — scrapers use the declared width and height to
+ * reserve the card before the image loads.
  */
 export const OG_IMAGE = {
   path: '/og-image.png',
