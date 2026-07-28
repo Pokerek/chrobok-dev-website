@@ -390,15 +390,15 @@ another fast-forward. This is the property the squash merge would have destroyed
 
 #### Automated
 
-- [x] 1.1 Build and type-check pass: `yarn build`
-- [x] 1.2 Lint passes: `yarn lint`
-- [x] 1.3 No `src/` file is modified
+- [x] 1.1 Build and type-check pass: `yarn build` — 159f541
+- [x] 1.2 Lint passes: `yarn lint` — 159f541
+- [x] 1.3 No `src/` file is modified — 159f541
 
 #### Manual
 
-- [ ] 1.4 Release rule describes the fast-forward ritual and matches actual repo settings
-- [ ] 1.5 `CLAUDE.md` and the rule file no longer contradict each other on PRs against `main`
-- [ ] 1.6 No roadmap entry outside S-08 was edited
+- [x] 1.4 Release rule describes the fast-forward ritual and matches actual repo settings — 159f541
+- [x] 1.5 `CLAUDE.md` and the rule file no longer contradict each other on PRs against `main` — 159f541
+- [x] 1.6 No roadmap entry outside S-08 was edited — 159f541
 
 ### Phase 2: Pre-flight and land on `development`
 
