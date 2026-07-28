@@ -28,7 +28,7 @@ Tokens are configured in `tailwind.config.mjs` (colors, fonts, spacing) and `src
 
 - **Container**: centered, `2rem` horizontal padding, max width `1400px` at `2xl` (Tailwind `container`).
 - **Grid**: the page skeleton is section-level, not a global two-column frame. Use the `Section` primitive
-  at `src/components/layout/Section.astro`: a semantic `<section>` with a scroll anchor plus the container.
+  at `src/ui/base/section/Section.astro`: a semantic `<section>` with a scroll anchor plus the container.
   Fill the `label` slot to get the `label | content` two-column layout (`md:grid-cols-section`), which
   **collapses to a single column below `md`**; omit the `label` slot for a full-width section.
 - Sections own their own heading level and ARIA — pass headings as slot content, don't let the primitive
