@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "packageManager": "yarn@1.22.22",
   "engines": {
+    "node": "22.x",
     "npm": "please-use-yarn",
     "yarn": ">=1.22.0"
   },
