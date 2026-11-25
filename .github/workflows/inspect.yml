@@ -9,6 +9,8 @@ permissions:
 
 jobs:
   # The job is named `ci`: the dev-flow plugin merges a PR only after a check named `ci` passed.
+  # No build step: Vercel's preview build runs `yarn build` (astro check + build) on every PR commit,
+  # and its status gates the merge as well.
   ci:
     runs-on: ubuntu-latest
     steps:
@@ -19,4 +21,3 @@ jobs:
           cache: 'yarn'
       - run: yarn install --frozen-lockfile
       - run: yarn lint
-      - run: yarn build

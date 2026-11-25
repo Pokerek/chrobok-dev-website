@@ -37,7 +37,7 @@ Branch names must match `^(feat|improvement|bugfix|hotfix|docs|chore)/CHR-[0-9]+
 
 The branch model and its invariants are in `.claude/rules/release-process.md`: feature branch → squash-merge → `development` → fast-forward → `main`. Every PR title ends in `(CHR-<n>)`.
 
-The `ci` check is the job of that name in `.github/workflows/inspect.yml`, on every PR into `development`: `yarn lint`, then `yarn build` (`astro check && astro build`). The linter is ESLint.
+The `ci` check is the job of that name in `.github/workflows/inspect.yml`, on every PR into `development`: `yarn lint`. The build (`astro check && astro build`) is not in `ci`: Vercel's preview build runs it on every PR commit, and its `Vercel` status is one of the PR's checks, which `/dev-flow:pr-merge` waits on too. The linter is ESLint.
 
 ## Repo
 
