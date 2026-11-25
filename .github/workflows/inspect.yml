@@ -8,7 +8,8 @@ permissions:
   contents: read
 
 jobs:
-  lint:
+  # The job is named `ci`: the dev-flow plugin merges a PR only after a check named `ci` passed.
+  ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -18,3 +19,4 @@ jobs:
           cache: 'yarn'
       - run: yarn install --frozen-lockfile
       - run: yarn lint
+      - run: yarn build

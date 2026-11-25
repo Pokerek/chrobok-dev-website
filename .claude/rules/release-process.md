@@ -20,10 +20,11 @@ about one from the other.
 | ---------------------------- | ----------------------------------- | ------------------------------------------------- |
 | `main`                       | Production                          | https://www.chrobok.dev                           |
 | `development`                | Integration — GitHub default branch | Vercel branch **Preview** (stable per-branch URL) |
-| `(feat\|fix\|chore\|docs)/…` | Feature branches                    | Vercel per-commit Preview                         |
+| `(feat\|improvement\|bugfix\|hotfix\|docs\|chore)/CHR-<n>-…` | Feature branches | Vercel per-commit Preview |
 
 1. Branch off `development`. The name must satisfy `validate-branch-name` (enforced by
-   `.husky/pre-commit`): `main`, `master`, `development`, or `(feat|fix|chore|docs)/…`.
+   `.husky/pre-commit`): `main`, `master`, `development`, or
+   `(feat|improvement|bugfix|hotfix|docs|chore)/CHR-<n>-…`, where `CHR-<n>` is the Linear issue id.
 2. Open the PR against **`development`**. Review it on the branch preview URL.
 3. Merge into `development` — rebuilds the `development` preview, leaves production untouched.
 4. A release is `development` → `main`. Open a PR with base `main` and head `development` for review

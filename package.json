@@ -25,8 +25,8 @@
     "src/**/*.{astro,js,jsx,ts,tsx,json,md,css}": "prettier --write"
   },
   "validate-branch-name": {
-    "pattern": "^(main|master|development|(feat|fix|chore|docs)\\/[a-zA-Z0-9][a-zA-Z0-9_-]*)$",
-    "errorMsg": "Branch name must match: (feat|fix|chore|docs)/description"
+    "pattern": "^(main|master|development|(feat|improvement|bugfix|hotfix|docs|chore)\\/CHR-[0-9]+-[a-zA-Z0-9_.-]+)$",
+    "errorMsg": "Branch name must match: (feat|improvement|bugfix|hotfix|docs|chore)/CHR-<n>-description"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.5",
