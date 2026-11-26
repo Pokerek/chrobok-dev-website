@@ -26,3 +26,7 @@ pnpm-debug.log*
 # 10x skills (locally installed)
 .claude/skills/10x-*/
 .claude/.10x-cli-manifest.json
+
+# dev-flow: context docs, run results and issue worktrees
+.scratch/
+.claude/worktrees/
