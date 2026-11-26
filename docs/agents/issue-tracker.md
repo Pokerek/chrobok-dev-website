@@ -33,7 +33,7 @@ Flat `ui` sits beside the build issue's other labels when its diff changes a **U
 
 ## Branches
 
-Branch names must match `^(feat|improvement|bugfix|hotfix|docs|chore)/CHR-[0-9]+-[a-zA-Z0-9_.-]+$` (`validate-branch-name` in the husky `pre-commit`, configured in `package.json`; `main`, `master` and `development` also pass), where `CHR-<n>` is the Linear issue id.
+The branch-name pattern belongs to the dev-flow plugin, not this file: `consumer-contract.md` → **Branches**, with `<KEY>` = `CHR`. So a branch carries the Linear issue id as `CHR-<n>`. `validate-branch-name` in the husky `pre-commit` enforces it, configured in `package.json`; `main`, `master` and `development` also pass.
 
 The branch model and its invariants are in `.claude/rules/release-process.md`: feature branch → squash-merge → `development` → fast-forward → `main`. Every PR title ends in `(CHR-<n>)`.
 
