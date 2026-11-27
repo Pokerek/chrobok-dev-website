@@ -5,12 +5,12 @@ version: 1
 status: living
 created: 2026-07-20
 source_of_record: tailwind.config.mjs + src/styles/globals.css (code wins)
-consumed_by: [10x-shape, 10x-prd, implementation]
+consumed_by: [implementation]
 ---
 
 # Design Notes — chrobok.dev
 
-Input document for `/10x-shape`. Companion to [`author-profile.md`](./author-profile.md):
+Input document for shaping the product. Companion to [`author-profile.md`](./author-profile.md):
 that file says **who** the site is for and what it must prove, this one says **how it
 should look** and what is already built.
 
@@ -123,7 +123,7 @@ identity-defining rule in the system — see the risk below.
    the only non-palette colour that would appear on the site. Pick a token (black ring,
    offset in `page-bg`) before shipping.
 
-## Open questions for `/10x-shape`
+## Open questions
 
 - Does the 2-column grid hold as the page skeleton, or is it a section-level pattern only?
 - What is the mobile behaviour — single column stack, and at which breakpoint?

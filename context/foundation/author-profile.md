@@ -5,12 +5,12 @@ version: 1
 status: living
 created: 2026-07-20
 source_of_record: pokerek_mind/kariera/ (second brain)
-consumed_by: [10x-shape, 10x-prd, content work]
+consumed_by: [content work]
 ---
 
 # Author Profile — Karol Chrobok
 
-Input document for `/10x-shape`. This site's product **is the author**, so the shape
+Input document for shaping the product. This site's product **is the author**, so the shape
 session needs a factual profile before it can define vision, persona, and scope.
 Everything below is verified from the author's career inventory; anything uncertain is
 listed under Open Questions rather than guessed.
@@ -130,7 +130,7 @@ selecting and shaping, not writing from scratch.
 3. Give a recruiter, in one screen: who / what level / what proof / how to contact.
 4. Be the one channel that outlives any job board profile.
 
-## Open Questions for `/10x-shape`
+## Open Questions
 
 - Does the site carry the **journal** (mirror/import from Instagram) or only link to it?
 - Depth of the **projects/case-study** layer — [product] work is in private repos and under
