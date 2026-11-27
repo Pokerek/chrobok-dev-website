@@ -14,7 +14,7 @@ mirrors: none (Linear-only — no GitHub-issues mirror in this project)
 This project's backlog is mirrored into **Linear** (workspace `chrobok-dev`, team **Chrobok-dev** /
 key `CHR`, project **chrobok-dev-website**). `roadmap.md` remains the human source-of-record; the
 Linear issues are its single live mirror. This file documents the Linear-side conventions so future
-migrations/edits — and the `/pr-ready` and `/pr-merge` skills — stay consistent.
+migrations/edits — and the `/dev-flow:pr-ready` and `/dev-flow:pr-merge` skills — stay consistent.
 
 Unlike the sibling `10x-Travel` project, this mirror is intentionally lean: no GitHub mirror, no custom
 labels, no project milestones. Status is carried entirely by the Linear workflow state.
@@ -28,9 +28,10 @@ labels, no project milestones. Status is carried entirely by the Linear workflow
 
 ## Issue mapping (roadmap → Linear)
 
-Keyed by roadmap ID. The **Change ID** column lets the skills resolve a `<change-id>` (branch /
-`context/changes/` slug) straight to the Linear identifier without a second lookup. The **State** column
-is a point-in-time snapshot — Linear is the live source of truth for workflow state.
+Keyed by roadmap ID. The **Change ID** column is historical: it names the folder under
+`context/archive/` for items that were archived, and maps it to the Linear identifier without a second
+lookup. The **State** column is a point-in-time snapshot — Linear is the live source of truth for
+workflow state.
 
 | Linear | Roadmap ID | Change ID                 | Title (short)                    | State snapshot |
 | ------ | ---------- | ------------------------- | -------------------------------- | -------------- |
@@ -51,30 +52,30 @@ is a point-in-time snapshot — Linear is the live source of truth for workflow 
 - **One issue per roadmap item.** Title and body mirror the roadmap; body carries Outcome, Change ID,
   PRD refs, Prerequisites, Unknowns and Risk verbatim.
 - **Status lives in the workflow state**, not in a label. Team states: `Backlog`, `Todo`,
-  `In Progress`, `In Review`, `Done`, `Canceled`, `Duplicate`. A slice that becomes ready moves
-  Backlog → Todo → In Progress → In Review → Done.
+  `In Progress`, `In Review`, `Testing`, `Done`, `Canceled`, `Duplicate`. A slice that becomes ready
+  moves Backlog → Todo → In Progress → In Review → Testing → Done.
 - **No custom labels or milestones.** They exist in the `10x-Travel` mirror but were deliberately not
   recreated here — this v1 is a single linear sequence, so the workflow state alone is enough.
 
 ## Status flow driven by the skills
 
 The Linear workflow state is the implementation-progress axis, distinct from the roadmap's
-planning-readiness `Status` (which only `/10x-plan` and `/10x-archive` touch).
+planning-readiness `Status`.
 
-- **`/pr-ready`** moves the issue **Todo/Backlog → In Review** and attaches the PR link. Forward-only —
-  an issue already In Review/Done keeps its state; the link is still attached if missing.
-- **`/pr-merge`** moves the issue **→ Done** after the squash-merge lands.
+- **`/dev-flow:pr-ready`** moves the issue to **In Review** and attaches the PR link.
+- **`/dev-flow:pr-merge`** squash-merges the PR into `development` and moves the issue on after the
+  squash-merge lands.
 
 ## GitHub is not used
 
 This project has **no** GitHub-issues mirror and no `tasks-github.md`. Issues live only in Linear.
-`/pr-ready` and `/pr-merge` skip every GitHub-mirror step here — the PR itself (opened against
+`/dev-flow:pr-ready` and `/dev-flow:pr-merge` skip every GitHub-mirror step here — the PR itself (opened against
 `development`) plus the Linear state change are the whole tracker surface. Do not create a
 `tasks-github.md` or comment on GitHub issues for this repo.
 
 ## Keeping doc and issues in sync
 
-`roadmap.md` stays the source-of-record. When a roadmap item changes status (a slice becomes `ready`,
-or is archived via `/10x-archive`), move the Linear workflow state **and** edit `roadmap.md`; keep them
+`roadmap.md` stays the source-of-record. When a roadmap item changes status (a slice becomes `ready`),
+move the Linear workflow state **and** edit `roadmap.md`; keep them
 from drifting. If a new roadmap item is mirrored into Linear, append its row to the table above — the
 skills treat this table as the mapping source of record and do not edit it themselves.

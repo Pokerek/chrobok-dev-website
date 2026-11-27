@@ -271,10 +271,10 @@ Foundations below assume these are present and do NOT re-scaffold them.
 
 ## Backlog Handoff
 
-| Roadmap ID | Change ID                 | Suggested issue title                                             | Ready for `/10x-plan` | Notes |
+| Roadmap ID | Change ID                 | Suggested issue title                                             | Ready to build        | Notes |
 | ---------- | ------------------------- | ----------------------------------------------------------------- | --------------------- | ----- |
-| F-01       | design-system-contract    | Settle the design-system and layout contract before content work  | yes                   | Run `/10x-plan design-system-contract` |
-| F-02       | v1-release-staging        | Stage v1 so merges do not publish to production                   | yes                   | Run `/10x-plan v1-release-staging` |
+| F-01       | design-system-contract    | Settle the design-system and layout contract before content work  | yes                   | —     |
+| F-02       | v1-release-staging        | Stage v1 so merges do not publish to production                   | yes                   | —     |
 | F-03       | inspection-gate           | Gate v1 merges on build, types and lint; make the NFR checklist runnable | no             | Needs F-02 |
 | S-01       | hero-first-screen         | Hero: name, role, stack, positioning line, contact above the fold | no                    | Needs F-01, F-02 |
 | S-02       | work-proof-block          | Work block: ownership scope, outcome numbers, two-tier stack tags | no                    | Needs F-01, F-02 |

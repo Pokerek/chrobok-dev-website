@@ -21,9 +21,9 @@ timeline_budget:
 
 # Shape Notes — Chrobok.dev
 
-> Discovery session facilitated by `/10x-shape`. Sections below anticipate the
-> 10 greenfield PRD sections so `/10x-prd` can map cleanly. `## Forward: ...`
-> blocks are informational and do NOT map into the PRD.
+> Discovery session notes. Sections below anticipate the 10 greenfield PRD
+> sections so they map cleanly. `## Forward: ...` blocks are informational and
+> do NOT map into the PRD.
 
 ## Vision & Problem Statement
 

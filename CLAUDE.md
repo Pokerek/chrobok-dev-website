@@ -49,6 +49,8 @@ check your work.
 - `src/constants` — shared constant modules (`*.constants.ts`)
 - `src/styles` — `globals.css`, `utils.ts` (`cn()`)
 - `src/assets` — internal assets; `public/` — public assets
+- `context/foundation` — product docs (PRD, roadmap, tech stack, lessons)
+- `context/archive` — history of the old 10x change flow; read-only
 
 Some of these directories don't exist yet; create them at these paths rather than inventing new ones.
 When the structure changes, update this section.

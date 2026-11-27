@@ -35,7 +35,7 @@ measures, and together they are the "site survives a technical inspection" guard
 > The reflow check earns its place: it is the only step that has ever caught a defect here. The
 > S-07 run found two — the Contact email overrunning its column (fixed) and the mobile-menu
 > anchors' doubled `container` padding forcing ~30px of horizontal scroll (open, see
-> `context/changes/inspection-hardening-pass/change.md`). **Expect this box to fail on the nav
+> `context/archive/2026-07-28-inspection-hardening-pass/change.md`). **Expect this box to fail on the nav
 > defect until that is fixed.** Note it uses *text* zoom, not page zoom, and that axe does not
 > test reflow at all — WCAG 2.1 AA 1.4.10 is invisible to the automated scan above.
 
