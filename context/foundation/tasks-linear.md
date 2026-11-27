@@ -63,8 +63,8 @@ The Linear workflow state is the implementation-progress axis, distinct from the
 planning-readiness `Status`.
 
 - **`/dev-flow:pr-ready`** moves the issue to **In Review** and attaches the PR link.
-- **`/dev-flow:pr-merge`** squash-merges the PR into `development` and moves the issue on after the
-  squash-merge lands.
+- **`/dev-flow:pr-merge`** squash-merges the PR into `development` and moves the issue to
+  **Testing** when a manual check is owed, else to **Done**.
 
 ## GitHub is not used
 
